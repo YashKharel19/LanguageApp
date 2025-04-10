@@ -1,0 +1,14 @@
+[
+    {
+        "question": "What is React Native?",
+        "answer": "A framework for building native apps using React"
+    },
+    {
+        "question": "What is JSX?",
+        "answer": "A syntax extension for JavaScript"
+    },
+    {
+        "question": "What does useState do?",
+        "answer": "It lets you add state to functional components"
+    }
+]

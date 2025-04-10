@@ -1,48 +1,25 @@
-// app/flashcards.tsx
-import React, { useState, useEffect } from 'react'; // Importing useState and useEffect
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
 import Flashcard from '../components/Flashcard';
-import { loadFlashcards, saveFlashcards } from '../utils/storage';
+import flashcardData from '../data/nepali.json'; // <-- Import JSON file directly
 
-// Define the type for a flashcard
 type FlashcardType = {
     question: string;
     answer: string;
 };
 
 export default function FlashcardsScreen() {
-    // Specify the type of the state
-    const [cards, setCards] = useState<FlashcardType[]>([]); // Set the state to be an array of FlashcardType
+    const [cards] = useState<FlashcardType[]>(flashcardData); // Load directly from JSON
     const [index, setIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchCards = async () => {
-            const storedCards = await loadFlashcards();
-            if (storedCards.length === 0) {
-                const defaultCards: FlashcardType[] = [
-                    { question: 'What is React Native?', answer: 'A framework for building native apps using React' },
-                    { question: 'What is JSX?', answer: 'A syntax extension for JavaScript' },
-                ];
-                await saveFlashcards(defaultCards);
-                setCards(defaultCards);
-            } else {
-                setCards(storedCards);
-            }
-            setLoading(false);
-        };
-
-        fetchCards();
-    }, []);
 
     const nextCard = () => {
         setShowAnswer(false);
         setIndex((prevIndex) => (prevIndex + 1) % cards.length);
     };
 
-    if (loading) {
-        return <ActivityIndicator size="large" style={{ marginTop: 100 }} />;
+    if (cards.length === 0) {
+        return <ActivityIndicator size="large" className="mt-24" />;
     }
 
     return (
@@ -57,5 +34,3 @@ export default function FlashcardsScreen() {
         </View>
     );
 }
-
-
