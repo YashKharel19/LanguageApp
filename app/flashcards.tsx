@@ -46,8 +46,8 @@ export default function FlashcardsScreen() {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Flashcards</Text>
+        <View className="flex-1 justify-center items-center bg-white">
+            <Text className="text-3xl font-bold mb-5">Flashcards</Text>
             <Flashcard
                 card={cards[index]}
                 showAnswer={showAnswer}
@@ -58,7 +58,4 @@ export default function FlashcardsScreen() {
     );
 }
 
-const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' },
-    title: { fontSize: 32, fontWeight: 'bold', marginBottom: 20 },
-});
+

@@ -6,18 +6,15 @@ export default function Index() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Lumalingo App</Text>
-      <TouchableOpacity style={styles.button} onPress={() => router.push('/flashcards')}>
-        <Text style={styles.buttonText}>Start Learning</Text>
+    <View className="flex-1 justify-center items-center bg-white">
+      <Text className="text-3xl font-bold mb-5">Welcome to Lumalingo App</Text>
+      <TouchableOpacity
+        className="bg-purple-700 px-6 py-4 rounded-lg"
+        onPress={() => router.push('/flashcards')}
+      >
+        <Text className="text-white text-lg">Start Learning</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' },
-  title: { fontSize: 32, fontWeight: 'bold', marginBottom: 20 },
-  button: { backgroundColor: '#6200ee', padding: 15, borderRadius: 8 },
-  buttonText: { color: '#fff', fontSize: 18 },
-});
