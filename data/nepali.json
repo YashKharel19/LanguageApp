@@ -1,14 +1,254 @@
 [
     {
-        "question": "What is React Native?",
-        "answer": "A framework for building native apps using React"
+        "letter": "क",
+        "word": "किताब",
+        "pronunciation": "ki-taab",
+        "image": "https://example.com/images/किताब.png",
+        "translation": "Book"
     },
     {
-        "question": "What is JSX?",
-        "answer": "A syntax extension for JavaScript"
+        "letter": "ख",
+        "word": "खरायो",
+        "pronunciation": "kha-raa-yo",
+        "image": "https://example.com/images/खरायो.png",
+        "translation": "Rabbit"
     },
     {
-        "question": "What does useState do?",
-        "answer": "It lets you add state to functional components"
+        "letter": "ग",
+        "word": "गाई",
+        "pronunciation": "gaa-ee",
+        "image": "https://example.com/images/गाई.png",
+        "translation": "Cow"
+    },
+    {
+        "letter": "घ",
+        "word": "घाँस",
+        "pronunciation": "ghaa-s",
+        "image": "https://example.com/images/घाँस.png",
+        "translation": "Grass"
+    },
+    {
+        "letter": "ङ",
+        "word": "ङो",
+        "pronunciation": "ngo",
+        "image": "https://example.com/images/ङो.png",
+        "translation": "Sound of 'nga'"
+    },
+    {
+        "letter": "च",
+        "word": "चरा",
+        "pronunciation": "cha-raa",
+        "image": "https://example.com/images/चरा.png",
+        "translation": "Bird"
+    },
+    {
+        "letter": "छ",
+        "word": "छाता",
+        "pronunciation": "chhaa-taa",
+        "image": "https://example.com/images/छाता.png",
+        "translation": "Umbrella"
+    },
+    {
+        "letter": "ज",
+        "word": "जुन",
+        "pronunciation": "jun",
+        "image": "https://example.com/images/जुन.png",
+        "translation": "Moon"
+    },
+    {
+        "letter": "झ",
+        "word": "झरना",
+        "pronunciation": "jhar-naa",
+        "image": "https://example.com/images/झरना.png",
+        "translation": "Waterfall"
+    },
+    {
+        "letter": "ञ",
+        "word": "ञ्याउ",
+        "pronunciation": "nyaau",
+        "image": "https://example.com/images/ञ्याउ.png",
+        "translation": "Meow (Cat sound)"
+    },
+    {
+        "letter": "ट",
+        "word": "टमाटर",
+        "pronunciation": "ta-maa-tar",
+        "image": "https://example.com/images/टमाटर.png",
+        "translation": "Tomato"
+    },
+    {
+        "letter": "ठ",
+        "word": "ठुलो",
+        "pronunciation": "thu-lo",
+        "image": "https://example.com/images/ठुलो.png",
+        "translation": "Big"
+    },
+    {
+        "letter": "ड",
+        "word": "डमरु",
+        "pronunciation": "da-ma-ru",
+        "image": "https://example.com/images/डमरु.png",
+        "translation": "Drum"
+    },
+    {
+        "letter": "ढ",
+        "word": "ढोका",
+        "pronunciation": "dho-kaa",
+        "image": "https://example.com/images/ढोका.png",
+        "translation": "Door"
+    },
+    {
+        "letter": "ण",
+        "word": "ण",
+        "pronunciation": "na",
+        "image": "https://example.com/images/ण.png",
+        "translation": "Retroflex 'na' sound"
+    },
+    {
+        "letter": "त",
+        "word": "तरबार",
+        "pronunciation": "tar-baar",
+        "image": "https://example.com/images/तरबार.png",
+        "translation": "Sword"
+    },
+    {
+        "letter": "थ",
+        "word": "थाल",
+        "pronunciation": "thaal",
+        "image": "https://example.com/images/थाल.png",
+        "translation": "Plate"
+    },
+    {
+        "letter": "द",
+        "word": "दही",
+        "pronunciation": "da-hee",
+        "image": "https://example.com/images/दही.png",
+        "translation": "Yogurt"
+    },
+    {
+        "letter": "ध",
+        "word": "धरती",
+        "pronunciation": "dhar-ti",
+        "image": "https://example.com/images/धरती.png",
+        "translation": "Earth"
+    },
+    {
+        "letter": "न",
+        "word": "नदी",
+        "pronunciation": "na-dee",
+        "image": "https://example.com/images/नदी.png",
+        "translation": "River"
+    },
+    {
+        "letter": "प",
+        "word": "पंखा",
+        "pronunciation": "pankhaa",
+        "image": "https://example.com/images/पंखा.png",
+        "translation": "Fan"
+    },
+    {
+        "letter": "फ",
+        "word": "फल",
+        "pronunciation": "phal",
+        "image": "https://example.com/images/फल.png",
+        "translation": "Fruit"
+    },
+    {
+        "letter": "ब",
+        "word": "बल्ल",
+        "pronunciation": "bal-la",
+        "image": "https://example.com/images/बल्ल.png",
+        "translation": "Finally"
+    },
+    {
+        "letter": "भ",
+        "word": "भालु",
+        "pronunciation": "bhaa-lu",
+        "image": "https://example.com/images/भालु.png",
+        "translation": "Bear"
+    },
+    {
+        "letter": "म",
+        "word": "माछा",
+        "pronunciation": "maa-chaa",
+        "image": "https://example.com/images/माछा.png",
+        "translation": "Fish"
+    },
+    {
+        "letter": "य",
+        "word": "यात्रा",
+        "pronunciation": "yaa-traa",
+        "image": "https://example.com/images/यात्रा.png",
+        "translation": "Journey"
+    },
+    {
+        "letter": "र",
+        "word": "रथ",
+        "pronunciation": "ra-th",
+        "image": "https://example.com/images/रथ.png",
+        "translation": "Chariot"
+    },
+    {
+        "letter": "ल",
+        "word": "लकडी",
+        "pronunciation": "la-ka-dee",
+        "image": "https://example.com/images/लकडी.png",
+        "translation": "Wood"
+    },
+    {
+        "letter": "व",
+        "word": "विजय",
+        "pronunciation": "vi-jay",
+        "image": "https://example.com/images/विजय.png",
+        "translation": "Victory"
+    },
+    {
+        "letter": "श",
+        "word": "शेर",
+        "pronunciation": "she-r",
+        "image": "https://example.com/images/शेर.png",
+        "translation": "Lion"
+    },
+    {
+        "letter": "ष",
+        "word": "षड्",
+        "pronunciation": "shad",
+        "image": "https://example.com/images/षड्.png",
+        "translation": "Six (Sanskrit-derived)"
+    },
+    {
+        "letter": "स",
+        "word": "सागर",
+        "pronunciation": "saa-gar",
+        "image": "https://example.com/images/सागर.png",
+        "translation": "Ocean"
+    },
+    {
+        "letter": "ह",
+        "word": "हात्ती",
+        "pronunciation": "haa-tee",
+        "image": "https://example.com/images/हात्ती.png",
+        "translation": "Elephant"
+    },
+    {
+        "letter": "क्ष",
+        "word": "क्षत्रिय",
+        "pronunciation": "ksha-tri-ya",
+        "image": "https://example.com/images/क्षत्रिय.png",
+        "translation": "Warrior"
+    },
+    {
+        "letter": "त्र",
+        "word": "त्रिकोण",
+        "pronunciation": "tri-koṇ",
+        "image": "https://example.com/images/त्रिकोण.png",
+        "translation": "Triangle"
+    },
+    {
+        "letter": "ज्ञ",
+        "word": "ज्ञान",
+        "pronunciation": "gyaa-na",
+        "image": "https://example.com/images/ज्ञान.png",
+        "translation": "Knowledge"
     }
 ]

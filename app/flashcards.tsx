@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native';
 import Flashcard from '../components/Flashcard';
-import flashcardData from '../data/nepali.json'; // <-- Import JSON file directly
+import flashcardData from '../data/nepali.json'; // Import JSON
 
 type FlashcardType = {
-    question: string;
-    answer: string;
+    letter: string;
+    word: string;
+    pronunciation: string;
+    image: string;
+    translation: string;
 };
 
 export default function FlashcardsScreen() {
-    const [cards] = useState<FlashcardType[]>(flashcardData); // Load directly from JSON
+    const [cards] = useState<FlashcardType[]>(flashcardData);
     const [index, setIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
 
@@ -17,10 +20,6 @@ export default function FlashcardsScreen() {
         setShowAnswer(false);
         setIndex((prevIndex) => (prevIndex + 1) % cards.length);
     };
-
-    if (cards.length === 0) {
-        return <ActivityIndicator size="large" className="mt-24" />;
-    }
 
     return (
         <View className="flex-1 justify-center items-center bg-white">
