@@ -16,26 +16,25 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
     console.log(card.image)
     return (
         <View className="items-center">
-            <View className="bg-gray-100 p-6 rounded-2xl mb-5 w-80">
+            <View className="bg-gray-100 p-4 rounded-2xl mb-5 w-80 h-80">
                 {showAnswer ? (
-                    <View className="items-center">
-                        <Text className="text-4xl font-semibold mb-1">{card.word}</Text>
-                        <Text className="text-sm italic text-gray-500 absolute left-[70%] transform translate-x-[-50%] mt-8">
-                            {card.pronunciation}
-                        </Text>
-
-                        <View className="my-4 items-center">
-                            <SvgImage width={200} height={200} />
+                    <View className="flex-1 justify-between">
+                        <View>
+                            <Text className="text-4xl font-semibold text-center">{card.word}</Text>
+                            <Text className="text-sm italic text-gray-500 text-right mt-1 mr-8">{card.pronunciation}</Text>
                         </View>
 
-                        <Text className="text-lg text-gray-700">{card.translation}</Text>
+                        <View className="items-center">
+                            <SvgImage width={140} height={140} />
+                        </View>
+
+                        <Text className="text-base text-gray-700 text-center">{card.translation}</Text>
                     </View>
                 ) : (
-                    <View className="items-center justify-center h-48">
-                        <Text className="text-7xl font-bold">{card.letter}</Text>
+                    <View className="flex-1 items-center justify-center">
+                        <Text className="text-8xl font-bold">{card.letter}</Text>
                     </View>
                 )}
-
             </View>
 
             <TouchableOpacity onPress={onToggle} className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-48">
@@ -48,6 +47,5 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
                 <Text className="text-white text-lg text-center">Next Card</Text>
             </TouchableOpacity>
         </View>
-
     );
 }
