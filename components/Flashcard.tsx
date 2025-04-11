@@ -19,13 +19,13 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
             <View className="bg-gray-100 p-6 rounded-2xl mb-5 w-80">
                 {showAnswer ? (
                     <View className="items-center">
-                        <View className="flex-row justify-between w-full mb-2">
-                            <Text className="text-3xl font-semibold">{card.word}</Text>
-                            <Text className="text-base italic text-gray-500">{card.pronunciation}</Text>
-                        </View>
+                        <Text className="text-4xl font-semibold mb-1">{card.word}</Text>
+                        <Text className="text-lg italic text-gray-500 mb-4">{card.pronunciation}</Text>
+
                         <View className="my-4 items-center">
-                            <SvgImage width={120} height={120} />
+                            <SvgImage width={160} height={160} />
                         </View>
+
                         <Text className="text-lg text-gray-700">{card.translation}</Text>
                     </View>
                 ) : (
@@ -33,6 +33,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
                         <Text className="text-7xl font-bold">{card.letter}</Text>
                     </View>
                 )}
+
             </View>
 
             <TouchableOpacity onPress={onToggle} className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-48">
