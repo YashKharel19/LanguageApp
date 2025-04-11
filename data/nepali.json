@@ -1,253 +1,253 @@
 [
     {
         "letter": "क",
-        "word": "किताब",
-        "pronunciation": "ki-taab",
+        "word": "कछुवा",
+        "pronunciation": "Kachuvā",
         "image": "https://example.com/images/किताब.png",
-        "translation": "Book"
+        "translation": "Tortoise"
     },
     {
         "letter": "ख",
         "word": "खरायो",
-        "pronunciation": "kha-raa-yo",
+        "pronunciation": "Kharāyō",
         "image": "https://example.com/images/खरायो.png",
         "translation": "Rabbit"
     },
     {
         "letter": "ग",
-        "word": "गाई",
-        "pronunciation": "gaa-ee",
+        "word": "गमला",
+        "pronunciation": "Gamalā",
         "image": "https://example.com/images/गाई.png",
-        "translation": "Cow"
+        "translation": "Pot"
     },
     {
         "letter": "घ",
-        "word": "घाँस",
-        "pronunciation": "ghaa-s",
+        "word": "घर",
+        "pronunciation": "Ghara",
         "image": "https://example.com/images/घाँस.png",
-        "translation": "Grass"
+        "translation": "House"
     },
     {
         "letter": "ङ",
-        "word": "ङो",
-        "pronunciation": "ngo",
+        "word": "नङ",
+        "pronunciation": "Naṅa",
         "image": "https://example.com/images/ङो.png",
-        "translation": "Sound of 'nga'"
+        "translation": "Nail"
     },
     {
         "letter": "च",
         "word": "चरा",
-        "pronunciation": "cha-raa",
+        "pronunciation": "Carā",
         "image": "https://example.com/images/चरा.png",
         "translation": "Bird"
     },
     {
         "letter": "छ",
         "word": "छाता",
-        "pronunciation": "chhaa-taa",
+        "pronunciation": "Chātā",
         "image": "https://example.com/images/छाता.png",
         "translation": "Umbrella"
     },
     {
         "letter": "ज",
-        "word": "जुन",
-        "pronunciation": "jun",
+        "word": "जरायो",
+        "pronunciation": "Jarāyo",
         "image": "https://example.com/images/जुन.png",
-        "translation": "Moon"
+        "translation": "Deer"
     },
     {
         "letter": "झ",
         "word": "झरना",
-        "pronunciation": "jhar-naa",
+        "pronunciation": "Jharanā",
         "image": "https://example.com/images/झरना.png",
         "translation": "Waterfall"
     },
     {
         "letter": "ञ",
-        "word": "ञ्याउ",
-        "pronunciation": "nyaau",
+        "word": "ञ्याउगोरु सिङ्गे ञ",
+        "pronunciation": "",
         "image": "https://example.com/images/ञ्याउ.png",
-        "translation": "Meow (Cat sound)"
+        "translation": ""
     },
     {
         "letter": "ट",
-        "word": "टमाटर",
-        "pronunciation": "ta-maa-tar",
+        "word": "टपरी",
+        "pronunciation": "Top-uh-ree",
         "image": "https://example.com/images/टमाटर.png",
-        "translation": "Tomato"
+        "translation": "Leaf Plate"
     },
     {
         "letter": "ठ",
-        "word": "ठुलो",
-        "pronunciation": "thu-lo",
+        "word": "ठेला",
+        "pronunciation": "Thela",
         "image": "https://example.com/images/ठुलो.png",
-        "translation": "Big"
+        "translation": "Cart"
     },
     {
         "letter": "ड",
         "word": "डमरु",
-        "pronunciation": "da-ma-ru",
+        "pronunciation": "Ḍamaru",
         "image": "https://example.com/images/डमरु.png",
-        "translation": "Drum"
+        "translation": "Small Drum"
     },
     {
         "letter": "ढ",
-        "word": "ढोका",
-        "pronunciation": "dho-kaa",
+        "word": "ढुङ्गा",
+        "pronunciation": "Ḍhuṅgā",
         "image": "https://example.com/images/ढोका.png",
-        "translation": "Door"
+        "translation": "Stone"
     },
     {
         "letter": "ण",
-        "word": "ण",
-        "pronunciation": "na",
+        "word": "वाण",
+        "pronunciation": "baan",
         "image": "https://example.com/images/ण.png",
-        "translation": "Retroflex 'na' sound"
+        "translation": "Arrow"
     },
     {
         "letter": "त",
-        "word": "तरबार",
-        "pronunciation": "tar-baar",
+        "word": "तराजु",
+        "pronunciation": "Tārāju",
         "image": "https://example.com/images/तरबार.png",
-        "translation": "Sword"
+        "translation": "Weighing Scale"
     },
     {
         "letter": "थ",
-        "word": "थाल",
-        "pronunciation": "thaal",
+        "word": "थैली",
+        "pronunciation": "Thā'ilī",
         "image": "https://example.com/images/थाल.png",
-        "translation": "Plate"
+        "translation": "Pouch"
     },
     {
         "letter": "द",
-        "word": "दही",
-        "pronunciation": "da-hee",
+        "word": "दमकल",
+        "pronunciation": "Damakala",
         "image": "https://example.com/images/दही.png",
-        "translation": "Yogurt"
+        "translation": "Fire Brigade"
     },
     {
         "letter": "ध",
-        "word": "धरती",
-        "pronunciation": "dhar-ti",
+        "word": "धनुष",
+        "pronunciation": "Dhanuṣa",
         "image": "https://example.com/images/धरती.png",
-        "translation": "Earth"
+        "translation": "Bow"
     },
     {
         "letter": "न",
-        "word": "नदी",
-        "pronunciation": "na-dee",
+        "word": "नाक",
+        "pronunciation": "Nāka",
         "image": "https://example.com/images/नदी.png",
-        "translation": "River"
+        "translation": "Nose"
     },
     {
         "letter": "प",
-        "word": "पंखा",
-        "pronunciation": "pankhaa",
+        "word": "परेवा",
+        "pronunciation": "Parēvā",
         "image": "https://example.com/images/पंखा.png",
-        "translation": "Fan"
+        "translation": "Pigeon"
     },
     {
         "letter": "फ",
-        "word": "फल",
-        "pronunciation": "phal",
+        "word": "फुल",
+        "pronunciation": "Phūla",
         "image": "https://example.com/images/फल.png",
-        "translation": "Fruit"
+        "translation": "Flower"
     },
     {
         "letter": "ब",
-        "word": "बल्ल",
-        "pronunciation": "bal-la",
+        "word": "बच्चा",
+        "pronunciation": "Baccā",
         "image": "https://example.com/images/बल्ल.png",
-        "translation": "Finally"
+        "translation": "Baby"
     },
     {
         "letter": "भ",
         "word": "भालु",
-        "pronunciation": "bhaa-lu",
+        "pronunciation": "Bhālu",
         "image": "https://example.com/images/भालु.png",
         "translation": "Bear"
     },
     {
         "letter": "म",
         "word": "माछा",
-        "pronunciation": "maa-chaa",
+        "pronunciation": "Māchā",
         "image": "https://example.com/images/माछा.png",
         "translation": "Fish"
     },
     {
         "letter": "य",
-        "word": "यात्रा",
-        "pronunciation": "yaa-traa",
+        "word": "यान",
+        "pronunciation": "yaan",
         "image": "https://example.com/images/यात्रा.png",
-        "translation": "Journey"
+        "translation": "Vehicle"
     },
     {
         "letter": "र",
         "word": "रथ",
-        "pronunciation": "ra-th",
+        "pronunciation": "rath",
         "image": "https://example.com/images/रथ.png",
         "translation": "Chariot"
     },
     {
         "letter": "ल",
-        "word": "लकडी",
-        "pronunciation": "la-ka-dee",
+        "word": "लसुन",
+        "pronunciation": "Lasuna",
         "image": "https://example.com/images/लकडी.png",
-        "translation": "Wood"
+        "translation": "Garlic"
     },
     {
         "letter": "व",
-        "word": "विजय",
-        "pronunciation": "vi-jay",
+        "word": "वकिल",
+        "pronunciation": "Vakila",
         "image": "https://example.com/images/विजय.png",
-        "translation": "Victory"
+        "translation": "Lawyer"
     },
     {
         "letter": "श",
-        "word": "शेर",
-        "pronunciation": "she-r",
+        "word": "शंख",
+        "pronunciation": "shankh",
         "image": "https://example.com/images/शेर.png",
-        "translation": "Lion"
+        "translation": "Shell"
     },
     {
         "letter": "ष",
-        "word": "षड्",
-        "pronunciation": "shad",
+        "word": "षट्कोण",
+        "pronunciation": "ṣaṭkoṇa",
         "image": "https://example.com/images/षड्.png",
-        "translation": "Six (Sanskrit-derived)"
+        "translation": "Hexagon"
     },
     {
         "letter": "स",
-        "word": "सागर",
-        "pronunciation": "saa-gar",
+        "word": "सर्प",
+        "pronunciation": "Sarpa",
         "image": "https://example.com/images/सागर.png",
-        "translation": "Ocean"
+        "translation": "Snake"
     },
     {
         "letter": "ह",
-        "word": "हात्ती",
-        "pronunciation": "haa-tee",
+        "word": "हलो",
+        "pronunciation": "Halō",
         "image": "https://example.com/images/हात्ती.png",
-        "translation": "Elephant"
+        "translation": "Plow"
     },
     {
         "letter": "क्ष",
         "word": "क्षत्रिय",
-        "pronunciation": "ksha-tri-ya",
+        "pronunciation": "kṣetrīya",
         "image": "https://example.com/images/क्षत्रिय.png",
         "translation": "Warrior"
     },
     {
         "letter": "त्र",
-        "word": "त्रिकोण",
-        "pronunciation": "tri-koṇ",
+        "word": "त्रिशुल",
+        "pronunciation": "Triśūla",
         "image": "https://example.com/images/त्रिकोण.png",
-        "translation": "Triangle"
+        "translation": "Trident"
     },
     {
         "letter": "ज्ञ",
         "word": "ज्ञान",
-        "pronunciation": "gyaa-na",
+        "pronunciation": "Jñāna",
         "image": "https://example.com/images/ज्ञान.png",
         "translation": "Knowledge"
     }
