@@ -1,18 +1,12 @@
+// app/flashcard.tsx
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import Flashcard from '../components/Flashcard';
-import flashcardData from '../data/nepali.json'; // Import JSON
-
-type FlashcardType = {
-    letter: string;
-    word: string;
-    pronunciation: string;
-    image: string;
-    translation: string;
-};
+import { consonantCards } from '../data/nepali'; // Ensure correct path
+import { FlashCardType } from '../containers/flashCardTypes';
 
 export default function FlashcardsScreen() {
-    const [cards] = useState<FlashcardType[]>(flashcardData);
+    const [cards] = useState<FlashCardType[]>(consonantCards);
     const [index, setIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
 

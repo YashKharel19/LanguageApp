@@ -1,20 +1,19 @@
+// components/Flashcard.tsx
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { FlashCardType } from '../containers/flashCardTypes';
 
-type FlashcardProps = {
-    card: {
-        letter: string;
-        word: string;
-        pronunciation: string;
-        image: string;
-        translation: string;
-    };
+type Props = {
+    card: FlashCardType;
     showAnswer: boolean;
     onToggle: () => void;
     onNext: () => void;
 };
 
-export default function Flashcard({ card, showAnswer, onToggle, onNext }: FlashcardProps) {
+export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props) {
+
+    const SvgImage = card.image;
+    console.log(card.image)
     return (
         <View className="items-center">
             <View className="bg-gray-100 p-6 rounded-2xl mb-5 w-80">
@@ -24,11 +23,9 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Flashc
                             <Text className="text-3xl font-semibold">{card.word}</Text>
                             <Text className="text-base italic text-gray-500">{card.pronunciation}</Text>
                         </View>
-                        <Image
-                            source={{ uri: card.image }}
-                            className="w-40 h-40 rounded-lg my-4"
-                            resizeMode="contain"
-                        />
+                        <View className="my-4 items-center">
+                            <SvgImage width={120} height={120} />
+                        </View>
                         <Text className="text-lg text-gray-700">{card.translation}</Text>
                     </View>
                 ) : (
@@ -48,5 +45,6 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Flashc
                 <Text className="text-white text-lg text-center">Next Card</Text>
             </TouchableOpacity>
         </View>
+
     );
 }
