@@ -20,10 +20,12 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
                 {showAnswer ? (
                     <View className="items-center">
                         <Text className="text-4xl font-semibold mb-1">{card.word}</Text>
-                        <Text className="text-lg italic text-gray-500 mb-4">{card.pronunciation}</Text>
+                        <Text className="text-sm italic text-gray-500 absolute left-[70%] transform translate-x-[-50%] mt-8">
+                            {card.pronunciation}
+                        </Text>
 
                         <View className="my-4 items-center">
-                            <SvgImage width={160} height={160} />
+                            <SvgImage width={200} height={200} />
                         </View>
 
                         <Text className="text-lg text-gray-700">{card.translation}</Text>
