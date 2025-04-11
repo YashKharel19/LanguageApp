@@ -23,7 +23,9 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
     }, [showAnswer]);
 
+    // Front side style with opacity animation for flip effect
     const frontStyle = useAnimatedStyle(() => ({
+        opacity: interpolate(rotate.value, [0, 180], [1, 0]),
         transform: [
             { perspective: 1000 },
             { rotateY: `${interpolate(rotate.value, [0, 180], [0, 180])}deg` },
@@ -32,9 +34,12 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
         position: 'absolute',
         width: '100%',
         height: '100%',
+        zIndex: 1, // Front should be on top during the flip
     }));
 
+    // Back side style with opacity animation for flip effect
     const backStyle = useAnimatedStyle(() => ({
+        opacity: interpolate(rotate.value, [0, 180], [0, 1]),
         transform: [
             { perspective: 1000 },
             { rotateY: `${interpolate(rotate.value, [0, 180], [180, 360])}deg` },
@@ -43,11 +48,12 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
         position: 'absolute',
         width: '100%',
         height: '100%',
+        zIndex: 0, // Back should be behind the front during the flip
     }));
 
     return (
         <View className="items-center">
-            <View className="w-80 h-[420px] relative">
+            <View className="w-80 h-[420px] relative overflow-hidden">
                 {/* Front Side */}
                 <Animated.View style={frontStyle}>
                     <View className="bg-primary-light p-4 rounded-sm w-80 h-[420px]">
@@ -78,6 +84,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
                 </Animated.View>
             </View>
 
+            {/* These were getting overlapped — now visible again */}
             <TouchableOpacity onPress={onToggle} className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-48">
                 <Text className="text-white text-lg text-center">
                     {showAnswer ? 'Show Letter' : 'Show Meaning'}
@@ -88,5 +95,6 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
                 <Text className="text-white text-lg text-center">Next Card</Text>
             </TouchableOpacity>
         </View>
+
     );
 }
