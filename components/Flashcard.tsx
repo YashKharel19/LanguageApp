@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -8,14 +9,17 @@ import Animated, {
 } from 'react-native-reanimated';
 import { FlashCardType } from '../containers/flashCardTypes';
 
+const { width, height } = Dimensions.get('window');
+
 type Props = {
     card: FlashCardType;
     showAnswer: boolean;
     onToggle: () => void;
     onNext: () => void;
+    onPrev?: () => void; // for swipe left/right
 };
 
-export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props) {
+export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }: Props) {
     const SvgImage = card.image;
     const rotate = useSharedValue(0);
 
@@ -23,78 +27,76 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext }: Props)
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
     }, [showAnswer]);
 
-    // Front side style with opacity animation for flip effect
+    const cardWidth = width * 0.9;
+    const cardHeight = height * 0.66;
+
     const frontStyle = useAnimatedStyle(() => ({
-        opacity: interpolate(rotate.value, [0, 180], [1, 0]),
         transform: [
             { perspective: 1000 },
             { rotateY: `${interpolate(rotate.value, [0, 180], [0, 180])}deg` },
         ],
         backfaceVisibility: 'hidden',
         position: 'absolute',
-        width: '100%',
-        height: '100%',
-        zIndex: 1, // Front should be on top during the flip
+        width: cardWidth,
+        height: cardHeight,
     }));
 
-    // Back side style with opacity animation for flip effect
     const backStyle = useAnimatedStyle(() => ({
-        opacity: interpolate(rotate.value, [0, 180], [0, 1]),
         transform: [
             { perspective: 1000 },
             { rotateY: `${interpolate(rotate.value, [0, 180], [180, 360])}deg` },
         ],
         backfaceVisibility: 'hidden',
         position: 'absolute',
-        width: '100%',
-        height: '100%',
-        zIndex: 0, // Back should be behind the front during the flip
+        width: cardWidth,
+        height: cardHeight,
     }));
 
+    const swipe = Gesture.Pan()
+        .onEnd((e) => {
+            if (e.translationX < -50) {
+                onNext();
+            } else if (e.translationX > 50 && onPrev) {
+                onPrev();
+            }
+        });
+
     return (
-        <View className="items-center">
-            <View className="w-80 h-[420px] relative overflow-hidden">
-                {/* Front Side */}
-                <Animated.View style={frontStyle}>
-                    <View className="bg-primary-light p-4 rounded-sm w-80 h-[420px]">
-                        <View className="flex-1 items-center justify-center">
-                            <Text className="text-8xl font-bold">{card.letter}</Text>
+        <GestureDetector gesture={swipe}>
+            <View className="flex-1 items-center justify-center bg-white px-4">
+                <Pressable onPress={onToggle} style={{ width: cardWidth, height: cardHeight }} className="relative overflow-hidden mb-6">
+                    <Animated.View style={frontStyle}>
+                        <View className="bg-primary-light p-4 rounded-sm w-full h-full items-center justify-center">
+                            <Text className="text-8xl font-bold text-center">{card.letter}</Text>
                         </View>
-                    </View>
-                </Animated.View>
+                    </Animated.View>
 
-                {/* Back Side */}
-                <Animated.View style={backStyle}>
-                    <View className="bg-primary-light p-4 rounded-sm w-80 h-[420px]">
-                        <View className="flex-1 justify-between">
-                            <View>
-                                <Text className="text-6xl font-semibold text-center">{card.word}</Text>
-                                <Text className="text-sm italic text-gray-500 text-right mt-1 mr-8">
-                                    {card.pronunciation}
-                                </Text>
+                    <Animated.View style={backStyle}>
+                        <View className="bg-primary-light p-4 rounded-sm w-full h-full justify-start">
+                            <Text className="text-9xl font-semibold text-center mb-2 pt-12">{card.word}</Text>
+                            <Text className="text-sm italic text-gray-500 text-right mb-4 mr-4">
+                                {card.pronunciation}
+                            </Text>
+
+                            <View className="items-center mb-4">
+                                <SvgImage width={340} height={340} />
                             </View>
 
-                            <View className="items-center">
-                                <SvgImage width={250} height={250} />
-                            </View>
-
-                            <Text className="text-base text-gray-700 text-center">{card.translation}</Text>
+                            <Text className="text-4xl text-gray-700 text-center">{card.translation}</Text>
                         </View>
-                    </View>
-                </Animated.View>
+                    </Animated.View>
+                </Pressable>
+
+                <TouchableOpacity onPress={onToggle} className="bg-purple-700 px-6 py-3 rounded-lg w-64">
+                    <Text className="text-white text-lg text-center">
+                        {showAnswer ? 'Show Letter' : 'Show Meaning'}
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={onNext} className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-64">
+                    <Text className="text-white text-lg text-center">Next Card</Text>
+                </TouchableOpacity>
             </View>
-
-            {/* These were getting overlapped — now visible again */}
-            <TouchableOpacity onPress={onToggle} className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-48">
-                <Text className="text-white text-lg text-center">
-                    {showAnswer ? 'Show Letter' : 'Show Meaning'}
-                </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={onNext} className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-48">
-                <Text className="text-white text-lg text-center">Next Card</Text>
-            </TouchableOpacity>
-        </View>
-
+        </GestureDetector>
     );
 }
