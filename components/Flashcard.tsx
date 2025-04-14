@@ -17,7 +17,7 @@ type Props = {
     showAnswer: boolean;
     onToggle: () => void;
     onNext: () => void;
-    onPrev?: () => void; // for swipe left/right
+    onPrev: () => void; // for swipe left/right
 };
 
 export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }: Props) {
@@ -54,13 +54,15 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     }));
 
     const swipe = Gesture.Pan()
+        .minDistance(10)
         .onEnd((e) => {
-            if (e.translationX < -50) {
+            if (e.translationX < -50 && Math.abs(e.velocityX) > 300) {
                 runOnJS(onNext)();
-            } else if (e.translationX > 50 && onPrev) {
+            } else if (e.translationX > 50 && Math.abs(e.velocityX) > 300 && onPrev) {
                 runOnJS(onPrev)();
             }
-        });
+        })
+        .activeOffsetX([-10, 10]);
 
     return (
         <GestureDetector gesture={swipe}>

@@ -14,7 +14,10 @@ export default function FlashcardsScreen() {
         setShowAnswer(false);
         setIndex((prevIndex) => (prevIndex + 1) % cards.length);
     };
-
+    const previousCard = () => {
+        setShowAnswer(false);
+        setIndex((prevIndex) => (prevIndex - 1) % cards.length);
+    }
     return (
         <View className="flex-1 justify-center items-center bg-white">
             <Text className="text-3xl font-bold mb-5">Flashcards</Text>
@@ -23,6 +26,7 @@ export default function FlashcardsScreen() {
                 showAnswer={showAnswer}
                 onToggle={() => setShowAnswer(!showAnswer)}
                 onNext={nextCard}
+                onPrev={previousCard}
             />
         </View>
     );
