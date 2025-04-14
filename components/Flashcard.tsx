@@ -6,6 +6,7 @@ import Animated, {
     useAnimatedStyle,
     withTiming,
     interpolate,
+    runOnJS,
 } from 'react-native-reanimated';
 import { FlashCardType } from '../containers/flashCardTypes';
 
@@ -55,34 +56,42 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     const swipe = Gesture.Pan()
         .onEnd((e) => {
             if (e.translationX < -50) {
-                onNext();
+                runOnJS(onNext)();
             } else if (e.translationX > 50 && onPrev) {
-                onPrev();
+                runOnJS(onPrev)();
             }
         });
 
     return (
         <GestureDetector gesture={swipe}>
             <View className="flex-1 items-center justify-center bg-white px-4">
-                <Pressable onPress={onToggle} style={{ width: cardWidth, height: cardHeight }} className="relative overflow-hidden mb-6">
+                <Pressable
+                    onPress={onToggle}
+                    style={{ width: cardWidth, height: cardHeight }}
+                    className="relative overflow-hidden mb-6"
+                >
+                    {/* Front Side */}
                     <Animated.View style={frontStyle}>
                         <View className="bg-primary-light p-4 rounded-sm w-full h-full items-center justify-center">
-                            <Text className="text-8xl font-bold text-center">{card.letter}</Text>
+                            <Text className="text-8xl font-bold">{card.letter}</Text>
                         </View>
                     </Animated.View>
 
+                    {/* Back Side */}
                     <Animated.View style={backStyle}>
-                        <View className="bg-primary-light p-4 rounded-sm w-full h-full justify-start">
-                            <Text className="text-9xl font-semibold text-center mb-2 pt-12">{card.word}</Text>
-                            <Text className="text-sm italic text-gray-500 text-right mb-4 mr-4">
-                                {card.pronunciation}
-                            </Text>
+                        <View className="bg-primary-light p-4 rounded-sm w-full h-full justify-between">
+                            <View>
+                                <Text className="text-6xl font-semibold text-center">{card.word}</Text>
+                                <Text className="text-sm italic text-gray-500 text-right mt-1 mr-8">
+                                    {card.pronunciation}
+                                </Text>
+                            </View>
 
-                            <View className="items-center mb-4">
+                            <View className="items-center">
                                 <SvgImage width={340} height={340} />
                             </View>
 
-                            <Text className="text-4xl text-gray-700 text-center">{card.translation}</Text>
+                            <Text className="text-4xl text-gray-700 text-center mt-4">{card.translation}</Text>
                         </View>
                     </Animated.View>
                 </Pressable>
