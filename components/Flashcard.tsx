@@ -1,5 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import React, { useEffect } from 'react';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    Dimensions,
+    Pressable,
+    Platform
+} from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
     useSharedValue,
@@ -23,14 +30,25 @@ type Props = {
 export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }: Props) {
     const SvgImage = card.image;
     const rotate = useSharedValue(0);
-    const wasSwiping = useRef(false); // Track if swipe occurred
+    const wasSwiping = useSharedValue(false); // Shared for better gesture/tap sync
+
+    const cardWidth = width * 0.9;
+    const cardHeight = height * 0.66;
 
     useEffect(() => {
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
     }, [showAnswer]);
 
-    const cardWidth = width * 0.9;
-    const cardHeight = height * 0.66;
+    useEffect(() => {
+        if (Platform.OS === 'web') {
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'ArrowRight') onNext();
+                else if (e.key === 'ArrowLeft') onPrev();
+            };
+            window.addEventListener('keydown', handleKeyDown);
+            return () => window.removeEventListener('keydown', handleKeyDown);
+        }
+    }, []);
 
     const frontStyle = useAnimatedStyle(() => ({
         transform: [
@@ -55,13 +73,12 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     }));
 
     const swipe = Gesture.Pan()
-        .minDistance(10)
-        .onStart(() => {
-            wasSwiping.current = false;
+        .onBegin(() => {
+            wasSwiping.value = false;
         })
         .onUpdate((e) => {
             if (Math.abs(e.translationX) > 10) {
-                wasSwiping.current = true;
+                wasSwiping.value = true;
             }
         })
         .onEnd((e) => {
@@ -70,18 +87,19 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
             } else if (e.translationX > 50 && Math.abs(e.velocityX) > 300) {
                 runOnJS(onPrev)();
             }
-        })
-        .activeOffsetX([-10, 10]);
+        });
+
+    const handlePress = () => {
+        if (!wasSwiping.value) {
+            onToggle();
+        }
+    };
 
     return (
         <GestureDetector gesture={swipe}>
             <View className="flex-1 items-center justify-center bg-white px-4">
                 <Pressable
-                    onPress={() => {
-                        if (!wasSwiping.current) {
-                            onToggle();
-                        }
-                    }}
+                    onPress={handlePress}
                     style={{ width: cardWidth, height: cardHeight }}
                     className="relative overflow-hidden mb-6"
                 >
