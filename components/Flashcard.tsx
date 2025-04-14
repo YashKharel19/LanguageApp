@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, Dimensions, Pressable } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -17,12 +17,13 @@ type Props = {
     showAnswer: boolean;
     onToggle: () => void;
     onNext: () => void;
-    onPrev: () => void; // for swipe left/right
+    onPrev: () => void;
 };
 
 export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }: Props) {
     const SvgImage = card.image;
     const rotate = useSharedValue(0);
+    const wasSwiping = useRef(false); // Track if swipe occurred
 
     useEffect(() => {
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
@@ -55,10 +56,18 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
 
     const swipe = Gesture.Pan()
         .minDistance(10)
+        .onStart(() => {
+            wasSwiping.current = false;
+        })
+        .onUpdate((e) => {
+            if (Math.abs(e.translationX) > 10) {
+                wasSwiping.current = true;
+            }
+        })
         .onEnd((e) => {
             if (e.translationX < -50 && Math.abs(e.velocityX) > 300) {
                 runOnJS(onNext)();
-            } else if (e.translationX > 50 && Math.abs(e.velocityX) > 300 && onPrev) {
+            } else if (e.translationX > 50 && Math.abs(e.velocityX) > 300) {
                 runOnJS(onPrev)();
             }
         })
@@ -68,7 +77,11 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         <GestureDetector gesture={swipe}>
             <View className="flex-1 items-center justify-center bg-white px-4">
                 <Pressable
-                    onPress={onToggle}
+                    onPress={() => {
+                        if (!wasSwiping.current) {
+                            onToggle();
+                        }
+                    }}
                     style={{ width: cardWidth, height: cardHeight }}
                     className="relative overflow-hidden mb-6"
                 >
