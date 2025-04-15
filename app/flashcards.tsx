@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Flashcard from '../components/Flashcard';
 import { consonantCards } from '../data/nepali';
@@ -13,7 +13,6 @@ import { Audio } from 'expo-av';
 
 const { width } = Dimensions.get('window');
 
-
 export default function FlashcardsScreen() {
     const [cards] = useState<FlashCardType[]>(consonantCards);
     const [index, setIndex] = useState(0);
@@ -21,45 +20,32 @@ export default function FlashcardsScreen() {
     const [direction, setDirection] = useState<'left' | 'right'>('left');
     const translateX = useSharedValue(0);
 
-    const sound = useRef<Audio.Sound | null>(null);
-
-    useEffect(() => {
-        loadSound();
-        return () => {
-            unloadSound();
-        };
-    }, []);
-
-    const loadSound = async () => {
-        const { sound: loadedSound } = await Audio.Sound.createAsync(
-            require('../assets/sounds/leftslide.wav')
-        );
-        sound.current = loadedSound;
-    };
-
-    const playSound = async () => {
-        if (sound.current) {
-            await sound.current.replayAsync();
-        }
-    };
-
-    const unloadSound = async () => {
-        if (sound.current) {
-            await sound.current.unloadAsync();
-            sound.current = null;
-        }
+    // Play a sound file dynamically
+    const playSound = async (file: any) => {
+        const { sound } = await Audio.Sound.createAsync(file);
+        await sound.replayAsync();
+        sound.setOnPlaybackStatusUpdate((status) => {
+            if (status.isLoaded && status.didJustFinish) {
+                sound.unloadAsync();
+            }
+        });
     };
 
     useEffect(() => {
+        // Start animation from off-screen
         translateX.value = direction === 'left' ? width : -width;
         translateX.value = withTiming(0, { duration: 300 });
     }, [index]);
 
     const animateOut = (onFinish: () => void) => {
-        playSound(); // 🔊 Play sound on swipe
-        translateX.value = withTiming(direction === 'left' ? -width : width, { duration: 200 }, () => {
-            runOnJS(onFinish)();
-        });
+        playSound(require('../assets/sounds/leftslide.wav')); // 🔊 Swipe sound
+        translateX.value = withTiming(
+            direction === 'left' ? -width : width,
+            { duration: 200 },
+            () => {
+                runOnJS(onFinish)();
+            }
+        );
     };
 
     const nextCard = () => {
@@ -89,14 +75,20 @@ export default function FlashcardsScreen() {
                 <Flashcard
                     card={cards[index]}
                     showAnswer={showAnswer}
-                    onToggle={() => setShowAnswer(!showAnswer)}
+                    onToggle={() => {
+                        setShowAnswer(!showAnswer);
+                        playSound(require('../assets/sounds/flip.mp3')); // 🔊 Flip sound
+                    }}
                     onNext={nextCard}
                     onPrev={previousCard}
                 />
             </Animated.View>
 
             <TouchableOpacity
-                onPress={() => setShowAnswer(!showAnswer)}
+                onPress={() => {
+                    setShowAnswer(!showAnswer);
+                    playSound(require('../assets/sounds/flip.mp3'));
+                }}
                 className="bg-purple-700 px-6 py-3 rounded-lg mt-6 w-64"
             >
                 <Text className="text-white text-lg text-center">
