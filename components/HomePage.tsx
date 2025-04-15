@@ -76,7 +76,7 @@ export default function HomePage() {
     };
 
     return (
-        <View className="flex-1 bg-purple-100 justify-center items-center px-5">
+        <View className="flex-1 bg-primary-light justify-center items-center px-5">
             <Animated.Text style={{ transform: [{ translateY: balloon1 }] }} className="absolute top-20 left-12 text-4xl">
                 🎈
             </Animated.Text>

@@ -1,24 +1,22 @@
-// components/FlashScreen.tsx
 import { View, Text, Animated, Easing } from 'react-native';
 import { useEffect, useRef } from 'react';
 import { Audio } from 'expo-av';
+import { twMerge } from 'tailwind-merge';
 
 const letters = ['L', 'U', 'M', 'A', 'षा'];
-const languages = ['Devnagri', 'Newari', '', 'Hindi', 'Nepali', 'Japanese'];
+const languages = ['Devnagri', 'Newari', 'Hindi', 'Nepali', 'Japanese'];
 
 export default function FlashScreen({ onComplete }: { onComplete: () => void }) {
     const animatedLetters = useRef(letters.map(() => new Animated.Value(0))).current;
     const balloonAnimations = useRef(languages.map(() => new Animated.Value(0))).current;
-
     useEffect(() => {
         animateLetters();
         animateBalloons();
         playBackgroundMusic();
 
-        // Automatically transition to HomePage after 4s
         const timer = setTimeout(() => {
             onComplete();
-        }, 4000);
+        }, 6000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -81,36 +79,52 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
         }
     };
 
+    const getColorForLetter = (letter: string) => {
+        if (letter === 'षा') return 'text-sha-pink';
+        return 'text-luma-blue';
+    };
+
+    const getBalloonColor = (index: number) => {
+        const colors = [
+            'bg-lang-red',
+            'bg-lang-yellow',
+            'bg-lang-green',
+            'bg-lang-blue',
+            'bg-lang-purple',
+            'bg-lang-rose',
+            'bg-lang-orange',
+        ];
+        return colors[index % colors.length];
+    };
+
     return (
-        <View className="flex-1 items-center justify-center bg-pink-100 px-4">
+        <View className="flex-1 bg-primary-light justify-center items-center px-4">
             <Text className="text-2xl font-bold text-rose-600 mb-2">🎉 Welcome to</Text>
 
             <View className="flex-row my-2">
                 {letters.map((letter, index) => (
                     <Animated.Text
                         key={index}
-                        style={{
-                            transform: [{ translateY: animatedLetters[index] }],
-                        }}
-                        className="text-4xl font-bold mx-1"
+                        style={{ transform: [{ translateY: animatedLetters[index] }] }}
+                        className={twMerge(`text-4xl font-bold mx-1`, getColorForLetter(letter))}
                     >
                         {letter}
                     </Animated.Text>
                 ))}
             </View>
 
-            <Text className="text-lg font-semibold text-purple-700 mt-4">Let's play & learn new languages!</Text>
+            <Text className="text-lg font-semibold text-purple-600 mt-4">
+                Let's play & learn new languages!
+            </Text>
 
             <View className="flex-row flex-wrap justify-center mt-8">
                 {languages.map((lang, index) => (
                     <Animated.View
                         key={lang}
-                        style={{
-                            transform: [{ translateY: balloonAnimations[index] }],
-                        }}
-                        className="m-2 rounded-xl px-3 py-2 shadow-md"
+                        style={{ transform: [{ translateY: balloonAnimations[index] }] }}
+                        className={twMerge(`m-2 rounded-xl py-2 px-3 shadow-md`, getBalloonColor(index))}
                     >
-                        <Text className="text-white font-bold">{lang}</Text>
+                        <Text className="text-white font-bold text-sm">{lang}</Text>
                     </Animated.View>
                 ))}
             </View>

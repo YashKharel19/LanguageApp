@@ -9,6 +9,15 @@ module.exports = {
     extend: {
       colors: {
         'primary-light': '#f9f3ed',
+        'luma-blue': "#2A77A1",
+        'sha-pink': "#CD57AD",
+        'lang-red': "#F87171",
+        'lang-yellow': "#FBBF24",
+        'lang-green': "#34D399",
+        'lang-blue': "#60A5FA",
+        'lang-purple': "#A78BFA",
+        'lang-rose': "#F472B6",
+        'lang-orange': "#FB923C"
       },
       borderRadius: {
         sm: '8px',
