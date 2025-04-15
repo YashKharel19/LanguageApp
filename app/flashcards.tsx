@@ -70,7 +70,6 @@ export default function FlashcardsScreen() {
 
     return (
         <View className="flex-1 justify-center items-center bg-white">
-            <Text className="text-3xl font-bold mt-12">Flashcards</Text>
             <Animated.View style={cardStyle}>
                 <Flashcard
                     card={cards[index]}
