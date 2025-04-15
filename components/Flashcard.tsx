@@ -100,7 +100,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     const speakWord = () => {
         if (card.pronunciation) {
             Speech.speak(card.pronunciation, {
-                language: 'en-EN', // or 'hi-IN' if Nepali pronunciation isn't working
+                language: 'en-US', // or 'hi-IN' if Nepali pronunciation isn't working
                 rate: 0.85,
             });
         }
