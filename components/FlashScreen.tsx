@@ -1,7 +1,6 @@
 import { View, Text, Animated, Easing } from 'react-native';
 import { useEffect, useRef } from 'react';
 import { Audio } from 'expo-av';
-import { twMerge } from 'tailwind-merge';
 
 const letters = ['L', 'U', 'M', 'A', 'षा'];
 const languages = ['Devnagri', 'Newari', 'Hindi', 'Nepali', 'Japanese'];
@@ -9,13 +8,16 @@ const languages = ['Devnagri', 'Newari', 'Hindi', 'Nepali', 'Japanese'];
 export default function FlashScreen({ onComplete }: { onComplete: () => void }) {
     const animatedLetters = useRef(letters.map(() => new Animated.Value(0))).current;
     const balloonAnimations = useRef(languages.map(() => new Animated.Value(0))).current;
+    const soundRef = useRef<Audio.Sound | null>(null); // Use Audio.Sound here
+
     useEffect(() => {
         animateLetters();
         animateBalloons();
         playBackgroundMusic();
 
         const timer = setTimeout(() => {
-            onComplete();
+            stopBackgroundMusic(); // Stop music before transitioning
+            onComplete(); // Proceed to the HomePage
         }, 6000);
 
         return () => clearTimeout(timer);
@@ -74,8 +76,16 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                     volume: 0.7,
                 }
             );
+            soundRef.current = sound; // Store the sound reference
         } catch (error) {
             console.log('Error playing sound:', error);
+        }
+    };
+
+    const stopBackgroundMusic = async () => {
+        if (soundRef.current) {
+            await soundRef.current.stopAsync(); // Stop the sound
+            soundRef.current = null; // Clear the reference
         }
     };
 
@@ -106,7 +116,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                     <Animated.Text
                         key={index}
                         style={{ transform: [{ translateY: animatedLetters[index] }] }}
-                        className={twMerge(`text-4xl font-bold mx-1`, getColorForLetter(letter))}
+                        className={`text-4xl font-bold mx-1 ${getColorForLetter(letter)}`}
                     >
                         {letter}
                     </Animated.Text>
@@ -122,7 +132,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                     <Animated.View
                         key={lang}
                         style={{ transform: [{ translateY: balloonAnimations[index] }] }}
-                        className={twMerge(`m-2 rounded-xl py-2 px-3 shadow-md`, getBalloonColor(index))}
+                        className={`m-2 rounded-xl py-2 px-3 shadow-md ${getBalloonColor(index)}`}
                     >
                         <Text className="text-white font-bold text-sm">{lang}</Text>
                     </Animated.View>
