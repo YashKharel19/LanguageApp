@@ -1,5 +1,4 @@
-// screens/FlashcardsScreen.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Flashcard from '../components/Flashcard';
 import { consonantCards } from '../data/nepali';
@@ -10,8 +9,10 @@ import Animated, {
     withTiming,
     runOnJS,
 } from 'react-native-reanimated';
+import { Audio } from 'expo-av';
 
 const { width } = Dimensions.get('window');
+
 
 export default function FlashcardsScreen() {
     const [cards] = useState<FlashCardType[]>(consonantCards);
@@ -20,12 +21,42 @@ export default function FlashcardsScreen() {
     const [direction, setDirection] = useState<'left' | 'right'>('left');
     const translateX = useSharedValue(0);
 
+    const sound = useRef<Audio.Sound | null>(null);
+
+    useEffect(() => {
+        loadSound();
+        return () => {
+            unloadSound();
+        };
+    }, []);
+
+    const loadSound = async () => {
+        const { sound: loadedSound } = await Audio.Sound.createAsync(
+            require('../assets/sounds/leftslide.wav')
+        );
+        sound.current = loadedSound;
+    };
+
+    const playSound = async () => {
+        if (sound.current) {
+            await sound.current.replayAsync();
+        }
+    };
+
+    const unloadSound = async () => {
+        if (sound.current) {
+            await sound.current.unloadAsync();
+            sound.current = null;
+        }
+    };
+
     useEffect(() => {
         translateX.value = direction === 'left' ? width : -width;
         translateX.value = withTiming(0, { duration: 300 });
     }, [index]);
 
     const animateOut = (onFinish: () => void) => {
+        playSound(); // 🔊 Play sound on swipe
         translateX.value = withTiming(direction === 'left' ? -width : width, { duration: 200 }, () => {
             runOnJS(onFinish)();
         });
@@ -54,7 +85,6 @@ export default function FlashcardsScreen() {
     return (
         <View className="flex-1 justify-center items-center bg-white">
             <Text className="text-3xl font-bold mt-12">Flashcards</Text>
-
             <Animated.View style={cardStyle}>
                 <Flashcard
                     card={cards[index]}
