@@ -1,7 +1,8 @@
+// screens/FlashcardsScreen.tsx
 import React, { useEffect, useState } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Flashcard from '../components/Flashcard';
-import { consonantCards } from '../data/nepali'; // Adjust if needed
+import { consonantCards } from '../data/nepali';
 import { FlashCardType } from '../containers/flashCardTypes';
 import Animated, {
     useSharedValue,
@@ -20,7 +21,6 @@ export default function FlashcardsScreen() {
     const translateX = useSharedValue(0);
 
     useEffect(() => {
-        // Slide new card in from the side
         translateX.value = direction === 'left' ? width : -width;
         translateX.value = withTiming(0, { duration: 300 });
     }, [index]);
@@ -43,7 +43,7 @@ export default function FlashcardsScreen() {
         setDirection('right');
         animateOut(() => {
             setShowAnswer(false);
-            setIndex((prev) => (prev - 1 + cards.length) % cards.length); // wrap correctly
+            setIndex((prev) => (prev - 1 + cards.length) % cards.length);
         });
     };
 
@@ -54,6 +54,7 @@ export default function FlashcardsScreen() {
     return (
         <View className="flex-1 justify-center items-center bg-white">
             <Text className="text-3xl font-bold mt-12">Flashcards</Text>
+
             <Animated.View style={cardStyle}>
                 <Flashcard
                     card={cards[index]}
@@ -63,6 +64,22 @@ export default function FlashcardsScreen() {
                     onPrev={previousCard}
                 />
             </Animated.View>
+
+            <TouchableOpacity
+                onPress={() => setShowAnswer(!showAnswer)}
+                className="bg-purple-700 px-6 py-3 rounded-lg mt-6 w-64"
+            >
+                <Text className="text-white text-lg text-center">
+                    {showAnswer ? 'Show Letter' : 'Show Meaning'}
+                </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={nextCard}
+                className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-64"
+            >
+                <Text className="text-white text-lg text-center">Next Card</Text>
+            </TouchableOpacity>
         </View>
     );
 }

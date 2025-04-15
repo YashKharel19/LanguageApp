@@ -1,11 +1,11 @@
+// components/Flashcard.tsx
 import React, { useEffect } from 'react';
 import {
     View,
     Text,
-    TouchableOpacity,
-    Dimensions,
     Pressable,
-    Platform
+    Platform,
+    Dimensions,
 } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -30,8 +30,7 @@ type Props = {
 export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }: Props) {
     const SvgImage = card.image;
     const rotate = useSharedValue(0);
-    const wasSwiping = useSharedValue(false); // Shared for better gesture/tap sync
-
+    const wasSwiping = useSharedValue(false);
     const cardWidth = width * 0.9;
     const cardHeight = height * 0.66;
 
@@ -97,7 +96,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
 
     return (
         <GestureDetector gesture={swipe}>
-            <View className="flex-1 items-center justify-center bg-white px-4">
+            <View className="items-center justify-center bg-white px-4">
                 <Pressable
                     onPress={handlePress}
                     style={{ width: cardWidth, height: cardHeight }}
@@ -128,16 +127,6 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                         </View>
                     </Animated.View>
                 </Pressable>
-
-                <TouchableOpacity onPress={onToggle} className="bg-purple-700 px-6 py-3 rounded-lg w-64">
-                    <Text className="text-white text-lg text-center">
-                        {showAnswer ? 'Show Letter' : 'Show Meaning'}
-                    </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={onNext} className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-64">
-                    <Text className="text-white text-lg text-center">Next Card</Text>
-                </TouchableOpacity>
             </View>
         </GestureDetector>
     );
