@@ -6,6 +6,7 @@ import {
     Pressable,
     Platform,
     Dimensions,
+    TouchableOpacity,
 } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -16,6 +17,8 @@ import Animated, {
     runOnJS,
 } from 'react-native-reanimated';
 import { FlashCardType } from '../containers/flashCardTypes';
+import * as Speech from 'expo-speech';
+import { Feather } from '@expo/vector-icons';// 📢 sound icon (you can replace with any icon)
 
 const { width, height } = Dimensions.get('window');
 
@@ -94,6 +97,15 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         }
     };
 
+    const speakWord = () => {
+        if (card.pronunciation) {
+            Speech.speak(card.pronunciation, {
+                language: 'en-EN', // or 'hi-IN' if Nepali pronunciation isn't working
+                rate: 0.85,
+            });
+        }
+    };
+
     return (
         <GestureDetector gesture={swipe}>
             <View className="items-center justify-center bg-white px-4">
@@ -105,7 +117,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                     {/* Front Side */}
                     <Animated.View style={frontStyle}>
                         <View className="bg-primary-light p-4 rounded-sm w-full h-full items-center justify-center">
-                            <Text className="text-8xl font-bold">{card.letter}</Text>
+                            <Text className="text-8xl">{card.letter}</Text>
                         </View>
                     </Animated.View>
 
@@ -113,17 +125,22 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                     <Animated.View style={backStyle}>
                         <View className="bg-primary-light p-4 rounded-sm w-full h-full justify-between">
                             <View>
-                                <Text className="text-6xl font-semibold text-center">{card.word}</Text>
-                                <Text className="text-sm italic text-gray-500 text-right mt-1 mr-8">
-                                    {card.pronunciation}
-                                </Text>
+                                <Text className="text-4xl font-semibold text-center">{card.word}</Text>
+                                <View className="flex-row justify-end items-center mt-1 mr-8">
+                                    <Text className="text-sm italic text-gray-500 mr-2">
+                                        {card.pronunciation}
+                                    </Text>
+                                    <Pressable onPress={speakWord}>
+                                        <Feather name="volume-2" size={18} color="#6b7280" />
+                                    </Pressable>
+                                </View>
                             </View>
 
                             <View className="items-center">
                                 <SvgImage width={340} height={340} />
                             </View>
 
-                            <Text className="text-4xl text-gray-700 text-center mt-4">{card.translation}</Text>
+                            <Text className="text-2xl text-gray-700 text-center mt-4">{card.translation}</Text>
                         </View>
                     </Animated.View>
                 </Pressable>
