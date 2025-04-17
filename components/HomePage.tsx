@@ -37,25 +37,33 @@ export default function HomePage() {
             resizeMode="cover"
             className="flex-1"
         >
-            <SafeAreaView className="flex-1 justify-between px-6 py-8">
-                {/* Top Section with Gradient Text */}
-                <View className="items-center">
-                    <GradientText text="Start" colors={['#00FF00', '#0000FF']} />
-                    <GradientText text="Learning" colors={['#FFA500', '#FF0000']} />
-                    <GradientText text="in" colors={['#FF0000', '#FF4D4D']} />
-                    <GradientText text="Your" colors={['#00BFFF', '#1E90FF']} />
-                    <GradientText text="Language" colors={['#FF0000', '#FF4D4D']} />
+            <SafeAreaView className="flex-1 justify-between">
+
+                {/* Top Gradient Text Section */}
+                <View>
+                    <View className="items-center">
+                        <GradientText text="Start" colors={['#0000FF', '#00FF00']} />
+                    </View>
+                    <View className="flex-row justify-center gap-4">
+                        <GradientText text="Learning" colors={['#FFA500', '#FF0000']} />
+                        <GradientText text="in" colors={['#FF0000', '#FF4D4D']} />
+                    </View>
+                    <View className="flex-row justify-center gap-4">
+                        <GradientText text="Your" colors={['#00BFFF', '#1E90FF']} />
+                        <GradientText text="Language" colors={['#FF0000', '#FF4D4D']} />
+                    </View>
                 </View>
 
-                {/* Bottom Section with Button */}
+                {/* Bottom Button */}
                 <View className="items-center space-y-4">
                     <TouchableOpacity
                         onPress={() => router.push('/flashcards')}
                         className="bg-lang-orange px-6 py-3 rounded-[15px] shadow"
                     >
-                        <Text className="text-white text-lg font-semibold">Select Your Country</Text>
+                        <Text className="text-white text-lg font-semibold">
+                            Select Your Country
+                        </Text>
                     </TouchableOpacity>
-
                 </View>
             </SafeAreaView>
         </ImageBackground>
