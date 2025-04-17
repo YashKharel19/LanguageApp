@@ -1,5 +1,5 @@
-import { View, Text, Animated, Easing, ImageBackground, Dimensions } from 'react-native';
-import { useEffect, useRef } from 'react';
+import { View, Text, Animated, Easing, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
@@ -9,15 +9,15 @@ const letters = ['L', 'u', 'ma', 'षा'];
 export default function FlashScreen({ onComplete }: { onComplete: () => void }) {
     const animatedLetters = useRef(letters.map(() => new Animated.Value(0))).current;
     const soundRef = useRef<Audio.Sound | null>(null);
+    const [showButton, setShowButton] = useState(false);
 
     useEffect(() => {
         animateLetters();
         playBackgroundMusic();
 
         const timer = setTimeout(() => {
-            stopBackgroundMusic();
-            onComplete();
-        }, 6000);
+            setShowButton(true);
+        }, 4000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -67,6 +67,11 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
         }
     };
 
+    const handleGetStarted = async () => {
+        await stopBackgroundMusic();
+        onComplete();
+    };
+
     const getColorForLetter = (letter: string) => {
         switch (letter) {
             case 'L':
@@ -88,9 +93,8 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
         <ImageBackground
             source={require('../assets/images/Splashscreen.png')}
             resizeMode="cover"
-            className="flex-1 justify-start items-center px-4"
+            className="flex-1 justify-between items-center px-4 py-8"
         >
-            {/* Upper section with margin from top */}
             <View style={{ marginTop: screenHeight * 0.15 }} className="items-center">
                 {/* Animated Logo */}
                 <View className="flex-row mb-2">
@@ -114,7 +118,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                             </Text>
                             <Text
                                 className="text-2xl font-bold tracking-widest"
-                                style={{ paddingLeft: 120 }} // Adjust this value to align under the 'L'
+                                style={{ paddingLeft: 120 }}
                             >
                                 SPEAK GLOBAL
                             </Text>
@@ -132,7 +136,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                             </Text>
                             <Text
                                 className="opacity-0 text-2xl font-bold tracking-widest"
-                                style={{ paddingLeft: 120 }} // same as above
+                                style={{ paddingLeft: 120 }}
                             >
                                 SPEAK GLOBAL
                             </Text>
@@ -140,6 +144,16 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                     </LinearGradient>
                 </MaskedView>
             </View>
+
+            {/* Bottom Button */}
+            {showButton && (
+                <TouchableOpacity
+                    onPress={handleGetStarted}
+                    className="bg-lang-orange px-6 py-3 rounded-[15px]"
+                >
+                    <Text className="text-white text-lg font-semibold">Get Started</Text>
+                </TouchableOpacity>
+            )}
         </ImageBackground>
     );
 }
