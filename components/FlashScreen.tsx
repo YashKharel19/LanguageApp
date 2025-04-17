@@ -118,7 +118,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                         start={[0, 0]}
                         end={[1, 1]}
                     >
-                        <Text className="opacity-0 text-center text-lg font-bold tracking-widest">
+                        <Text className="opacity-0 text-center text-2xl font-bold tracking-widest">
                             LEARN LOCAL, SPEAK GLOBAL
                         </Text>
                     </LinearGradient>
