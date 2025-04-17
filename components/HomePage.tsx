@@ -34,7 +34,7 @@ export default function HomePage() {
     return (
         <ImageBackground
             source={require('../assets/images/Splashscreen.png')}
-            resizeMode="cover"
+            resizeMode="stretch"
             className="flex-1"
         >
             <SafeAreaView className="flex-1 justify-between">
