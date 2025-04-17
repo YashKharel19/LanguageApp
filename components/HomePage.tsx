@@ -4,9 +4,12 @@ import { useRouter } from 'expo-router';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CountryFlag from 'react-native-country-flag';
+import { Audio } from 'expo-av';
+import { useEffect, useRef } from 'react';
 
 export default function HomePage() {
     const router = useRouter();
+    const soundRef = useRef<Audio.Sound | null>(null);
 
     const GradientText = ({
         text,
@@ -34,6 +37,43 @@ export default function HomePage() {
 
     const countries = ['in', 'cn', 'bd', 'es', 'fr'];
 
+    useEffect(() => {
+        playBackgroundMusic();
+
+        return () => {
+            stopBackgroundMusic(); // Cleanup when navigating away or component unmounts
+        };
+    }, []);
+
+    const playBackgroundMusic = async () => {
+        try {
+            const { sound } = await Audio.Sound.createAsync(
+                require('../assets/sounds/kidsmusic3.mp3'),
+                {
+                    shouldPlay: true,
+                    isLooping: true,
+                    volume: 0.7,
+                }
+            );
+            soundRef.current = sound;
+        } catch (error) {
+            console.log('Error playing sound:', error);
+        }
+    };
+
+    const stopBackgroundMusic = async () => {
+        if (soundRef.current) {
+            await soundRef.current.stopAsync();
+            await soundRef.current.unloadAsync();
+            soundRef.current = null;
+        }
+    };
+
+    const handleSelectCountry = async () => {
+        await stopBackgroundMusic();
+        router.push('/flashcards');
+    };
+
     return (
         <ImageBackground
             source={require('../assets/images/Splashscreen.png')}
@@ -41,10 +81,8 @@ export default function HomePage() {
             className="flex-1"
         >
             <SafeAreaView className="flex-1 justify-between">
-
-                {/* Top Section */}
+                {/* Top Gradient Text Section */}
                 <View>
-                    {/* Gradient Text */}
                     <View className="items-center">
                         <GradientText text="Start" colors={['#0000FF', '#00FF00']} />
                     </View>
@@ -83,7 +121,7 @@ export default function HomePage() {
                 {/* Bottom Button */}
                 <View className="items-center space-y-4 mb-6">
                     <TouchableOpacity
-                        onPress={() => router.push('/flashcards')}
+                        onPress={handleSelectCountry}
                         className="bg-lang-orange px-6 py-3 rounded-[15px] shadow"
                     >
                         <Text className="text-white text-lg font-semibold">
@@ -91,7 +129,6 @@ export default function HomePage() {
                         </Text>
                     </TouchableOpacity>
                 </View>
-
             </SafeAreaView>
         </ImageBackground>
     );
