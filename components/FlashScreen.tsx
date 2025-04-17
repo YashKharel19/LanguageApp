@@ -108,9 +108,17 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                 {/* Gradient Tagline */}
                 <MaskedView
                     maskElement={
-                        <Text className="text-center text-2xl font-bold tracking-widest">
-                            LEARN LOCAL, SPEAK GLOBAL
-                        </Text>
+                        <View>
+                            <Text className="text-2xl font-bold tracking-widest text-center">
+                                LEARN LOCAL,
+                            </Text>
+                            <Text
+                                className="text-2xl font-bold tracking-widest"
+                                style={{ paddingLeft: 120 }} // Adjust this value to align under the 'L'
+                            >
+                                SPEAK GLOBAL
+                            </Text>
+                        </View>
                     }
                 >
                     <LinearGradient
@@ -118,9 +126,17 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                         start={[0, 0]}
                         end={[1, 1]}
                     >
-                        <Text className="opacity-0 text-center text-2xl font-bold tracking-widest">
-                            LEARN LOCAL, SPEAK GLOBAL
-                        </Text>
+                        <View>
+                            <Text className="opacity-0 text-2xl font-bold tracking-widest text-center">
+                                LEARN LOCAL,
+                            </Text>
+                            <Text
+                                className="opacity-0 text-2xl font-bold tracking-widest"
+                                style={{ paddingLeft: 120 }} // same as above
+                            >
+                                SPEAK GLOBAL
+                            </Text>
+                        </View>
                     </LinearGradient>
                 </MaskedView>
             </View>
