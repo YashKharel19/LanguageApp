@@ -1,23 +1,22 @@
-import { View, Text, Animated, Easing } from 'react-native';
+import { View, Text, Animated, Easing, ImageBackground } from 'react-native';
 import { useEffect, useRef } from 'react';
 import { Audio } from 'expo-av';
+import { LinearGradient } from 'expo-linear-gradient';
+import MaskedView from '@react-native-masked-view/masked-view';
 
-const letters = ['L', 'U', 'M', 'A', 'षा'];
-const languages = ['Devnagri', 'Newari', 'Hindi', 'Nepali', 'Japanese'];
+const letters = ['L', 'u', 'ma', 'षा'];
 
 export default function FlashScreen({ onComplete }: { onComplete: () => void }) {
     const animatedLetters = useRef(letters.map(() => new Animated.Value(0))).current;
-    const balloonAnimations = useRef(languages.map(() => new Animated.Value(0))).current;
-    const soundRef = useRef<Audio.Sound | null>(null); // Use Audio.Sound here
+    const soundRef = useRef<Audio.Sound | null>(null);
 
     useEffect(() => {
         animateLetters();
-        animateBalloons();
         playBackgroundMusic();
 
         const timer = setTimeout(() => {
-            stopBackgroundMusic(); // Stop music before transitioning
-            onComplete(); // Proceed to the HomePage
+            stopBackgroundMusic();
+            onComplete();
         }, 6000);
 
         return () => clearTimeout(timer);
@@ -45,27 +44,6 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
         });
     };
 
-    const animateBalloons = () => {
-        balloonAnimations.forEach((anim) => {
-            Animated.loop(
-                Animated.sequence([
-                    Animated.timing(anim, {
-                        toValue: -30,
-                        duration: 2000,
-                        easing: Easing.inOut(Easing.quad),
-                        useNativeDriver: true,
-                    }),
-                    Animated.timing(anim, {
-                        toValue: 0,
-                        duration: 2000,
-                        easing: Easing.inOut(Easing.quad),
-                        useNativeDriver: true,
-                    }),
-                ])
-            ).start();
-        });
-    };
-
     const playBackgroundMusic = async () => {
         try {
             const { sound } = await Audio.Sound.createAsync(
@@ -76,7 +54,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                     volume: 0.7,
                 }
             );
-            soundRef.current = sound; // Store the sound reference
+            soundRef.current = sound;
         } catch (error) {
             console.log('Error playing sound:', error);
         }
@@ -84,33 +62,32 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
 
     const stopBackgroundMusic = async () => {
         if (soundRef.current) {
-            await soundRef.current.stopAsync(); // Stop the sound
-            soundRef.current = null; // Clear the reference
+            await soundRef.current.stopAsync();
+            soundRef.current = null;
         }
     };
 
     const getColorForLetter = (letter: string) => {
-        if (letter === 'षा') return 'text-sha-pink';
-        return 'text-luma-blue';
-    };
-
-    const getBalloonColor = (index: number) => {
-        const colors = [
-            'bg-lang-red',
-            'bg-lang-yellow',
-            'bg-lang-green',
-            'bg-lang-blue',
-            'bg-lang-purple',
-            'bg-lang-rose',
-            'bg-lang-orange',
-        ];
-        return colors[index % colors.length];
+        switch (letter) {
+            case 'L':
+                return 'text-lang-orange';
+            case 'u':
+                return 'text-lang-red';
+            case 'ma':
+                return 'text-lang-blue';
+            case 'षा':
+                return 'text-lang-yellow';
+            default:
+                return 'text-black';
+        }
     };
 
     return (
-        <View className="flex-1 bg-primary-light justify-center items-center px-4">
-            <Text className="text-2xl font-bold text-rose-600 mb-2">🎉 Welcome to</Text>
-
+        <ImageBackground
+            source={require('../assets/images/Splashscreen.png')}
+            resizeMode="cover"
+            className="flex-1 justify-center items-center px-4"
+        >
             <View className="flex-row my-2">
                 {letters.map((letter, index) => (
                     <Animated.Text
@@ -123,21 +100,24 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                 ))}
             </View>
 
-            <Text className="text-lg font-semibold text-purple-600 mt-4">
-                Let's play & learn new languages!
-            </Text>
-
-            <View className="flex-row flex-wrap justify-center mt-8">
-                {languages.map((lang, index) => (
-                    <Animated.View
-                        key={lang}
-                        style={{ transform: [{ translateY: balloonAnimations[index] }] }}
-                        className={`m-2 rounded-xl py-2 px-3 shadow-md ${getBalloonColor(index)}`}
-                    >
-                        <Text className="text-white font-bold text-sm">{lang}</Text>
-                    </Animated.View>
-                ))}
-            </View>
-        </View>
+            {/* Gradient-filled Text */}
+            <MaskedView
+                maskElement={
+                    <Text className="text-center text-lg font-bold tracking-widest">
+                        Learn Local, Speak Global
+                    </Text>
+                }
+            >
+                <LinearGradient
+                    colors={['#f79313', '#fbcd3c', '#f0665d', '#ff0000']}
+                    start={[0, 0]}
+                    end={[1, 1]}
+                >
+                    <Text className="opacity-0 text-center text-lg font-bold tracking-widest">
+                        Learn Local, Speak Global
+                    </Text>
+                </LinearGradient>
+            </MaskedView>
+        </ImageBackground>
     );
 }

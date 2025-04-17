@@ -11,13 +11,13 @@ module.exports = {
         'primary-light': '#f9f3ed',
         'luma-blue': "#2A77A1",
         'sha-pink': "#CD57AD",
-        'lang-red': "#F87171",
-        'lang-yellow': "#FBBF24",
+        'lang-red': "#f0665d",
+        'lang-yellow': "#fbcd3c",
         'lang-green': "#34D399",
-        'lang-blue': "#60A5FA",
+        'lang-blue': "#0a76dd",
         'lang-purple': "#A78BFA",
         'lang-rose': "#F472B6",
-        'lang-orange': "#FB923C"
+        'lang-orange': "#f79313"
       },
       borderRadius: {
         sm: '8px',
