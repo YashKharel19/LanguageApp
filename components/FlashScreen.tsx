@@ -92,7 +92,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
     return (
         <ImageBackground
             source={require('../assets/images/Splashscreen.png')}
-            resizeMode="cover"
+            resizeMode="stretch"
             className="flex-1 justify-between items-center px-4 py-8"
         >
             <View style={{ marginTop: screenHeight * 0.15 }} className="items-center">
