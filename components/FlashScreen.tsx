@@ -1,4 +1,4 @@
-import { View, Text, Animated, Easing, ImageBackground } from 'react-native';
+import { View, Text, Animated, Easing, ImageBackground, Dimensions } from 'react-native';
 import { useEffect, useRef } from 'react';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -82,42 +82,48 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
         }
     };
 
+    const screenHeight = Dimensions.get('window').height;
+
     return (
         <ImageBackground
             source={require('../assets/images/Splashscreen.png')}
             resizeMode="cover"
-            className="flex-1 justify-center items-center px-4"
+            className="flex-1 justify-start items-center px-4"
         >
-            <View className="flex-row my-2">
-                {letters.map((letter, index) => (
-                    <Animated.Text
-                        key={index}
-                        style={{ transform: [{ translateY: animatedLetters[index] }] }}
-                        className={`text-4xl font-bold mx-1 ${getColorForLetter(letter)}`}
-                    >
-                        {letter}
-                    </Animated.Text>
-                ))}
-            </View>
+            {/* Upper section with margin from top */}
+            <View style={{ marginTop: screenHeight * 0.15 }} className="items-center">
+                {/* Animated Logo */}
+                <View className="flex-row mb-2">
+                    {letters.map((letter, index) => (
+                        <Animated.Text
+                            key={index}
+                            style={{ transform: [{ translateY: animatedLetters[index] }] }}
+                            className={`text-4xl font-bold mx-1 ${getColorForLetter(letter)}`}
+                        >
+                            {letter}
+                        </Animated.Text>
+                    ))}
+                </View>
 
-            {/* Gradient-filled Text */}
-            <MaskedView
-                maskElement={
-                    <Text className="text-center text-lg font-bold tracking-widest">
-                        Learn Local, Speak Global
-                    </Text>
-                }
-            >
-                <LinearGradient
-                    colors={['#f79313', '#fbcd3c', '#f0665d', '#ff0000']}
-                    start={[0, 0]}
-                    end={[1, 1]}
+                {/* Gradient Tagline */}
+                <MaskedView
+                    maskElement={
+                        <Text className="text-center text-2xl font-bold tracking-widest">
+                            LEARN LOCAL, SPEAK GLOBAL
+                        </Text>
+                    }
                 >
-                    <Text className="opacity-0 text-center text-lg font-bold tracking-widest">
-                        Learn Local, Speak Global
-                    </Text>
-                </LinearGradient>
-            </MaskedView>
+                    <LinearGradient
+                        colors={['#f79313', '#fbcd3c', '#f0665d', '#ff0000']}
+                        start={[0, 0]}
+                        end={[1, 1]}
+                    >
+                        <Text className="opacity-0 text-center text-lg font-bold tracking-widest">
+                            LEARN LOCAL, SPEAK GLOBAL
+                        </Text>
+                    </LinearGradient>
+                </MaskedView>
+            </View>
         </ImageBackground>
     );
 }
