@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 
 const countries = [
+    { label: 'Nepal', code: 'np', emoji: '🇳🇵' },
     { label: 'India', code: 'in', emoji: '🇮🇳' },
     { label: 'China', code: 'cn', emoji: '🇨🇳' },
     { label: 'Bangladesh', code: 'bd', emoji: '🇧🇩' },
@@ -17,7 +18,7 @@ const countries = [
 ];
 
 const languagesByCountry: Record<string, string[]> = {
-    np: ['Nepali', 'Newari', 'Maithili'],
+    np: ['Nepali', 'Newari', 'Maithili', 'Tamang', 'Gurung', 'Magar'],
     in: ['Hindi', 'Tamil', 'Bengali'],
     cn: ['Mandarin', 'Cantonese'],
     bd: ['Bengali'],
@@ -140,12 +141,12 @@ export default function HomePage() {
                                     resizeMode: 'contain',
                                 }}
                             />
-                            {countries.slice(0, 2).map((country) => (
+                            {countries.slice(1, 3).map((country) => (
                                 <CountryFlag key={country.code} isoCode={country.code} size={50} style={{ borderRadius: 8 }} />
                             ))}
                         </View>
                         <View className="flex-row justify-center gap-6">
-                            {countries.slice(2).map((country) => (
+                            {countries.slice(3).map((country) => (
                                 <CountryFlag key={country.code} isoCode={country.code} size={50} style={{ borderRadius: 8 }} />
                             ))}
                         </View>
