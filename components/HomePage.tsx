@@ -57,7 +57,7 @@ export default function HomePage() {
     const handleLanguageSelect = async (lang: string) => {
         setSelectedLanguage(lang);
         await stopBackgroundMusic();
-        router.push('/flashcards');
+        router.push({ pathname: '/menu', params: { language: lang } });
     };
 
     const GradientText = ({ text, colors }: { text: string; colors: [string, string] }) => (
