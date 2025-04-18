@@ -1,15 +1,37 @@
-import { View, Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, Image, ScrollView, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CountryFlag from 'react-native-country-flag';
 import { Audio } from 'expo-av';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import RNPickerSelect from 'react-native-picker-select';
+
+const countries = [
+    { label: 'India', code: 'in', emoji: '🇮🇳' },
+    { label: 'China', code: 'cn', emoji: '🇨🇳' },
+    { label: 'Bangladesh', code: 'bd', emoji: '🇧🇩' },
+    { label: 'Spain', code: 'es', emoji: '🇪🇸' },
+    { label: 'France', code: 'fr', emoji: '🇫🇷' },
+];
+
+const languagesByCountry: Record<string, string[]> = {
+    np: ['Nepali', 'Newari', 'Maithili'],
+    in: ['Hindi', 'Tamil', 'Bengali'],
+    cn: ['Mandarin', 'Cantonese'],
+    bd: ['Bengali'],
+    es: ['Spanish'],
+    fr: ['French'],
+};
 
 export default function HomePage() {
     const router = useRouter();
     const soundRef = useRef<Audio.Sound | null>(null);
+    const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+    const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+    const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
+    const [languageOptions, setLanguageOptions] = useState<string[]>([]);
 
     const GradientText = ({
         text,
@@ -35,7 +57,7 @@ export default function HomePage() {
         </MaskedView>
     );
 
-    const countries = ['in', 'cn', 'bd', 'es', 'fr'];
+
 
     useEffect(() => {
         playBackgroundMusic();
@@ -69,10 +91,22 @@ export default function HomePage() {
         }
     };
 
-    const handleSelectCountry = async () => {
+    const handleCountrySelect = (value: string) => {
+        setSelectedCountry(value);
+        setLanguageOptions(languagesByCountry[value]);
+    };
+
+    const handleLanguageSelect = async (lang: string) => {
+        setSelectedLanguage(lang);
         await stopBackgroundMusic();
+        // Navigate or continue to next step
+
         router.push('/flashcards');
     };
+    // const handleSelectCountry = async () => {
+    //     await stopBackgroundMusic();
+    //     router.push('/flashcards');
+    // };
 
     return (
         <ImageBackground
@@ -106,29 +140,93 @@ export default function HomePage() {
                                     resizeMode: 'contain',
                                 }}
                             />
-                            {countries.slice(0, 2).map((code) => (
-                                <CountryFlag key={code} isoCode={code} size={50} style={{ borderRadius: 8 }} />
+                            {countries.slice(0, 2).map((country) => (
+                                <CountryFlag key={country.code} isoCode={country.code} size={50} style={{ borderRadius: 8 }} />
                             ))}
                         </View>
                         <View className="flex-row justify-center gap-6">
-                            {countries.slice(2).map((code) => (
-                                <CountryFlag key={code} isoCode={code} size={50} style={{ borderRadius: 8 }} />
+                            {countries.slice(2).map((country) => (
+                                <CountryFlag key={country.code} isoCode={country.code} size={50} style={{ borderRadius: 8 }} />
                             ))}
                         </View>
                     </View>
                 </View>
 
-                {/* Bottom Button */}
-                <View className="items-center space-y-4 mb-6">
-                    <TouchableOpacity
-                        onPress={handleSelectCountry}
-                        className="bg-lang-orange px-6 py-3 rounded-[15px] shadow"
-                    >
-                        <Text className="text-white text-lg font-semibold">
-                            Select Your Country
+
+                {/* Button to show dropdown */}
+                {!showCountryDropdown && (
+                    <View className="items-center my-6">
+                        <TouchableOpacity
+                            onPress={() => setShowCountryDropdown(true)}
+                            className="bg-lang-orange px-6 py-3 rounded-[15px] shadow"
+                        >
+                            <Text className="text-white text-lg font-semibold">Select Your Country</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+
+                {/* Enhanced Country Picker for Kids */}
+                {showCountryDropdown && !selectedCountry && (
+                    <View className="bg-white rounded-2xl mx-6 px-4 py-6 shadow-md items-center space-y-4">
+                        {/* Fun Title */}
+                        <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
+                            🌎 Pick Your Country
                         </Text>
-                    </TouchableOpacity>
-                </View>
+
+                        {/* Emoji Flag Grid */}
+                        <View className="flex-row flex-wrap justify-center gap-4 px-4 pt-2">
+                            {countries.map((country) => (
+                                <TouchableOpacity
+                                    key={country.code}
+                                    onPress={() => handleCountrySelect(country.code)}
+                                    className="bg-[#FFF4E0] w-[70px] h-[90px] rounded-2xl items-center justify-center shadow-md active:scale-95"
+                                    style={{
+                                        shadowColor: '#000',
+                                        shadowOffset: { width: 0, height: 2 },
+                                        shadowOpacity: 0.2,
+                                        shadowRadius: 3,
+                                        elevation: 4,
+                                    }}
+                                >
+                                    <Text style={{ fontSize: 36 }}>
+                                        {country.emoji || '🌍'}
+                                    </Text>
+                                    <Text className="text-xs font-semibold text-center text-gray-800 mt-1">
+                                        {country.label}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+
+                        {/* Friendly Prompt */}
+                        <Text className="text-sm text-gray-600 text-center pt-2">
+                            Tap a country to continue 🌟
+                        </Text>
+                    </View>
+                )}
+
+
+                {/* Language options */}
+                {selectedCountry && !selectedLanguage && (
+                    <View className="mt-6">
+                        <Text className="text-center text-xl font-bold mb-4 text-white">Pick a Language:</Text>
+                        <ScrollView
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={{ paddingHorizontal: 20 }}
+                        >
+                            {languageOptions.map((lang) => (
+                                <TouchableOpacity
+                                    key={lang}
+                                    onPress={() => handleLanguageSelect(lang)}
+                                    className="bg-white px-5 py-3 rounded-xl mx-2 shadow"
+                                >
+                                    <Text className="text-lg font-bold text-lang-orange">{lang}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </ScrollView>
+                    </View>
+                )}
             </SafeAreaView>
         </ImageBackground>
     );
