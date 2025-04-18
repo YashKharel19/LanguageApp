@@ -78,6 +78,9 @@ export default function HomePage() {
         </MaskedView>
     );
 
+    // List of countries to display
+    const featuredCountries = ['NP', 'IN', 'CN', 'BD', 'LK', 'ES', 'FR', 'DE']; // Nepal, India, China, Bangladesh, Sri Lanka, Spain, France, Germany
+
     return (
         <ImageBackground
             source={require('../assets/images/Splashscreen.png')}
@@ -102,21 +105,23 @@ export default function HomePage() {
                     {/* Flags */}
                     <View className="items-center mt-4">
                         <View className="flex-row gap-6 mb-3">
+                            {/* Nepal flag as custom image */}
                             <Image
-                                source={require('../assets/flag/nepal.png')}
+                                source={require('../assets/flag/nepal.png')} // Custom image for Nepal
                                 style={{
                                     width: 70,
                                     height: 60,
                                     resizeMode: 'contain',
                                 }}
                             />
-                            {countries.slice(1, 3).map((country) => (
-                                <CountryFlag key={country.code} isoCode={country.code} size={50} style={{ borderRadius: 8 }} />
+                            {/* Use CountryFlag for the rest of the countries */}
+                            {featuredCountries.slice(1, 4).map((countryCode) => (
+                                <CountryFlag key={countryCode} isoCode={countryCode} size={50} style={{ borderRadius: 8 }} />
                             ))}
                         </View>
                         <View className="flex-row justify-center gap-6">
-                            {countries.slice(3).map((country) => (
-                                <CountryFlag key={country.code} isoCode={country.code} size={50} style={{ borderRadius: 8 }} />
+                            {featuredCountries.slice(4).map((countryCode) => (
+                                <CountryFlag key={countryCode} isoCode={countryCode} size={50} style={{ borderRadius: 8 }} />
                             ))}
                         </View>
                     </View>
@@ -141,27 +146,33 @@ export default function HomePage() {
                             🌎 Pick Your Country
                         </Text>
 
-                        <View className="flex-row flex-wrap justify-center gap-4 px-4 pt-2">
-                            {countries.map((country) => (
-                                <TouchableOpacity
-                                    key={country.code}
-                                    onPress={() => handleCountrySelect(country.code)}
-                                    className="bg-[#FFF4E0] w-[70px] h-[90px] rounded-2xl items-center justify-center shadow-md active:scale-95"
-                                    style={{
-                                        shadowColor: '#000',
-                                        shadowOffset: { width: 0, height: 2 },
-                                        shadowOpacity: 0.2,
-                                        shadowRadius: 3,
-                                        elevation: 4,
-                                    }}
-                                >
-                                    <Text style={{ fontSize: 36 }}>{country.emoji || '🌍'}</Text>
-                                    <Text className="text-xs font-semibold text-center text-gray-800 mt-1">
-                                        {country.label}
-                                    </Text>
-                                </TouchableOpacity>
-                            ))}
-                        </View>
+                        {/* Scrollable country list */}
+                        <ScrollView
+                            showsVerticalScrollIndicator={true}
+                            contentContainerStyle={{ paddingBottom: 20 }}
+                        >
+                            <View className="flex-row flex-wrap justify-center gap-4 px-4 pt-2">
+                                {countries.map((country) => (
+                                    <TouchableOpacity
+                                        key={country.code}
+                                        onPress={() => handleCountrySelect(country.code)}
+                                        className="bg-primary-light w-[70px] h-[90px] rounded-2xl items-center justify-center shadow-md active:scale-95"
+                                        style={{
+                                            shadowColor: '#000',
+                                            shadowOffset: { width: 0, height: 2 },
+                                            shadowOpacity: 0.2,
+                                            shadowRadius: 3,
+                                            elevation: 4,
+                                        }}
+                                    >
+                                        <Text style={{ fontSize: 36 }}>{country.emoji || '🌍'}</Text>
+                                        <Text className="text-xs font-semibold text-center text-gray-800 mt-1">
+                                            {country.label}
+                                        </Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
+                        </ScrollView>
 
                         <Text className="text-sm text-gray-600 text-center pt-2">
                             Tap a country to continue 🌟
@@ -173,6 +184,7 @@ export default function HomePage() {
                 {selectedCountry && !selectedLanguage && (
                     <View className="mt-6">
                         <Text className="text-center text-xl font-bold mb-4 text-white">Pick a Language:</Text>
+                        {/* Scrollable language list */}
                         <ScrollView
                             horizontal
                             showsHorizontalScrollIndicator={false}
