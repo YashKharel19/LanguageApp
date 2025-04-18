@@ -182,24 +182,40 @@ export default function HomePage() {
 
                 {/* Language Selection */}
                 {selectedCountry && !selectedLanguage && (
-                    <View className="mt-6">
-                        <Text className="text-center text-xl font-bold mb-4 text-white">Pick a Language:</Text>
-                        {/* Scrollable language list */}
+                    <View className="bg-white rounded-2xl mx-6 px-4 py-6 shadow-md items-center space-y-4 my-4 flex-1">
+                        <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
+                            🗣️ Pick a Language
+                        </Text>
+
                         <ScrollView
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={{ paddingHorizontal: 20 }}
+                            showsVerticalScrollIndicator={true}
+                            contentContainerStyle={{ paddingBottom: 20 }}
                         >
-                            {languageOptions.map((lang) => (
-                                <TouchableOpacity
-                                    key={lang}
-                                    onPress={() => handleLanguageSelect(lang)}
-                                    className="bg-white px-5 py-3 rounded-xl mx-2 shadow"
-                                >
-                                    <Text className="text-lg font-bold text-lang-orange">{lang}</Text>
-                                </TouchableOpacity>
-                            ))}
+                            <View className="flex-row flex-wrap justify-center gap-4 px-4 pt-2">
+                                {languageOptions.map((lang) => (
+                                    <TouchableOpacity
+                                        key={lang}
+                                        onPress={() => handleLanguageSelect(lang)}
+                                        className="bg-primary-light w-[100px] h-[80px] rounded-2xl items-center justify-center shadow-md active:scale-95"
+                                        style={{
+                                            shadowColor: '#000',
+                                            shadowOffset: { width: 0, height: 2 },
+                                            shadowOpacity: 0.2,
+                                            shadowRadius: 3,
+                                            elevation: 4,
+                                        }}
+                                    >
+                                        <Text className="text-md font-semibold text-center text-gray-800">
+                                            {lang}
+                                        </Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
                         </ScrollView>
+
+                        <Text className="text-sm text-gray-600 text-center pt-2">
+                            Tap a language to begin 📚
+                        </Text>
                     </View>
                 )}
             </SafeAreaView>
