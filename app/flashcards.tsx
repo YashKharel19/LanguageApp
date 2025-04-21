@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Audio } from 'expo-av';
 import { useLocalSearchParams } from 'expo-router';
-
+import { useRouter } from 'expo-router';
 const { width } = Dimensions.get('window');
 
 export default function FlashcardsScreen() {
@@ -20,8 +20,10 @@ export default function FlashcardsScreen() {
     const [showAnswer, setShowAnswer] = useState(false);
     const [direction, setDirection] = useState<'left' | 'right'>('left');
     const translateX = useSharedValue(0);
-
+    const router = useRouter();
     // 🔁 Dynamically import cards based on selected language
+
+
     useEffect(() => {
         const loadCards = async () => {
             try {
@@ -33,9 +35,10 @@ export default function FlashcardsScreen() {
                     case 'Kannada':
                         cardModule = await import('../data/kannada.ts');
                         break;
-                    // Add more languages here as needed
+                    // Add supported languages here
                     default:
-                        cardModule = await import('../data/nepali.ts'); // fallback
+                        router.replace('/comingsoon'); // Redirect to child-friendly page
+                        return;
                 }
                 setCards(cardModule.consonantCards || []);
             } catch (error) {
@@ -45,6 +48,7 @@ export default function FlashcardsScreen() {
 
         loadCards();
     }, [language]);
+
 
     const playSound = async (file: any) => {
         const { sound } = await Audio.Sound.createAsync(file);
