@@ -15,6 +15,8 @@ import Hadagu from "../assets/images/kannada/Hadagu.svg";
 import Topi from "../assets/images/kannada/Topi.svg";
 import Oota from '../assets/images/kannada/Oota.svg';
 import Sara from "../assets/images/kannada/Sara.svg";
+import Phala from '../assets/images/kannada/Phala.svg';
+import Dhana from '../assets/images/kannada/Arasa.svg';
 
 import Eejoo from '../assets/images/kannada/Arasa.svg';
 import Ungura from '../assets/images/kannada/Arasa.svg';
@@ -37,7 +39,6 @@ import Dakke from '../assets/images/kannada/Arasa.svg';
 import Naa from '../assets/images/kannada/Arasa.svg';
 import Taayi from '../assets/images/kannada/Arasa.svg';
 import ThalaThala from '../assets/images/kannada/Arasa.svg';
-import Dhana from '../assets/images/kannada/Arasa.svg';
 import Nadi from '../assets/images/kannada/Arasa.svg';
 import Padaka from '../assets/images/kannada/Arasa.svg';
 import Bale from '../assets/images/kannada/Arasa.svg';
@@ -46,7 +47,7 @@ import Yantra from '../assets/images/kannada/Arasa.svg';
 import Langa from '../assets/images/kannada/Arasa.svg';
 import Vana from '../assets/images/kannada/Arasa.svg';
 import Shakti from '../assets/images/kannada/Arasa.svg';
-import Phala from '../assets/images/kannada/Arasa.svg';
+
 
 
 import { FlashCardType } from "../containers/flashCardTypes";
