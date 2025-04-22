@@ -1,11 +1,19 @@
-import { View, Text, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    ImageBackground,
+    Image,
+    ScrollView,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CountryFlag from 'react-native-country-flag';
 import { Audio } from 'expo-av';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { countries } from '../data/countries';
 import { languagesByCountry } from '../data/languages';
@@ -17,13 +25,6 @@ export default function HomePage() {
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
     const [languageOptions, setLanguageOptions] = useState<string[]>([]);
-
-    useEffect(() => {
-        playBackgroundMusic();
-        return () => {
-            stopBackgroundMusic();
-        };
-    }, []);
 
     const playBackgroundMusic = async () => {
         try {
@@ -49,6 +50,20 @@ export default function HomePage() {
         }
     };
 
+    useFocusEffect(
+        useCallback(() => {
+            setShowCountryDropdown(false);
+            setSelectedCountry(null);
+            setSelectedLanguage(null);
+            setLanguageOptions([]);
+
+            playBackgroundMusic();
+            return () => {
+                stopBackgroundMusic();
+            };
+        }, [])
+    );
+
     const handleCountrySelect = (value: string) => {
         setSelectedCountry(value);
         setLanguageOptions(languagesByCountry[value] || []);
@@ -60,7 +75,13 @@ export default function HomePage() {
         router.push({ pathname: '/menu', params: { language: lang } });
     };
 
-    const GradientText = ({ text, colors }: { text: string; colors: [string, string] }) => (
+    const GradientText = ({
+        text,
+        colors,
+    }: {
+        text: string;
+        colors: [string, string];
+    }) => (
         <MaskedView
             maskElement={
                 <View className="items-center">
@@ -78,8 +99,7 @@ export default function HomePage() {
         </MaskedView>
     );
 
-    // List of countries to display
-    const featuredCountries = ['NP', 'IN', 'CN', 'BD', 'LK', 'ES', 'FR', 'DE']; // Nepal, India, China, Bangladesh, Sri Lanka, Spain, France, Germany
+    const featuredCountries = ['NP', 'IN', 'CN', 'BD', 'LK', 'ES', 'FR', 'DE'];
 
     return (
         <ImageBackground
@@ -105,52 +125,55 @@ export default function HomePage() {
                     {/* Flags */}
                     <View className="items-center mt-4">
                         <View className="flex-row gap-6 mb-3">
-                            {/* Nepal flag as custom image */}
                             <Image
-                                source={require('../assets/flag/nepal.png')} // Custom image for Nepal
+                                source={require('../assets/flag/nepal.png')}
                                 style={{
                                     width: 70,
                                     height: 60,
                                     resizeMode: 'contain',
                                 }}
                             />
-                            {/* Use CountryFlag for the rest of the countries */}
                             {featuredCountries.slice(1, 4).map((countryCode) => (
-                                <CountryFlag key={countryCode} isoCode={countryCode} size={50} style={{ borderRadius: 8 }} />
+                                <CountryFlag
+                                    key={countryCode}
+                                    isoCode={countryCode}
+                                    size={50}
+                                    style={{ borderRadius: 8 }}
+                                />
                             ))}
                         </View>
                         <View className="flex-row justify-center gap-6">
                             {featuredCountries.slice(4).map((countryCode) => (
-                                <CountryFlag key={countryCode} isoCode={countryCode} size={50} style={{ borderRadius: 8 }} />
+                                <CountryFlag
+                                    key={countryCode}
+                                    isoCode={countryCode}
+                                    size={50}
+                                    style={{ borderRadius: 8 }}
+                                />
                             ))}
                         </View>
                     </View>
                 </View>
 
-                {/* Country Picker Trigger */}
                 {!showCountryDropdown && (
                     <View className="items-center my-6">
                         <TouchableOpacity
                             onPress={() => setShowCountryDropdown(true)}
                             className="bg-lang-orange px-6 py-3 rounded-[15px] shadow"
                         >
-                            <Text className="text-white text-lg font-semibold">Select Your Country</Text>
+                            <Text className="text-white text-lg font-semibold">
+                                Select Your Country
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 )}
 
-                {/* Country Selection */}
                 {showCountryDropdown && !selectedCountry && (
                     <View className="bg-white rounded-2xl mx-6 px-4 py-6 shadow-md items-center space-y-4">
                         <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
                             🌎 Pick Your Country
                         </Text>
-
-                        {/* Scrollable country list */}
-                        <ScrollView
-                            showsVerticalScrollIndicator={true}
-                            contentContainerStyle={{ paddingBottom: 20 }}
-                        >
+                        <ScrollView showsVerticalScrollIndicator={true}>
                             <View className="flex-row flex-wrap justify-center gap-4 px-4 pt-2">
                                 {countries.map((country) => (
                                     <TouchableOpacity
@@ -173,24 +196,18 @@ export default function HomePage() {
                                 ))}
                             </View>
                         </ScrollView>
-
                         <Text className="text-sm text-gray-600 text-center pt-2">
                             Tap a country to continue 🌟
                         </Text>
                     </View>
                 )}
 
-                {/* Language Selection */}
                 {selectedCountry && !selectedLanguage && (
                     <View className="bg-white rounded-2xl mx-6 px-4 py-6 shadow-md items-center space-y-4 my-4 flex-1">
                         <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
                             🗣️ Pick a Language
                         </Text>
-
-                        <ScrollView
-                            showsVerticalScrollIndicator={true}
-                            contentContainerStyle={{ paddingBottom: 20 }}
-                        >
+                        <ScrollView showsVerticalScrollIndicator={true}>
                             <View className="flex-row flex-wrap justify-center gap-4 px-4 pt-2">
                                 {languageOptions.map((lang) => (
                                     <TouchableOpacity
@@ -212,7 +229,6 @@ export default function HomePage() {
                                 ))}
                             </View>
                         </ScrollView>
-
                         <Text className="text-sm text-gray-600 text-center pt-2">
                             Tap a language to begin 📚
                         </Text>

@@ -1,29 +1,19 @@
-// components/MenuPage.tsx
 import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
-import { useEffect, useRef } from 'react';
-import { useRouter } from 'expo-router';
+import { useRef, useCallback } from 'react';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Audio } from 'expo-av';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 
-type MenuPageProps = {
-    language: string;
-};
-
-export default function MenuPage({ language }: MenuPageProps) {
+export default function MenuPage() {
+    const { language } = useLocalSearchParams<{ language: string }>();
     const router = useRouter();
     const soundRef = useRef<Audio.Sound | null>(null);
-
-    useEffect(() => {
-        playBackgroundMusic();
-        return () => {
-            stopBackgroundMusic();
-        };
-    }, []);
 
     const playBackgroundMusic = async () => {
         try {
             const { sound } = await Audio.Sound.createAsync(
-                require('../assets/sounds/kidsmusic3.mp3'),
+                require('../assets/sounds/kidsmusic2.mp3'),
                 {
                     shouldPlay: true,
                     isLooping: true,
@@ -44,8 +34,18 @@ export default function MenuPage({ language }: MenuPageProps) {
         }
     };
 
+    useFocusEffect(
+        useCallback(() => {
+            playBackgroundMusic();
+
+            return () => {
+                stopBackgroundMusic();
+            };
+        }, [])
+    );
+
     const goToFlashcards = async () => {
-        await stopBackgroundMusic();
+        await stopBackgroundMusic(); // Ensure music stops before navigation
         router.push({
             pathname: '/flashcards',
             params: { language },
@@ -59,14 +59,12 @@ export default function MenuPage({ language }: MenuPageProps) {
             className="flex-1"
         >
             <SafeAreaView className="flex-1 justify-between px-4">
-                {/* Title */}
                 <View className="mt-12">
                     <Text className="text-3xl font-extrabold text-center text-lang-blue tracking-widest">
                         Learn the {language} Alphabets
                     </Text>
                 </View>
 
-                {/* Buttons */}
                 <View className="mb-16 space-y-4 items-center gap-4">
                     <TouchableOpacity
                         onPress={goToFlashcards}
