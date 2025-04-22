@@ -4,8 +4,9 @@ import {
     TouchableOpacity,
     ImageBackground,
     Image,
-    ScrollView,
+    FlatList,
 } from 'react-native';
+
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import MaskedView from '@react-native-masked-view/masked-view';
@@ -15,8 +16,16 @@ import { Audio } from 'expo-av';
 import { useRef, useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 
+import SearchBar from '../components/SearchBar';
 import { countries } from '../data/countries';
 import { languagesByCountry } from '../data/languages';
+
+// Define proper types for country and language data
+interface Country {
+    code: string;
+    label: string;
+    emoji?: string;
+}
 
 export default function HomePage() {
     const router = useRouter();
@@ -25,6 +34,8 @@ export default function HomePage() {
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
     const [languageOptions, setLanguageOptions] = useState<string[]>([]);
+    const [countrySearchText, setCountrySearchText] = useState('');
+    const [languageSearchText, setLanguageSearchText] = useState('');
 
     const playBackgroundMusic = async () => {
         try {
@@ -67,6 +78,7 @@ export default function HomePage() {
     const handleCountrySelect = (value: string) => {
         setSelectedCountry(value);
         setLanguageOptions(languagesByCountry[value] || []);
+        setLanguageSearchText('');
     };
 
     const handleLanguageSelect = async (lang: string) => {
@@ -75,13 +87,7 @@ export default function HomePage() {
         router.push({ pathname: '/menu', params: { language: lang } });
     };
 
-    const GradientText = ({
-        text,
-        colors,
-    }: {
-        text: string;
-        colors: [string, string];
-    }) => (
+    const GradientText = ({ text, colors }: { text: string; colors: [string, string] }) => (
         <MaskedView
             maskElement={
                 <View className="items-center">
@@ -101,6 +107,60 @@ export default function HomePage() {
 
     const featuredCountries = ['NP', 'IN', 'CN', 'BD', 'LK', 'ES', 'FR', 'DE'];
 
+    const filteredCountries = countrySearchText.trim() === ''
+        ? countries
+        : countries.filter((country) => {
+            const search = countrySearchText.trim().toLowerCase();
+            return (
+                country.label.toLowerCase().includes(search) ||
+                country.code.toLowerCase().includes(search)
+            );
+        });
+
+    const filteredLanguages = languageOptions.filter((lang) =>
+        lang.toLowerCase().includes(languageSearchText.trim().toLowerCase())
+    );
+
+    // Properly typed render functions for FlatList
+    const renderCountryItem = ({ item }: { item: Country }) => (
+        <TouchableOpacity
+            key={item.code}
+            onPress={() => handleCountrySelect(item.code)}
+            className="bg-primary-light w-[70px] h-[90px] m-2 rounded-2xl items-center justify-center shadow-md active:scale-95"
+            style={{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.2,
+                shadowRadius: 3,
+                elevation: 4,
+            }}
+        >
+            <Text style={{ fontSize: 36 }}>{item.emoji || '🌍'}</Text>
+            <Text className="text-xs font-semibold text-center text-gray-800 mt-1">
+                {item.label}
+            </Text>
+        </TouchableOpacity>
+    );
+
+    const renderLanguageItem = ({ item }: { item: string }) => (
+        <TouchableOpacity
+            key={item}
+            onPress={() => handleLanguageSelect(item)}
+            className="bg-primary-light w-[100px] h-[80px] m-2 rounded-2xl items-center justify-center shadow-md active:scale-95"
+            style={{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.2,
+                shadowRadius: 3,
+                elevation: 4,
+            }}
+        >
+            <Text className="text-md font-semibold text-center text-gray-800">
+                {item}
+            </Text>
+        </TouchableOpacity>
+    );
+
     return (
         <ImageBackground
             source={require('../assets/images/Splashscreen.png')}
@@ -108,7 +168,6 @@ export default function HomePage() {
             className="flex-1"
         >
             <SafeAreaView className="flex-1 justify-between">
-                {/* Header Title */}
                 <View>
                     <View className="items-center">
                         <GradientText text="Start" colors={['#0000FF', '#00FF00']} />
@@ -173,29 +232,34 @@ export default function HomePage() {
                         <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
                             🌎 Pick Your Country
                         </Text>
-                        <ScrollView showsVerticalScrollIndicator={true}>
-                            <View className="flex-row flex-wrap justify-center gap-4 px-4 pt-2">
-                                {countries.map((country) => (
-                                    <TouchableOpacity
-                                        key={country.code}
-                                        onPress={() => handleCountrySelect(country.code)}
-                                        className="bg-primary-light w-[70px] h-[90px] rounded-2xl items-center justify-center shadow-md active:scale-95"
-                                        style={{
-                                            shadowColor: '#000',
-                                            shadowOffset: { width: 0, height: 2 },
-                                            shadowOpacity: 0.2,
-                                            shadowRadius: 3,
-                                            elevation: 4,
-                                        }}
-                                    >
-                                        <Text style={{ fontSize: 36 }}>{country.emoji || '🌍'}</Text>
-                                        <Text className="text-xs font-semibold text-center text-gray-800 mt-1">
-                                            {country.label}
-                                        </Text>
-                                    </TouchableOpacity>
-                                ))}
-                            </View>
-                        </ScrollView>
+                        <SearchBar
+                            value={countrySearchText}
+                            onChangeText={setCountrySearchText}
+                            placeholder="Search country..."
+                        />
+
+                        {/* Properly typed FlatList */}
+                        <View className="h-[300px] w-full">
+                            {filteredCountries.length > 0 ? (
+                                <FlatList
+                                    data={filteredCountries as Country[]}
+                                    renderItem={renderCountryItem}
+                                    keyExtractor={(item: Country) => item.code}
+                                    numColumns={4}
+                                    contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
+                                    showsVerticalScrollIndicator={true}
+                                    initialNumToRender={12}
+                                    removeClippedSubviews={true}
+                                    keyboardShouldPersistTaps="handled"
+                                />
+                            ) : (
+                                <View className="flex-1 justify-center items-center">
+                                    <Text className="text-gray-600 text-base text-center">
+                                        No countries found ❌
+                                    </Text>
+                                </View>
+                            )}
+                        </View>
                         <Text className="text-sm text-gray-600 text-center pt-2">
                             Tap a country to continue 🌟
                         </Text>
@@ -207,28 +271,32 @@ export default function HomePage() {
                         <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
                             🗣️ Pick a Language
                         </Text>
-                        <ScrollView showsVerticalScrollIndicator={true}>
-                            <View className="flex-row flex-wrap justify-center gap-4 px-4 pt-2">
-                                {languageOptions.map((lang) => (
-                                    <TouchableOpacity
-                                        key={lang}
-                                        onPress={() => handleLanguageSelect(lang)}
-                                        className="bg-primary-light w-[100px] h-[80px] rounded-2xl items-center justify-center shadow-md active:scale-95"
-                                        style={{
-                                            shadowColor: '#000',
-                                            shadowOffset: { width: 0, height: 2 },
-                                            shadowOpacity: 0.2,
-                                            shadowRadius: 3,
-                                            elevation: 4,
-                                        }}
-                                    >
-                                        <Text className="text-md font-semibold text-center text-gray-800">
-                                            {lang}
-                                        </Text>
-                                    </TouchableOpacity>
-                                ))}
-                            </View>
-                        </ScrollView>
+                        <SearchBar
+                            value={languageSearchText}
+                            onChangeText={setLanguageSearchText}
+                            placeholder="Search language..."
+                        />
+
+                        {/* Properly typed language FlatList */}
+                        <View className="h-[300px] w-full">
+                            {filteredLanguages.length > 0 ? (
+                                <FlatList
+                                    data={filteredLanguages}
+                                    renderItem={renderLanguageItem}
+                                    keyExtractor={(item: string) => item}
+                                    numColumns={2}
+                                    contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
+                                    showsVerticalScrollIndicator={true}
+                                    keyboardShouldPersistTaps="handled"
+                                />
+                            ) : (
+                                <View className="flex-1 justify-center items-center">
+                                    <Text className="text-gray-600 text-base text-center">
+                                        No languages found ❌
+                                    </Text>
+                                </View>
+                            )}
+                        </View>
                         <Text className="text-sm text-gray-600 text-center pt-2">
                             Tap a language to begin 📚
                         </Text>
