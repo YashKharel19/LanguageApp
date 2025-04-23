@@ -37,7 +37,7 @@ import Vana from '../assets/images/kannada/Vana.svg';
 import Bharani from '../assets/images/kannada/Bharani.svg';
 import Yantra from '../assets/images/kannada/Yantra.svg';
 import Shakti from '../assets/images/kannada/Shakti.svg';
-import Odu from '../assets/images/kannada/Odu.svg';
+import Odu from '../assets/images/nepali/Gyan.svg';
 import Takka from '../assets/images/kannada/Takka.svg';
 import Bale from '../assets/images/kannada/Bale.svg';
 
