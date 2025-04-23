@@ -5,6 +5,9 @@ import {
     ImageBackground,
     Image,
     FlatList,
+    Modal,
+    Pressable,
+    Keyboard,
 } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -85,6 +88,17 @@ export default function HomePage() {
         setSelectedLanguage(lang);
         await stopBackgroundMusic();
         router.push({ pathname: '/menu', params: { language: lang } });
+    };
+
+    const closeCountryDropdown = () => {
+        Keyboard.dismiss();
+        setShowCountryDropdown(false);
+    };
+
+    const closeLanguageSelection = () => {
+        Keyboard.dismiss();
+        setSelectedCountry(null);
+        setLanguageOptions([]);
     };
 
     const GradientText = ({ text, colors }: { text: string; colors: [string, string] }) => (
@@ -227,81 +241,107 @@ export default function HomePage() {
                     </View>
                 )}
 
-                {showCountryDropdown && !selectedCountry && (
-                    <View className="bg-white rounded-2xl mx-6 px-4 py-6 shadow-md items-center space-y-4">
-                        <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
-                            🌎 Pick Your Country
-                        </Text>
-                        <SearchBar
-                            value={countrySearchText}
-                            onChangeText={setCountrySearchText}
-                            placeholder="Search country..."
-                        />
-
-                        {/* Properly typed FlatList */}
-                        <View className="h-[300px] w-full">
-                            {filteredCountries.length > 0 ? (
-                                <FlatList
-                                    data={filteredCountries as Country[]}
-                                    renderItem={renderCountryItem}
-                                    keyExtractor={(item: Country) => item.code}
-                                    numColumns={4}
-                                    contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
-                                    showsVerticalScrollIndicator={true}
-                                    initialNumToRender={12}
-                                    removeClippedSubviews={true}
-                                    keyboardShouldPersistTaps="handled"
+                {/* Country dropdown as Modal */}
+                <Modal
+                    visible={showCountryDropdown && !selectedCountry}
+                    transparent={true}
+                    animationType="fade"
+                    onRequestClose={closeCountryDropdown}
+                >
+                    <Pressable
+                        onPress={closeCountryDropdown}
+                        className="flex-1 justify-center items-center"
+                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+                    >
+                        <Pressable onPress={(e) => e.stopPropagation()}>
+                            <View className="bg-white rounded-2xl w-[80%] px-4 py-6 shadow-md items-center space-y-4 mx-6">
+                                <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
+                                    🌎 Pick Your Country
+                                </Text>
+                                <SearchBar
+                                    value={countrySearchText}
+                                    onChangeText={setCountrySearchText}
+                                    placeholder="Search country..."
                                 />
-                            ) : (
-                                <View className="flex-1 justify-center items-center">
-                                    <Text className="text-gray-600 text-base text-center">
-                                        No countries found ❌
-                                    </Text>
+
+                                <View className="h-[300px] w-full">
+                                    {filteredCountries.length > 0 ? (
+                                        <FlatList
+                                            data={filteredCountries as Country[]}
+                                            renderItem={renderCountryItem}
+                                            keyExtractor={(item: Country) => item.code}
+                                            numColumns={4}
+                                            contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
+                                            showsVerticalScrollIndicator={true}
+                                            initialNumToRender={12}
+                                            removeClippedSubviews={true}
+                                            keyboardShouldPersistTaps="handled"
+                                        />
+                                    ) : (
+                                        <View className="flex-1 justify-center items-center">
+                                            <Text className="text-gray-600 text-base text-center">
+                                                No countries found ❌
+                                            </Text>
+                                        </View>
+                                    )}
                                 </View>
-                            )}
-                        </View>
-                        <Text className="text-sm text-gray-600 text-center pt-2">
-                            Tap a country to continue 🌟
-                        </Text>
-                    </View>
-                )}
+                                <Text className="text-sm text-gray-600 text-center pt-2">
+                                    Tap a country to continue 🌟
+                                </Text>
+                            </View>
+                        </Pressable>
+                    </Pressable>
+                </Modal>
 
-                {selectedCountry && !selectedLanguage && (
-                    <View className="bg-white rounded-2xl mx-6 px-4 py-6 shadow-md items-center space-y-4 my-4 flex-1">
-                        <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
-                            🗣️ Pick a Language
-                        </Text>
-                        <SearchBar
-                            value={languageSearchText}
-                            onChangeText={setLanguageSearchText}
-                            placeholder="Search language..."
-                        />
-
-                        {/* Properly typed language FlatList */}
-                        <View className="h-[300px] w-full">
-                            {filteredLanguages.length > 0 ? (
-                                <FlatList
-                                    data={filteredLanguages}
-                                    renderItem={renderLanguageItem}
-                                    keyExtractor={(item: string) => item}
-                                    numColumns={2}
-                                    contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
-                                    showsVerticalScrollIndicator={true}
-                                    keyboardShouldPersistTaps="handled"
+                {/* Language dropdown as Modal */}
+                <Modal
+                    visible={selectedCountry !== null && !selectedLanguage}
+                    transparent={true}
+                    animationType="fade"
+                    onRequestClose={closeLanguageSelection}
+                >
+                    <Pressable
+                        onPress={closeLanguageSelection}
+                        className="flex-1 justify-center items-center"
+                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+                    >
+                        <Pressable onPress={(e) => e.stopPropagation()}>
+                            <View className="bg-white rounded-2xl w-[80%] px-4 py-6 shadow-md items-center space-y-4 mx-6">
+                                <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
+                                    🗣️ Pick a Language
+                                </Text>
+                                <SearchBar
+                                    value={languageSearchText}
+                                    onChangeText={setLanguageSearchText}
+                                    placeholder="Search language..."
                                 />
-                            ) : (
-                                <View className="flex-1 justify-center items-center">
-                                    <Text className="text-gray-600 text-base text-center">
-                                        No languages found ❌
-                                    </Text>
+
+                                <View className="h-[300px] w-full">
+                                    {filteredLanguages.length > 0 ? (
+                                        <FlatList
+                                            data={filteredLanguages}
+                                            renderItem={renderLanguageItem}
+                                            keyExtractor={(item: string) => item}
+                                            numColumns={2}
+                                            contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
+                                            showsVerticalScrollIndicator={true}
+                                            keyboardShouldPersistTaps="handled"
+                                        />
+                                    ) : (
+                                        <View className="flex-1 justify-center items-center">
+                                            <Text className="text-gray-600 text-base text-center">
+                                                No languages found ❌
+                                            </Text>
+                                        </View>
+                                    )}
                                 </View>
-                            )}
-                        </View>
-                        <Text className="text-sm text-gray-600 text-center pt-2">
-                            Tap a language to begin 📚
-                        </Text>
-                    </View>
-                )}
+                                <Text className="text-sm text-gray-600 text-center pt-2">
+                                    Tap a language to begin 📚
+                                </Text>
+                            </View>
+                        </Pressable>
+                    </Pressable>
+                </Modal>
             </SafeAreaView>
         </ImageBackground>
     );
