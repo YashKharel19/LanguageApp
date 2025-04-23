@@ -21,6 +21,8 @@ import * as Speech from 'expo-speech';
 import { Feather } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import AutoSizeLetter from './AutoSizeLetter';
+
 const { width, height } = Dimensions.get('window');
 
 type Props = {
@@ -120,7 +122,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                         {/* Front Side */}
                         <Animated.View style={frontStyle}>
                             <View className="bg-primary-light p-4 rounded-sm w-full h-full items-center justify-center">
-                                <Text className="text-8xl">{card.letter}</Text>
+                                <AutoSizeLetter letter={card.letter} />
                             </View>
                         </Animated.View>
 
