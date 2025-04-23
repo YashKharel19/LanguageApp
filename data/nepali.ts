@@ -40,7 +40,6 @@ import Gyan from "../assets/images/nepali/Gyan.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 
-console.log(Kachuwa)
 export const consonantCards: FlashCardType[] = [
   { letter: "क", word: "कछुवा", pronunciation: "Kachuvā", image: Kachuwa, translation: "Tortoise" },
   { letter: "ख", word: "खरायो", pronunciation: "Kharāyō", image: Kharayo, translation: "Rabbit" },

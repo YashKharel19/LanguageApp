@@ -5,7 +5,11 @@ import "../global.css";
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack />
+      <Stack
+        screenOptions={{
+          headerShown: false, // 🔥 This hides headers for *all* pages
+        }}
+      />
     </GestureHandlerRootView>
   );
 }

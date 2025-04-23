@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Flashcard from '../components/Flashcard';
-import { consonantCards } from '../data/nepali';
 import { FlashCardType } from '../containers/flashCardTypes';
 import Animated, {
     useSharedValue,
@@ -10,17 +9,47 @@ import Animated, {
     runOnJS,
 } from 'react-native-reanimated';
 import { Audio } from 'expo-av';
-
+import { useLocalSearchParams } from 'expo-router';
+import { useRouter } from 'expo-router';
 const { width } = Dimensions.get('window');
 
 export default function FlashcardsScreen() {
-    const [cards] = useState<FlashCardType[]>(consonantCards);
+    const { language } = useLocalSearchParams();
+    const [cards, setCards] = useState<FlashCardType[]>([]);
     const [index, setIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
     const [direction, setDirection] = useState<'left' | 'right'>('left');
     const translateX = useSharedValue(0);
+    const router = useRouter();
+    // 🔁 Dynamically import cards based on selected language
 
-    // Play a sound file dynamically
+
+    useEffect(() => {
+        const loadCards = async () => {
+            try {
+                let cardModule;
+                switch (language) {
+                    case 'Nepali':
+                        cardModule = await import('../data/nepali.ts');
+                        break;
+                    case 'Kannada':
+                        cardModule = await import('../data/kannada.ts');
+                        break;
+                    // Add supported languages here
+                    default:
+                        router.replace('/comingsoon'); // Redirect to child-friendly page
+                        return;
+                }
+                setCards(cardModule.consonantCards || []);
+            } catch (error) {
+                console.error('Error loading language cards:', error);
+            }
+        };
+
+        loadCards();
+    }, [language]);
+
+
     const playSound = async (file: any) => {
         const { sound } = await Audio.Sound.createAsync(file);
         await sound.replayAsync();
@@ -32,13 +61,12 @@ export default function FlashcardsScreen() {
     };
 
     useEffect(() => {
-        // Start animation from off-screen
         translateX.value = direction === 'left' ? width : -width;
         translateX.value = withTiming(0, { duration: 300 });
     }, [index]);
 
     const animateOut = (onFinish: () => void) => {
-        playSound(require('../assets/sounds/leftslide.wav')); // 🔊 Swipe sound
+        playSound(require('../assets/sounds/leftslide.wav'));
         translateX.value = withTiming(
             direction === 'left' ? -width : width,
             { duration: 200 },
@@ -68,6 +96,14 @@ export default function FlashcardsScreen() {
         transform: [{ translateX: translateX.value }],
     }));
 
+    if (!cards.length) {
+        return (
+            <View className="flex-1 justify-center items-center bg-white">
+                <Text className="text-lg text-gray-600">Loading cards...</Text>
+            </View>
+        );
+    }
+
     return (
         <View className="flex-1 justify-center items-center bg-white">
             <Animated.View style={cardStyle}>
@@ -76,7 +112,7 @@ export default function FlashcardsScreen() {
                     showAnswer={showAnswer}
                     onToggle={() => {
                         setShowAnswer(!showAnswer);
-                        playSound(require('../assets/sounds/flip.mp3')); // 🔊 Flip sound
+                        playSound(require('../assets/sounds/flip.mp3'));
                     }}
                     onNext={nextCard}
                     onPrev={previousCard}
