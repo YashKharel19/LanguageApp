@@ -17,36 +17,38 @@ import Oota from '../assets/images/kannada/Oota.svg';
 import Sara from "../assets/images/kannada/Sara.svg";
 import Phala from '../assets/images/kannada/Phala.svg';
 import Dhana from '../assets/images/kannada/Arasa.svg';
-
+import Ungura from '../assets/images/kannada/Ungura.svg';
+import Aidu from '../assets/images/kannada/Aidu.svg';
 import Eejoo from '../assets/images/kannada/Arasa.svg';
-import Ungura from '../assets/images/kannada/Arasa.svg';
-import Aidu from '../assets/images/kannada/Arasa.svg';
-import Odu from '../assets/images/kannada/Arasa.svg';
-import Aushadhi from '../assets/images/kannada/Arasa.svg';
+import Aushadhi from '../assets/images/kannada/Aushadhi.svg';
+import Kamala from '../assets/images/kannada/Kamala.svg';
+import Khadga from '../assets/images/kannada/Khadga.svg';
+import Godhi from '../assets/images/kannada/Godhi.svg';
+import Ghante from '../assets/images/kannada/Ghante.svg';
+import Chamacha from '../assets/images/kannada/Chamacha.svg';
+import Dabbi from '../assets/images/kannada/Dabbi.svg';
+import Dakke from '../assets/images/kannada/Dakke.svg';
+import Naa from '../assets/images/kannada/Naa.svg';
+import Taayi from '../assets/images/kannada/Taayi.svg';
+import Nadi from '../assets/images/kannada/Nadi.svg';
+import Padaka from '../assets/images/kannada/Padaka.svg';
+import Langa from '../assets/images/kannada/Langa.svg';
+import Vana from '../assets/images/kannada/Vana.svg';
+import Bharani from '../assets/images/kannada/Bharani.svg';
+import Yantra from '../assets/images/kannada/Yantra.svg';
+import Shakti from '../assets/images/kannada/Shakti.svg';
+import Odu from '../assets/images/kannada/Odu.svg';
+import Takka from '../assets/images/kannada/Takka.svg';
+import Bale from '../assets/images/kannada/Bale.svg';
+
 import Um from '../assets/images/kannada/Arasa.svg';
 import Auhvaana from '../assets/images/kannada/Arasa.svg';
-import Kamala from '../assets/images/kannada/Arasa.svg';
-import Khadga from '../assets/images/kannada/Arasa.svg';
-import Godhi from '../assets/images/kannada/Arasa.svg';
-import Ghante from '../assets/images/kannada/Arasa.svg';
 import Nga from '../assets/images/kannada/Arasa.svg';
-import Chamacha from '../assets/images/kannada/Arasa.svg';
 import Jala from '../assets/images/kannada/Arasa.svg';
 import Nya from '../assets/images/kannada/Arasa.svg';
-import Takka from '../assets/images/kannada/Arasa.svg';
-import Dabbi from '../assets/images/kannada/Arasa.svg';
-import Dakke from '../assets/images/kannada/Arasa.svg';
-import Naa from '../assets/images/kannada/Arasa.svg';
-import Taayi from '../assets/images/kannada/Arasa.svg';
 import ThalaThala from '../assets/images/kannada/Arasa.svg';
-import Nadi from '../assets/images/kannada/Arasa.svg';
-import Padaka from '../assets/images/kannada/Arasa.svg';
-import Bale from '../assets/images/kannada/Arasa.svg';
-import Bharani from '../assets/images/kannada/Arasa.svg';
-import Yantra from '../assets/images/kannada/Arasa.svg';
-import Langa from '../assets/images/kannada/Arasa.svg';
-import Vana from '../assets/images/kannada/Arasa.svg';
-import Shakti from '../assets/images/kannada/Arasa.svg';
+
+
 
 
 
