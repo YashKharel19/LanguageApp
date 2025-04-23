@@ -11,6 +11,8 @@ import Animated, {
 import { Audio } from 'expo-av';
 import { useLocalSearchParams } from 'expo-router';
 import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 const { width } = Dimensions.get('window');
 
 export default function FlashcardsScreen() {
@@ -105,38 +107,48 @@ export default function FlashcardsScreen() {
     }
 
     return (
-        <View className="flex-1 justify-center items-center bg-white">
-            <Animated.View style={cardStyle}>
-                <Flashcard
-                    card={cards[index]}
-                    showAnswer={showAnswer}
-                    onToggle={() => {
-                        setShowAnswer(!showAnswer);
-                        playSound(require('../assets/sounds/flip.mp3'));
-                    }}
-                    onNext={nextCard}
-                    onPrev={previousCard}
-                />
-            </Animated.View>
+        <SafeAreaView className="flex-1 bg-white px-4 pt-safe">
+            <View className="flex-1">
+                {/* Flashcard Section (70%) */}
+                <View className="flex-[8] justify-center items-center">
+                    <Animated.View style={cardStyle}>
+                        <Flashcard
+                            card={cards[index]}
+                            showAnswer={showAnswer}
+                            onToggle={() => {
+                                setShowAnswer(!showAnswer);
+                                playSound(require('../assets/sounds/flip.mp3'));
+                            }}
+                            onNext={nextCard}
+                            onPrev={previousCard}
+                        />
+                    </Animated.View>
+                </View>
 
-            <TouchableOpacity
-                onPress={() => {
-                    setShowAnswer(!showAnswer);
-                    playSound(require('../assets/sounds/flip.mp3'));
-                }}
-                className="bg-purple-700 px-6 py-3 rounded-lg mt-6 w-64"
-            >
-                <Text className="text-white text-lg text-center">
-                    {showAnswer ? 'Show Letter' : 'Show Meaning'}
-                </Text>
-            </TouchableOpacity>
+                {/* Button Section (30%) */}
+                <View className="flex-[2] justify-end items-center pb-6 space-y-4">
+                    <TouchableOpacity
+                        onPress={() => {
+                            setShowAnswer(!showAnswer);
+                            playSound(require('../assets/sounds/flip.mp3'));
+                        }}
+                        className="bg-purple-700 py-3 rounded-lg w-64"
+                    >
+                        <Text className="text-white text-lg text-center">
+                            {showAnswer ? 'Show Letter' : 'Show Meaning'}
+                        </Text>
+                    </TouchableOpacity>
 
-            <TouchableOpacity
-                onPress={nextCard}
-                className="bg-purple-700 px-6 py-3 rounded-lg mt-2 w-64"
-            >
-                <Text className="text-white text-lg text-center">Next Card</Text>
-            </TouchableOpacity>
-        </View>
+                    <TouchableOpacity
+                        onPress={nextCard}
+                        className="bg-purple-700 py-3 rounded-lg mt-2 w-64"
+                    >
+                        <Text className="text-white text-lg text-center">Next Card</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </SafeAreaView>
     );
+
+
 }
