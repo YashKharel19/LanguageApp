@@ -1,4 +1,3 @@
-// components/Flashcard.tsx
 import React, { useEffect } from 'react';
 import {
     View,
@@ -23,7 +22,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import AutoSizeLetter from './AutoSizeLetter';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 type Props = {
     card: FlashCardType;
@@ -37,9 +36,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     const SvgImage = card.image;
     const rotate = useSharedValue(0);
     const wasSwiping = useSharedValue(false);
-    const cardWidth = width * 0.9;
-    const maxCardHeight = 600;
-    const cardHeight = Math.min(height * 0.66, maxCardHeight);
+    const cardWidth = Math.min(width * 0.9, 400);
 
     useEffect(() => {
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
@@ -63,8 +60,8 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         ],
         backfaceVisibility: 'hidden',
         position: 'absolute',
-        width: cardWidth,
-        height: cardHeight,
+        width: '100%',
+        height: '100%',
     }));
 
     const backStyle = useAnimatedStyle(() => ({
@@ -74,8 +71,8 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         ],
         backfaceVisibility: 'hidden',
         position: 'absolute',
-        width: cardWidth,
-        height: cardHeight,
+        width: '100%',
+        height: '100%',
     }));
 
     const swipe = Gesture.Pan()
@@ -111,45 +108,53 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     };
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView className="flex-1">
             <GestureDetector gesture={swipe}>
-                <View className="items-center justify-center bg-white px-4">
+                <View className="flex-1 justify-center items-center bg-white px-4">
                     <Pressable
                         onPress={handlePress}
-                        style={{ width: cardWidth, height: cardHeight }}
-                        className="relative overflow-hidden mb-6"
+                        style={{ width: cardWidth }}
+                        className="flex-[0.8] relative"
                     >
                         {/* Front Side */}
                         <Animated.View style={frontStyle}>
-                            <View className="bg-primary-light p-4 rounded-sm w-full h-full items-center justify-center">
+                            <View className="bg-primary-light p-4 rounded-xl w-full h-full items-center justify-center">
                                 <AutoSizeLetter letter={card.letter} />
                             </View>
                         </Animated.View>
 
                         {/* Back Side */}
                         <Animated.View style={backStyle}>
-                            <ScrollView
-                                className="bg-primary-light p-4 rounded-sm w-full h-full"
-                                contentContainerStyle={{ justifyContent: 'space-between', flexGrow: 1 }}
-                            >
-                                <View>
-                                    <Text className="text-4xl font-semibold text-center">{card.word}</Text>
-                                    <View className="flex-row justify-end items-center mt-1 mr-8">
-                                        <Text className="text-sm italic text-gray-500 mr-2">
-                                            {card.pronunciation}
-                                        </Text>
-                                        <Pressable onPress={speakWord}>
-                                            <Feather name="volume-2" size={18} color="#6b7280" />
-                                        </Pressable>
+                            <View className="bg-primary-light p-4 rounded-xl w-full h-full">
+                                <ScrollView
+                                    contentContainerStyle={{
+                                        flexGrow: 1,
+                                        justifyContent: 'space-between',
+                                        paddingBottom: 20,
+                                    }}
+                                    showsVerticalScrollIndicator={false}
+                                >
+                                    <View>
+                                        <Text className="text-4xl font-semibold text-center">{card.word}</Text>
+                                        <View className="flex-row justify-end items-center mt-1 mr-2 flex-wrap">
+                                            <Text className="text-sm italic text-gray-500 mr-2">
+                                                {card.pronunciation}
+                                            </Text>
+                                            <Pressable onPress={speakWord}>
+                                                <Feather name="volume-2" size={18} color="#6b7280" />
+                                            </Pressable>
+                                        </View>
                                     </View>
-                                </View>
 
-                                <View className="items-center my-4">
-                                    <SvgImage width={340} height={340} />
-                                </View>
+                                    <View className="items-center my-4">
+                                        <SvgImage width={260} height={260} preserveAspectRatio="xMidYMid meet" />
+                                    </View>
 
-                                <Text className="text-2xl text-gray-700 text-center mt-4">{card.translation}</Text>
-                            </ScrollView>
+                                    <Text className="text-2xl text-gray-700 text-center mt-4">
+                                        {card.translation}
+                                    </Text>
+                                </ScrollView>
+                            </View>
                         </Animated.View>
                     </Pressable>
                 </View>

@@ -107,10 +107,10 @@ export default function FlashcardsScreen() {
     }
 
     return (
-        <SafeAreaView className="flex-1 bg-white px-4 pt-safe">
+        <SafeAreaView className="flex-1 bg-white px-4">
             <View className="flex-1">
                 {/* Flashcard Section (70%) */}
-                <View className="flex-[8] justify-center items-center">
+                <View className="flex-[12] justify-center items-center">
                     <Animated.View style={cardStyle}>
                         <Flashcard
                             card={cards[index]}
@@ -126,7 +126,7 @@ export default function FlashcardsScreen() {
                 </View>
 
                 {/* Button Section (30%) */}
-                <View className="flex-[2] justify-end items-center pb-6 space-y-4">
+                <View className="flex-[1] justify-end items-center pb-6 space-y-4">
                     <TouchableOpacity
                         onPress={() => {
                             setShowAnswer(!showAnswer);

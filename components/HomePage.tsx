@@ -270,7 +270,7 @@ export default function HomePage() {
                                             data={filteredCountries as Country[]}
                                             renderItem={renderCountryItem}
                                             keyExtractor={(item: Country) => item.code}
-                                            numColumns={4}
+                                            numColumns={3}
                                             contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
                                             showsVerticalScrollIndicator={true}
                                             initialNumToRender={12}
@@ -306,7 +306,7 @@ export default function HomePage() {
                         style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
                     >
                         <Pressable onPress={(e) => e.stopPropagation()}>
-                            <View className="bg-white rounded-2xl w-[80%] px-4 py-6 shadow-md items-center space-y-4 mx-6">
+                            <View className="bg-white rounded-2xl w-[80%] px-4 py-6 shadow-md items-center space-y-4 ">
                                 <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
                                     🗣️ Pick a Language
                                 </Text>
@@ -322,7 +322,7 @@ export default function HomePage() {
                                             data={filteredLanguages}
                                             renderItem={renderLanguageItem}
                                             keyExtractor={(item: string) => item}
-                                            numColumns={2}
+                                            numColumns={3}
                                             contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
                                             showsVerticalScrollIndicator={true}
                                             keyboardShouldPersistTaps="handled"
