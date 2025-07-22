@@ -44,16 +44,17 @@ export default function ComingSoon() {
 
     return (
         <ImageBackground
-            source={require('../assets/images/Splashscreen3.jpg')}
+            source={require('../assets/images/sad.jpg')}
             resizeMode="cover"
 
             imageStyle={{ width: '100%', height: '100%' }}
-            className="flex-1 justify-center items-center"
+            className="flex-1 justify-start items-center"
         >
+
             <Animated.View
                 style={{
                     transform: [{ translateY: bounceValue }],
-                    marginBottom: 20,
+                    marginTop: 282,
                 }}
             >
                 <Image
@@ -63,25 +64,7 @@ export default function ComingSoon() {
                 />
             </Animated.View>
 
-            <View className="items-center bg-white/70 px-6 py-4 rounded-2xl shadow-md">
-                <Text className="text-3xl text-purple-700 font-bold mb-2">
-                    Oopsie! 🚧
-                </Text>
-                <Text className="text-lg text-center text-gray-800">
-                    Flashcards for this language aren't ready yet.
-                </Text>
-                <Text className="text-base text-center text-gray-700 mt-1">
-                    Come back soon to learn more fun letters!
-                </Text>
 
-                <TouchableOpacity
-                    onPress={playPopSound}
-                    className="bg-yellow-400 px-6 py-3 rounded-full mt-4 shadow-md"
-                    activeOpacity={0.8}
-                >
-                    <Text className="text-white text-lg font-bold">🎈 Tap Me!</Text>
-                </TouchableOpacity>
-            </View>
         </ImageBackground>
     );
 }
