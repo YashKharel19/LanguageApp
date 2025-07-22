@@ -48,7 +48,7 @@ export default function ComingSoon() {
             resizeMode="cover"
 
             imageStyle={{ width: '100%', height: '100%' }}
-            className="flex-1 justify-center items-center p-6"
+            className="flex-1 justify-center items-center"
         >
             <Animated.View
                 style={{

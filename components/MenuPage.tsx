@@ -54,7 +54,7 @@ export default function MenuPage() {
 
     return (
         <ImageBackground
-            source={require('../assets/images/menupage.png')}
+            source={require('../assets/images/menupage.jpg')}
             resizeMode="stretch"
             className="flex-1"
         >
