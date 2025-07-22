@@ -9,9 +9,9 @@ import Animated, {
     runOnJS,
 } from 'react-native-reanimated';
 import { Audio } from 'expo-av';
-import { useLocalSearchParams } from 'expo-router';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Feather } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 
@@ -23,8 +23,6 @@ export default function FlashcardsScreen() {
     const [direction, setDirection] = useState<'left' | 'right'>('left');
     const translateX = useSharedValue(0);
     const router = useRouter();
-    // 🔁 Dynamically import cards based on selected language
-
 
     useEffect(() => {
         const loadCards = async () => {
@@ -37,9 +35,8 @@ export default function FlashcardsScreen() {
                     case 'Kannada':
                         cardModule = await import('../data/kannada.ts');
                         break;
-                    // Add supported languages here
                     default:
-                        router.replace('/comingsoon'); // Redirect to child-friendly page
+                        router.replace('/comingsoon');
                         return;
                 }
                 setCards(cardModule.consonantCards || []);
@@ -50,7 +47,6 @@ export default function FlashcardsScreen() {
 
         loadCards();
     }, [language]);
-
 
     const playSound = async (file: any) => {
         const { sound } = await Audio.Sound.createAsync(file);
@@ -108,8 +104,27 @@ export default function FlashcardsScreen() {
 
     return (
         <SafeAreaView className="flex-1 bg-white px-4">
+            {/* 🔙 Top Nav Buttons */}
+            <View className="flex-row justify-between items-center pt-2 pb-4">
+                <TouchableOpacity
+                    onPress={() => router.back()}
+                    className="flex-row items-center bg-white px-3 py-1 rounded-full shadow"
+                >
+                    <Feather name="arrow-left" size={20} color="#000" />
+                    <Text className="ml-2 text-base font-medium">Back</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => router.replace('/')}
+                    className="flex-row items-center bg-white px-3 py-1 rounded-full shadow"
+                >
+                    <Feather name="home" size={20} color="#000" />
+                    <Text className="ml-2 text-base font-medium">Home</Text>
+                </TouchableOpacity>
+            </View>
+
+            {/* 📖 Flashcard Area */}
             <View className="flex-1">
-                {/* Flashcard Section (70%) */}
                 <View className="flex-[12] justify-center items-center">
                     <Animated.View style={cardStyle}>
                         <Flashcard
@@ -125,7 +140,7 @@ export default function FlashcardsScreen() {
                     </Animated.View>
                 </View>
 
-                {/* Button Section (30%) */}
+                {/* 🔘 Action Buttons */}
                 <View className="flex-[1] justify-end items-center pb-6 space-y-4">
                     <TouchableOpacity
                         onPress={() => {
@@ -149,6 +164,4 @@ export default function FlashcardsScreen() {
             </View>
         </SafeAreaView>
     );
-
-
 }
