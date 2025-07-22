@@ -44,8 +44,10 @@ export default function ComingSoon() {
 
     return (
         <ImageBackground
-            source={require('../assets/images/Splashscreen.png')}
-            resizeMode="stretch"
+            source={require('../assets/images/Splashscreen3.jpg')}
+            resizeMode="cover"
+
+            imageStyle={{ width: '100%', height: '100%' }}
             className="flex-1 justify-center items-center p-6"
         >
             <Animated.View
