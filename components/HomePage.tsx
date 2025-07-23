@@ -23,50 +23,15 @@ import SearchBar from '../components/SearchBar';
 import { countries } from '../data/countries';
 import { languagesByCountry } from '../data/languages';
 
-// Define types for clarity
 interface Country {
     code: string;
     label: string;
     emoji?: string;
 }
 
-type SupportedCountryCode = 'np' | 'in' | 'es' | 'fr' | 'ph';
-type SupportedLanguage =
-    | 'Nepali'
-    | 'Tamang'
-    | 'Limbu'
-    | 'Gujrati'
-    | 'Punjabi'
-    | 'Hindi'
-    | 'Spanish'
-    | 'French'
-    | 'Filipino';
-
-// Sets for supported countries and languages
-const supportedCountriesSet = new Set<SupportedCountryCode>(['np', 'in', 'es', 'fr', 'ph']);
-const supportedLanguagesSet = new Set<SupportedLanguage>([
-    'Nepali',
-    'Tamang',
-    'Limbu',
-    'Gujrati',
-    'Punjabi',
-    'Hindi',
-    'Spanish',
-    'French',
-    'Filipino',
-]);
-
-const languageColors: Record<SupportedLanguage, string> = {
-    Nepali: 'orange',
-    Tamang: 'orange',
-    Limbu: 'orange',
-    Spanish: 'orange',
-    Gujrati: 'orange',
-    Punjabi: 'orange',
-    Hindi: 'orange',
-    French: 'orange',
-    Filipino: 'orange',
-};
+const supportedCountries = ['np', 'in', 'es', 'fr', 'ph'];
+const supportedLanguages = ['Nepali', 'Tamang', 'Limbu', 'Gujrati', 'Punjabi', 'Hindi', 'Kannada', 'Spanish', 'French', 'Filipino'];
+const supportedLanguagesSet = new Set(supportedLanguages);
 
 export default function HomePage() {
     const router = useRouter();
@@ -157,15 +122,17 @@ export default function HomePage() {
         </MaskedView>
     );
 
-    // Sort countries: supported first (in given order), then rest alphabetically
+    const featuredCountries = ['np', 'in', 'ph', 'bd', 'es', 'fr',];
+
     const sortedCountries = [
-        ...countries.filter((c) => supportedCountriesSet.has(c.code as SupportedCountryCode)),
+        ...supportedCountries
+            .map(code => countries.find(c => c.code === code))
+            .filter(Boolean) as Country[],
         ...countries
-            .filter((c) => !supportedCountriesSet.has(c.code as SupportedCountryCode))
+            .filter(c => !supportedCountries.includes(c.code))
             .sort((a, b) => a.label.localeCompare(b.label)),
     ];
 
-    // Filter countries by search input
     const filteredCountries = countrySearchText.trim() === ''
         ? sortedCountries
         : sortedCountries.filter((country) => {
@@ -176,80 +143,61 @@ export default function HomePage() {
             );
         });
 
-    // Sort languages: supported first (in given order), then rest alphabetically
-    const sortedLanguages = [
-        ...languageOptions.filter((lang) => supportedLanguagesSet.has(lang as SupportedLanguage)),
+    const filteredLanguages = [
+        ...languageOptions.filter(l => supportedLanguagesSet.has(l)),
         ...languageOptions
-            .filter((lang) => !supportedLanguagesSet.has(lang as SupportedLanguage))
+            .filter(l => !supportedLanguagesSet.has(l))
             .sort((a, b) => a.localeCompare(b)),
-    ];
+    ].filter((lang) =>
+        lang.toLowerCase().includes(languageSearchText.trim().toLowerCase())
+    );
 
-    // Filter languages by search input
-    const filteredLanguages = languageSearchText.trim() === ''
-        ? sortedLanguages
-        : sortedLanguages.filter((lang) =>
-            lang.toLowerCase().includes(languageSearchText.trim().toLowerCase())
+    const renderCountryItem = ({ item }: { item: Country }) => {
+        const isSupported = supportedCountries.includes(item.code);
+        return (
+            <TouchableOpacity
+                onPress={() => handleCountrySelect(item.code)}
+                className={`w-[70px] h-[90px] m-2 rounded-2xl items-center justify-center shadow-md active:scale-95 ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'}`}
+                style={{
+                    shadowColor: '#000',
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 3,
+                    elevation: 4,
+                }}
+            >
+                <Text style={{ fontSize: 36 }}>{item.emoji || '🌍'}</Text>
+                <Text className="text-xs font-semibold text-center text-gray-800 mt-1">
+                    {item.label}
+                </Text>
+            </TouchableOpacity>
         );
+    };
 
-    // Helper: highlight active countries orange, else gray
-    const getCountryBgColor = (code: string) =>
-        supportedCountriesSet.has(code as SupportedCountryCode) ? '#FFA500' : '#d1d5db'; // orange or gray-300
-
-    // Helper: highlight active languages orange, else gray
-    const getLanguageBgColor = (lang: string) =>
-        supportedLanguagesSet.has(lang as SupportedLanguage) ? '#FFA500' : '#d1d5db'; // orange or gray-300
-
-    // Render country with emoji & label
-    const renderCountryItem = ({ item }: { item: Country }) => (
-        <TouchableOpacity
-            key={item.code}
-            onPress={() => handleCountrySelect(item.code)}
-            className="w-[80px] h-[100px] m-2 rounded-3xl items-center justify-center shadow-lg active:scale-95"
-            style={{
-                backgroundColor: getCountryBgColor(item.code),
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0.3,
-                shadowRadius: 5,
-                elevation: 6,
-            }}
-        >
-            <Text style={{ fontSize: 44 }}>{item.emoji || '🌍'}</Text>
-            <Text className="text-sm font-extrabold text-center text-gray-900 mt-1">
-                {item.label}
-            </Text>
-        </TouchableOpacity>
-    );
-
-    // Render language with color & emoji
-    const renderLanguageItem = ({ item }: { item: string }) => (
-        <TouchableOpacity
-            key={item}
-            onPress={() => handleLanguageSelect(item)}
-            className="w-[120px] h-[90px] m-2 rounded-3xl items-center justify-center shadow-lg active:scale-95"
-            style={{
-                backgroundColor: getLanguageBgColor(item),
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0.3,
-                shadowRadius: 5,
-                elevation: 6,
-            }}
-        >
-            <Text className="text-xl font-extrabold text-center text-gray-900 mb-1">{item}</Text>
-            <Text style={{ fontSize: 28 }}>
-                {item === 'Nepali' || item === 'Tamang' || item === 'Limbu'
-                    ? '🇳🇵'
-                    : item === 'Spanish'
-                        ? '🇪🇸'
-                        : item === 'French'
-                            ? '🇫🇷'
-                            : item === 'Filipino'
-                                ? '🇵🇭'
-                                : '🗣️'}
-            </Text>
-        </TouchableOpacity>
-    );
+    const renderLanguageItem = ({ item }: { item: string }) => {
+        const isSupported = supportedLanguagesSet.has(item);
+        return (
+            <TouchableOpacity
+                onPress={() => handleLanguageSelect(item)}
+                className={`rounded-2xl m-2 items-center justify-center px-4 py-3 ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'}`}
+                style={{
+                    minWidth: 90,
+                    maxWidth: 120,
+                    flexGrow: 1,
+                    flexShrink: 1,
+                    shadowColor: '#000',
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 3,
+                    elevation: 4,
+                }}
+            >
+                <Text className="text-center text-[14px] font-semibold text-gray-800">
+                    {item}
+                </Text>
+            </TouchableOpacity>
+        );
+    };
 
     return (
         <ImageBackground
@@ -272,32 +220,30 @@ export default function HomePage() {
                         <GradientText text="Language" colors={['#FF0000', '#FF4D4D']} />
                     </View>
 
-                    {/* Flags: show supported countries only here */}
                     <View className="items-center mt-4">
                         <View className="flex-row gap-6 mb-3">
                             <Image
                                 source={require('../assets/flag/nepal.png')}
-                                style={{
-                                    width: 80,
-                                    height: 70,
-                                    resizeMode: 'contain',
-                                }}
+                                style={{ width: 70, height: 60, resizeMode: 'contain' }}
                             />
-                            {(['in', 'es', 'fr'] as SupportedCountryCode[]).map((countryCode) => (
+                            {featuredCountries.slice(1, 4).map((countryCode) => (
                                 <CountryFlag
                                     key={countryCode}
                                     isoCode={countryCode}
-                                    size={60}
-                                    style={{ borderRadius: 10 }}
+                                    size={50}
+                                    style={{ borderRadius: 8 }}
                                 />
                             ))}
                         </View>
                         <View className="flex-row justify-center gap-6">
-                            <CountryFlag
-                                isoCode="PH"
-                                size={60}
-                                style={{ borderRadius: 10 }}
-                            />
+                            {featuredCountries.slice(4).map((countryCode) => (
+                                <CountryFlag
+                                    key={countryCode}
+                                    isoCode={countryCode}
+                                    size={50}
+                                    style={{ borderRadius: 8 }}
+                                />
+                            ))}
                         </View>
                     </View>
                 </View>
@@ -306,17 +252,15 @@ export default function HomePage() {
                     <View className="items-center my-6">
                         <TouchableOpacity
                             onPress={() => setShowCountryDropdown(true)}
-                            className="bg-lang-orange px-8 py-4 rounded-[20px] shadow-lg"
-                            style={{ backgroundColor: '#FFA500' }}
+                            className="bg-lang-orange px-6 py-3 rounded-[15px] shadow"
                         >
-                            <Text className="text-white text-xl font-extrabold">
+                            <Text className="text-white text-lg font-semibold">
                                 Select Your Country
                             </Text>
                         </TouchableOpacity>
                     </View>
                 )}
 
-                {/* Country dropdown modal */}
                 <Modal
                     visible={showCountryDropdown && !selectedCountry}
                     transparent={true}
@@ -329,8 +273,8 @@ export default function HomePage() {
                         style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
                     >
                         <Pressable onPress={(e) => e.stopPropagation()}>
-                            <View className="bg-white rounded-3xl w-[85%] px-6 py-8 shadow-lg items-center space-y-6 mx-6">
-                                <Text className="text-3xl font-extrabold text-lang-blue text-center tracking-wide">
+                            <View className="bg-white rounded-2xl w-[80%] px-4 py-6 shadow-md items-center space-y-4 mx-6">
+                                <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
                                     🌎 Pick Your Country
                                 </Text>
                                 <SearchBar
@@ -338,30 +282,18 @@ export default function HomePage() {
                                     onChangeText={setCountrySearchText}
                                     placeholder="Search country..."
                                 />
-
-                                <View className="h-[320px] w-full">
-                                    {filteredCountries.length > 0 ? (
-                                        <FlatList
-                                            data={filteredCountries as Country[]}
-                                            renderItem={renderCountryItem}
-                                            keyExtractor={(item: Country) => item.code}
-                                            numColumns={3}
-                                            contentContainerStyle={{
-                                                alignItems: 'center',
-                                                paddingVertical: 12,
-                                            }}
-                                            showsVerticalScrollIndicator={true}
-                                            initialNumToRender={12}
-                                            removeClippedSubviews={true}
-                                            keyboardShouldPersistTaps="handled"
-                                        />
-                                    ) : (
-                                        <View className="flex-1 justify-center items-center">
-                                            <Text className="text-gray-600 text-base text-center">
-                                                No countries found ❌
-                                            </Text>
-                                        </View>
-                                    )}
+                                <View className="h-[300px] w-full">
+                                    <FlatList
+                                        data={filteredCountries}
+                                        renderItem={renderCountryItem}
+                                        keyExtractor={(item: Country) => item.code}
+                                        numColumns={3}
+                                        contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
+                                        showsVerticalScrollIndicator={true}
+                                        initialNumToRender={12}
+                                        removeClippedSubviews={true}
+                                        keyboardShouldPersistTaps="handled"
+                                    />
                                 </View>
                                 <Text className="text-sm text-gray-600 text-center pt-2">
                                     Tap a country to continue 🌟
@@ -371,7 +303,6 @@ export default function HomePage() {
                     </Pressable>
                 </Modal>
 
-                {/* Language dropdown modal */}
                 <Modal
                     visible={selectedCountry !== null && !selectedLanguage}
                     transparent={true}
@@ -384,8 +315,8 @@ export default function HomePage() {
                         style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
                     >
                         <Pressable onPress={(e) => e.stopPropagation()}>
-                            <View className="bg-white rounded-3xl w-[85%] px-6 py-8 shadow-lg items-center space-y-6 ">
-                                <Text className="text-3xl font-extrabold text-lang-blue text-center tracking-wide">
+                            <View className="bg-white rounded-2xl w-[80%] px-4 py-6 shadow-md items-center space-y-4">
+                                <Text className="text-2xl font-extrabold text-lang-blue text-center tracking-wide">
                                     🗣️ Pick a Language
                                 </Text>
                                 <SearchBar
@@ -393,31 +324,20 @@ export default function HomePage() {
                                     onChangeText={setLanguageSearchText}
                                     placeholder="Search language..."
                                 />
-
-                                <View className="h-[320px] w-full">
-                                    {filteredLanguages.length > 0 ? (
-                                        <FlatList
-                                            data={filteredLanguages}
-                                            renderItem={renderLanguageItem}
-                                            keyExtractor={(item: string) => item}
-                                            numColumns={3}
-                                            contentContainerStyle={{
-                                                alignItems: 'center',
-                                                paddingVertical: 12,
-                                            }}
-                                            showsVerticalScrollIndicator={true}
-                                            keyboardShouldPersistTaps="handled"
-                                        />
-                                    ) : (
-                                        <View className="flex-1 justify-center items-center">
-                                            <Text className="text-gray-600 text-base text-center">
-                                                No languages found ❌
-                                            </Text>
-                                        </View>
-                                    )}
+                                <View style={{ maxHeight: 400, width: '100%' }}>
+                                    <FlatList
+                                        data={filteredLanguages}
+                                        renderItem={renderLanguageItem}
+                                        keyExtractor={(item: string) => item}
+                                        numColumns={3}
+                                        columnWrapperStyle={{ justifyContent: 'center' }}
+                                        contentContainerStyle={{ alignItems: 'center', paddingHorizontal: 8, paddingBottom: 12 }}
+                                        showsVerticalScrollIndicator={true}
+                                        keyboardShouldPersistTaps="handled"
+                                    />
                                 </View>
                                 <Text className="text-sm text-gray-600 text-center pt-2">
-                                    Tap a language to continue 🌟
+                                    Tap a language to begin 📚
                                 </Text>
                             </View>
                         </Pressable>
