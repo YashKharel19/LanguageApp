@@ -23,7 +23,7 @@ import Umbrella from "../assets/images/nepali/Chata.svg";
 import Water from "../assets/images/nepali/Baan.svg";
 import Noise from "../assets/images/nepali/Baan.svg";
 import Knowledge from "../assets/images/nepali/Gyan.svg";
-import Tomato from "../assets/images/nepali/Baan.svg";
+import Tomato from "../assets/images/Tomato.svg";
 import Cold from "../assets/images/nepali/Baan.svg";
 import Left from "../assets/images/nepali/Baan.svg";
 import Bat from "../assets/images/nepali/Baan.svg";

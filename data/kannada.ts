@@ -2,7 +2,7 @@
 
 // Import all local SVG files (based on English translation in PascalCase)
 import Akka from "../assets/images/kannada/Akka.svg";
-import Elephant from "../assets/images/kannada/Elephant.svg";
+import Elephant from "../assets/images/kannada/Aane.svg";
 import Mouse from "../assets/images/kannada/Mouse.svg";
 import Swim from "../assets/images/kannada/Swim.svg";
 import Laddu from "../assets/images/kannada/Laddu.svg";
@@ -13,7 +13,7 @@ import Five from "../assets/images/kannada/Five.svg";
 import Alone from "../assets/images/kannada/Alone.svg";
 import Read from "../assets/images/kannada/Read.svg";
 import Medicine from "../assets/images/kannada/Medicine.svg";
-import Monkey from "../assets/images/kannada/Monkey.svg";
+import Monkey from "../assets/images/Monkey.svg";
 import Sword from "../assets/images/kannada/Sword.svg";
 import Wheat from "../assets/images/kannada/Wheat.svg";
 import Bell from "../assets/images/kannada/Bell.svg";
@@ -26,7 +26,7 @@ import Greeting from "../assets/images/kannada/Greeting.svg";
 import Word from "../assets/images/kannada/Word.svg";
 import House from "../assets/images/kannada/House.svg";
 import Success from "../assets/images/kannada/Success.svg";
-import Chariot from "../assets/images/kannada/Chariot.svg";
+import Chariot from "../assets/images/nepali/Ratha.svg";
 import Salt from "../assets/images/kannada/Salt.svg";
 import Tree from "../assets/images/kannada/Tree.svg";
 import Power from "../assets/images/kannada/Power.svg";
