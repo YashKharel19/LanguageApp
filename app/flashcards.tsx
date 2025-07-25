@@ -32,9 +32,31 @@ export default function FlashcardsScreen() {
                     case 'Nepali':
                         cardModule = await import('../data/nepali.ts');
                         break;
+                    case 'Limbu':
+                        cardModule = await import('../data/limbu.ts');
+                        break;
+                    case 'Tamang':
+                        cardModule = await import('../data/tamang.ts');
+                        break;
                     case 'Kannada':
                         cardModule = await import('../data/kannada.ts');
                         break;
+                    case 'Punjabi':
+                        cardModule = await import('../data/punjabi.ts');
+                        break;
+                    case 'Gujrati':
+                        cardModule = await import('../data/gujrati.ts');
+                        break;
+                    case 'Hindi':
+                        cardModule = await import('../data/hindi.ts');
+                        break;
+                    case 'Spanish':
+                        cardModule = await import('../data/spanish.ts');
+                        break;
+                    case 'Filipino':
+                        cardModule = await import('../data/filipino.ts');
+                        break;
+
                     default:
                         router.replace('/comingsoon');
                         return;
