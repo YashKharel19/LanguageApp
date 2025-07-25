@@ -25,7 +25,7 @@ import Parewa from "../assets/images/nepali/Parewa.svg";
 import Phool from "../assets/images/nepali/Fhul.svg";
 import Baccha from "../assets/images/nepali/Bachha.svg";
 import Bhalu from "../assets/images/nepali/Bhalu.svg";
-import Machha from "../assets/images/nepali/Machha.svg";
+import Machha from "../assets/images/Fish.svg";
 import Yaan from "../assets/images/nepali/Yaan.svg";
 import Rath from "../assets/images/nepali/Ratha.svg";
 import Lasun from "../assets/images/nepali/Lasun.svg";
