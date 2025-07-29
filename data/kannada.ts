@@ -1,7 +1,7 @@
 // assets/data/consonants.ts
 import Arasa from "../assets/images/kannada/Arasa.svg";
-import Elephant from "../assets/images/kannada/Aane.svg";
-import Mouse from "../assets/images/kannada/Mouse.svg";
+import Elephant from "../assets/images/Elephant.svg";
+import Mouse from "../assets/images/Mouse.svg";
 import Ungura from "../assets/images/kannada/Ungura.svg";
 import Meal from "../assets/images/kannada/Oota.svg";
 import What from "../assets/images/What.svg";
@@ -13,30 +13,35 @@ import Medicine from "../assets/images/kannada/Aushadhi.svg";
 import Lotus from "../assets/images/Lotus.svg";
 import Khadga from "../assets/images/kannada/Khadga.svg";
 import Wheat from "../assets/images/kannada/Godhi.svg";
-import Bell from "../assets/images/kannada/Ghante.svg";
+import Bell from "../assets/images/Bell.svg";
 import Chatri from "../assets/images/nepali/Chata.svg";
-import Water from "../assets/images/water.svg";
+import Water from "../assets/images/Glasswater.svg";
 import Bow from "../assets/images/nepali/Dhanush.svg";
-import Chamacha from "../assets/images/kannada/Chamacha.svg";
-import Ele from "../assets/images/kannada/Ele.svg";
-import Vana from "../assets/images/kannada/Vana.svg";
-import Bharani from "../assets/images/kannada/Bharani.svg";
-import Box from "../assets/images/kannada/Box.svg";
-import Mother from "../assets/images/kannada/Mother.svg";
+import Chamacha from "../assets/images/Spoon.svg";
+import Ele from "../assets/images/Leaf.svg";
+import Vana from "../assets/images/Forest.svg";
+import Bharani from "../assets/images/Jar.svg";
+import Box from "../assets/images/kannada/Dabbi.svg";
+import Mother from "../assets/images/Mother.svg";
 import Waterfalls from "../assets/images/nepali/Jharna.svg";
 import Langa from "../assets/images/kannada/Langa.svg";
-import House from "../assets/images/kannada/House.svg";
+import House from "../assets/images/nepali/Ghara.svg";
 import Yantra from "../assets/images/kannada/Yantra.svg";
 import Chariot from "../assets/images/nepali/Ratha.svg";
-import Sara from "../assets/images/kannada/Sara.svg";
+import Sara from "../assets/images/Necklace.svg";
 import Ship from "../assets/images/Ship.svg";
-import Power from "../assets/images/kannada/Power.svg";
-import Yedi from "../assets/images/kannada/Yedi.svg";
-import Cow from "../assets/images/kannada/Cow.svg";
-import Bale from "../assets/images/kannada/Bale.svg";
+import Power from "../assets/images/Power.svg";
+import Yedi from "../assets/images/Crab.svg";
+import Dhana from "../assets/images/kannada/Dhana.svg";
+import Bale from "../assets/images/Bangle.svg";
 import Topi from "../assets/images/kannada/Topi.svg";
 import Padaka from "../assets/images/kannada/Padaka.svg";
 import Fruits from "../assets/images/Fruits.svg";
+import Nadi from "../assets/images/River.svg";
+import Thief from "../assets/images/Thief.svg";
+import Swim from "../assets/images/Swim.svg";
+import Invitation from "../assets/images/Invitation.svg";
+import Shine from "../assets/images/Shine.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 
@@ -69,10 +74,10 @@ export const consonantCards: FlashCardType[] = [
     { letter: "ಠ", word: "ಠಕ್ಕ", pronunciation: "Takka", image: Thief, translation: "Thief" },
     { letter: "ಡ", word: "ಡಬ್ಬಿ", pronunciation: "Ḍabbi", image: Box, translation: "Box" },
     { letter: "ತ", word: "ತಾಯಿ", pronunciation: "Tāayi", image: Mother, translation: "Mother" },
-    { letter: "ಥ", word: "ಥಳಥಳ", pronunciation: "Thala", image: Shine, translation: "Mother" },
-    { letter: "ದ", word: "ದನ", pronunciation: "Dhana", image: Cow, translation: "Cow" },
+    { letter: "ಥ", word: "ಥಳಥಳ", pronunciation: "Thala", image: Shine, translation: "Shine" },
+    { letter: "ದ", word: "ದನ", pronunciation: "Dhana", image: Dhana, translation: "Cow" },
     { letter: "ಧ", word: "ಧನಸ್ಸು", pronunciation: "Dhanasuu", image: Bow, translation: "Bow" },
-    { letter: "ನ", word: "ನದಿ", pronunciation: "Nadi", image: River, translation: "River" },
+    { letter: "ನ", word: "ನದಿ", pronunciation: "Nadi", image: Nadi, translation: "River" },
     { letter: "ಪ", word: "ಪದಕ", pronunciation: "Padaka", image: Padaka, translation: "Medal" },
     { letter: "ಫ", word: "ಫಲ", pronunciation: "Phala", image: Fruits, translation: "Fruit" },
     { letter: "ಬ", word: "ಬಳೆ", pronunciation: "Bale", image: Bale, translation: "Bangle" },
