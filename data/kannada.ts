@@ -42,6 +42,8 @@ import Thief from "../assets/images/Thief.svg";
 import Swim from "../assets/images/Swim.svg";
 import Invitation from "../assets/images/Invitation.svg";
 import Shine from "../assets/images/Shine.svg";
+import Drum from "../assets/images/Drum.svg";
+import Housefly from "../assets/images/Housefly.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 
@@ -58,23 +60,25 @@ export const consonantCards: FlashCardType[] = [
     { letter: "ಒ", word: "ಒಂಟೆ", pronunciation: "Ontey", image: Camel, translation: "Camel" },
     { letter: "ಓ", word: "ಓದು", pronunciation: "Ōdu", image: Read, translation: "Read" },
     { letter: "ಔ", word: "ಔಷಧಿ", pronunciation: "Auṣadhi", image: Medicine, translation: "Medicine" },
-    { letter: "ಅಂ", word: "", pronunciation: "", image: What, translation: "" },
+    { letter: "ಅಂ", word: "", pronunciation: "Um", image: What, translation: "" },
     { letter: "ಅ:", word: "ಆಹ್ವಾನ", pronunciation: "auhvaana", image: Invitation, translation: "Invitation" },
     { letter: "ಕ", word: "ಕಮಲ", pronunciation: "Kamala", image: Lotus, translation: "Lotus" },
     { letter: "ಖ", word: "ಖಡ್ಗ", pronunciation: "Khaḍga", image: Khadga, translation: "Sword" },
     { letter: "ಗ", word: "ಗೋಧಿ", pronunciation: "Gōdhi", image: Wheat, translation: "Wheat" },
     { letter: "ಘ", word: "ಘಂಟೆ", pronunciation: "Ghaṇṭe", image: Bell, translation: "Bell" },
-    { letter: "ಙ", word: "", pronunciation: "", image: What, translation: "" },
+    { letter: "ಙ", word: "", pronunciation: "(ṅa)", image: What, translation: "" },
     { letter: "ಚ", word: "ಚಮಚ", pronunciation: "Chamacha", image: Chamacha, translation: "Spoon" },
     { letter: "ಛ", word: "ಛತ್ರಿ", pronunciation: "Chatri", image: Chatri, translation: "Umbrella" },
     { letter: "ಜ", word: "ಜಲ", pronunciation: "Jala", image: Water, translation: "Water" },
     { letter: "ಝ", word: "ಝರಿ", pronunciation: "Jari", image: Waterfalls, translation: "WaterFalls" },
-    { letter: "ಞ", word: "", pronunciation: "", image: What, translation: "" },
+    { letter: "ಞ", word: "", pronunciation: "ña", image: What, translation: "" },
     { letter: "ಟ", word: "ಟೋಪಿ", pronunciation: "Topi", image: Topi, translation: "Hat" },
     { letter: "ಠ", word: "ಠಕ್ಕ", pronunciation: "Takka", image: Thief, translation: "Thief" },
     { letter: "ಡ", word: "ಡಬ್ಬಿ", pronunciation: "Ḍabbi", image: Box, translation: "Box" },
+    { letter: "ಢ", word: "ಢಕ್ಕೆ", pronunciation: "Ḍakke", image: Drum, translation: "Drum" },
+    { letter: "ಣ", word: "ನೊಣ", pronunciation: "Naa", image: Housefly, translation: "Housefly" },
     { letter: "ತ", word: "ತಾಯಿ", pronunciation: "Tāayi", image: Mother, translation: "Mother" },
-    { letter: "ಥ", word: "ಥಳಥಳ", pronunciation: "Thala", image: Shine, translation: "Shine" },
+    { letter: "ಥ", word: "ಥಳಥಳ", pronunciation: "Thala Thala", image: Shine, translation: "Shine" },
     { letter: "ದ", word: "ದನ", pronunciation: "Dhana", image: Dhana, translation: "Cow" },
     { letter: "ಧ", word: "ಧನಸ್ಸು", pronunciation: "Dhanasuu", image: Bow, translation: "Bow" },
     { letter: "ನ", word: "ನದಿ", pronunciation: "Nadi", image: Nadi, translation: "River" },
