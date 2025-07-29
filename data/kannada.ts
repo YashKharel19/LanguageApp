@@ -8,7 +8,7 @@ import What from "../assets/images/What.svg";
 import Hexagon from "../assets/images/nepali/Satkon.svg";
 import Aidu from "../assets/images/kannada/Aidu.svg";
 import Camel from "../assets/images/Camel.svg";
-import Read from "../assets/images/kannada/Odu.svg";
+import Read from "../assets/images/Read.svg";
 import Medicine from "../assets/images/kannada/Aushadhi.svg";
 import Lotus from "../assets/images/Lotus.svg";
 import Khadga from "../assets/images/kannada/Khadga.svg";

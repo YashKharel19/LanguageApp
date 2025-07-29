@@ -34,7 +34,7 @@ import Wealth from "../assets/images/Money.svg";
 import Bird from "../assets/images/nepali/Cara.svg";
 import Flower from "../assets/images/nepali/Fhul.svg";
 import Child from "../assets/images/nepali/Bachha.svg";
-import Drum from "../assets/images/kannada/Dakke.svg";
+import Drum from "../assets/images/Drum.svg";
 import House from "../assets/images/nepali/Ghara.svg";
 import Journey from "../assets/images/Journey.svg";
 import Bear from "../assets/images/nepali/Bhalu.svg";
