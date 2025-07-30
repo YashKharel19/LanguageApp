@@ -1,58 +1,59 @@
-import Amigo from "../assets/images/nepali/Baan.svg";
-import Barco from "../assets/images/nepali/Baan.svg";
-import Casa from "../assets/images/nepali/Baan.svg";
-import Dedo from "../assets/images/nepali/Baan.svg";
-import Escuela from "../assets/images/nepali/Baan.svg";
-import Flor from "../assets/images/nepali/Baan.svg";
-import Gato from "../assets/images/nepali/Baan.svg";
-import Hola from "../assets/images/nepali/Baan.svg";
-import Imagen from "../assets/images/nepali/Baan.svg";
-import Jirafa from "../assets/images/nepali/Baan.svg";
-import Ketchup from "../assets/images/nepali/Baan.svg";
-import Libro from "../assets/images/nepali/Baan.svg";
-import Mar from "../assets/images/nepali/Baan.svg";
-import Nido from "../assets/images/nepali/Baan.svg";
-import Owl from "../assets/images/nepali/Baan.svg";
-import Pond from "../assets/images/nepali/Baan.svg";
-import Queen from "../assets/images/nepali/Baan.svg";
-import Read from "../assets/images/nepali/Baan.svg";
-import Salt from "../assets/images/nepali/Baan.svg";
-import Tongue from "../assets/images/nepali/Baan.svg";
-import Umbrella from "../assets/images/nepali/Baan.svg";
-import Van from "../assets/images/nepali/Baan.svg";
-import Water from "../assets/images/nepali/Baan.svg";
-import XRay from "../assets/images/nepali/Baan.svg";
-import Yak from "../assets/images/nepali/Baan.svg";
-import Zebra from "../assets/images/nepali/Baan.svg";
-
+// 📦 Image Imports (renamed to English translations)
+import friend from "../assets/images/Friend.svg";
+import boat from "../assets/images/Ship.svg";
+import house from "../assets/images/nepali/Ghara.svg";
+import finger from "../assets/images/Finger.svg";
+import school from "../assets/images/School.svg";
+import flower from "../assets/images/nepali/Fhul.svg";
+import cat from "../assets/images/Cat.svg";
+import ice from "../assets/images/Ice.svg";
+import picture from "../assets/images/Picture.svg";
+import giraffe from "../assets/images/Girrafe.svg";
+import kiwi from "../assets/images/nepali/Kiwi.svg";
+import book from "../assets/images/nepali/Gyan.svg";
+import sea from "../assets/images/Sea.svg";
+import nest from "../assets/images/Nest.svg";
+import owl from "../assets/images/Owl.svg";
+import dog from "../assets/images/Dog.svg";
+import queen from "../assets/images/Queen.svg";
+import read from "../assets/images/Read.svg";
+import wise from "../assets/images/Wise.svg";
+import earth from "../assets/images/Earth.svg";
+import umbrella from "../assets/images/nepali/Chata.svg";
+import cow from "../assets/images/kannada/Dhana.svg";
+import water from "../assets/images/Glasswater.svg";
+import xray from "../assets/images/Xray.svg";
+import yak from "../assets/images/nepali/Goru.svg";
+import zebra from "../assets/images/Zebra.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 
+// 🧠 Flashcard Array
 export const consonantCards: FlashCardType[] = [
-    { letter: 'A', pronunciation: 'ah-MEE-goh', word: 'Amigo', translation: 'Friend', image: Amigo },
-    { letter: 'B', pronunciation: 'BAR-koh', word: 'Barco', translation: 'Boat', image: Barco },
-    { letter: 'C', pronunciation: 'KAH-sah', word: 'Casa', translation: 'House', image: Casa },
-    { letter: 'D', pronunciation: 'DEH-doh', word: 'Dedo', translation: 'Finger', image: Dedo },
-    { letter: 'E', pronunciation: 'es-KWEH-lah', word: 'Escuela', translation: 'School', image: Escuela },
-    { letter: 'F', pronunciation: 'flor', word: 'Flor', translation: 'Flower', image: Flor },
-    { letter: 'G', pronunciation: 'GAH-toh', word: 'Gato', translation: 'Cat', image: Gato },
-    { letter: 'H', pronunciation: 'OH-lah', word: 'Hola', translation: 'Hello', image: Hola },
-    { letter: 'I', pronunciation: 'ee-MAH-hen', word: 'Imagen', translation: 'Picture', image: Imagen },
-    { letter: 'J', pronunciation: 'hee-RAH-fah', word: 'Jirafa', translation: 'Girrafe', image: Jirafa },
-    { letter: 'K', pronunciation: 'KEH-choop', word: 'Ketchup', translation: 'Ketchup', image: Ketchup },
-    { letter: 'L', pronunciation: 'LEE-broh', word: 'Libro', translation: 'Book', image: Libro },
-    { letter: 'M', pronunciation: 'mar', word: 'Mar', translation: 'Sea', image: Mar },
-    { letter: 'N', pronunciation: 'NEE-doh', word: 'Nido', translation: 'Nido', image: Nido },
-    { letter: 'O', pronunciation: 'owl', word: 'Owl', translation: 'Owl', image: Owl },
-    { letter: 'P', pronunciation: 'paand', word: 'Pond', translation: 'Pond', image: Pond },
-    { letter: 'Q', pronunciation: 'kween', word: 'Queen', translation: 'Queen', image: Queen },
-    { letter: 'R', pronunciation: 'reed', word: 'Read', translation: 'Read', image: Read },
-    { letter: 'S', pronunciation: 'saalt', word: 'Salt', translation: 'Salt', image: Salt },
-    { letter: 'T', pronunciation: 'tuhng', word: 'Tongue', translation: 'Tongue', image: Tongue },
-    { letter: 'U', pronunciation: 'uhm·breh·luh', word: 'Umbrella', translation: 'Umbrella', image: Umbrella },
-    { letter: 'V', pronunciation: 'van', word: 'Van', translation: 'Van', image: Van },
-    { letter: 'W', pronunciation: 'waa·tr', word: 'Water', translation: 'Water', image: Water },
-    { letter: 'X', pronunciation: 'eks-re', word: 'X-Ray', translation: 'X-Ray', image: XRay },
-    { letter: 'Y', pronunciation: 'yah-k', word: 'Yak', translation: 'Yak', image: Yak },
-    { letter: 'Z', pronunciation: 'ZEE-brah', word: 'Zebra', translation: 'Zebra', image: Zebra },
+    { letter: 'A', pronunciation: 'ah-MEE-goh', word: 'Amigo', translation: 'Friend', image: friend },
+    { letter: 'B', pronunciation: 'BAR-koh', word: 'Barco', translation: 'Boat', image: boat },
+    { letter: 'C', pronunciation: 'KAH-sah', word: 'Casa', translation: 'House', image: house },
+    { letter: 'D', pronunciation: 'DEH-doh', word: 'Dedo', translation: 'Finger', image: finger },
+    { letter: 'E', pronunciation: 'es-KWEH-lah', word: 'Escuela', translation: 'School', image: school },
+    { letter: 'F', pronunciation: 'flor', word: 'Flor', translation: 'Flower', image: flower },
+    { letter: 'G', pronunciation: 'GAH-toh', word: 'Gato', translation: 'Cat', image: cat },
+    { letter: 'H', pronunciation: 'YEH-lo', word: 'hielo', translation: 'Ice', image: ice },
+    { letter: 'I', pronunciation: 'ee-MAH-hen', word: 'Imagen', translation: 'Picture', image: picture },
+    { letter: 'J', pronunciation: 'hee-RAH-fah', word: 'Jirafa', translation: 'Giraffe', image: giraffe },
+    { letter: 'K', pronunciation: 'KEE-wee', word: 'Kiwi', translation: 'Kiwi', image: kiwi },
+    { letter: 'L', pronunciation: 'LEE-broh', word: 'Libro', translation: 'Book', image: book },
+    { letter: 'M', pronunciation: 'mar', word: 'Mar', translation: 'Sea', image: sea },
+    { letter: 'N', pronunciation: 'NEE-doh', word: 'Nido', translation: 'Nest', image: nest },
+    { letter: 'O', pronunciation: 'owl', word: 'Owl', translation: 'Owl', image: owl },
+    { letter: 'P', pronunciation: 'paand', word: 'Perro', translation: 'Dog', image: dog },
+    { letter: 'Q', pronunciation: 'kween', word: 'Queen', translation: 'Queen', image: queen },
+    { letter: 'R', pronunciation: 'reed', word: 'Read', translation: 'Read', image: read },
+    { letter: 'S', pronunciation: 'SAH-byoh', word: 'Sabio', translation: 'Wise', image: wise },
+    { letter: 'T', pronunciation: 'TYEHR-rah', word: 'Tierra', translation: 'Earth', image: earth },
+    { letter: 'U', pronunciation: 'uhm·breh·luh', word: 'Umbrella', translation: 'Umbrella', image: umbrella },
+    { letter: 'V', pronunciation: 'BAH-kah', word: 'Vaca', translation: 'Cow', image: cow },
+    { letter: 'W', pronunciation: 'waa·tr', word: 'Water', translation: 'Water', image: water },
+    { letter: 'X', pronunciation: 'eks-re', word: 'X-Ray', translation: 'X-Ray', image: xray },
+    { letter: 'Y', pronunciation: 'yah-k', word: 'Yak', translation: 'Yak', image: yak },
+    { letter: 'Z', pronunciation: 'ZEE-brah', word: 'Zebra', translation: 'Zebra', image: zebra },
 ];
