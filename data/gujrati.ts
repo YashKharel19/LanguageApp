@@ -44,7 +44,7 @@ import Shame from "../assets/images/nepali/Baan.svg";
 import Hexagon from "../assets/images/nepali/Satkon.svg";
 import Sun from "../assets/images/Sun.svg";
 import Damage from "../assets/images/Damage.svg";
-import Elephant from "../assets/images/kannada/Aane.svg";
+import Elephant from "../assets/images/Elephant.svg";
 import Wise from "../assets/images/Wise.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
