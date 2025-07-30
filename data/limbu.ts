@@ -16,7 +16,7 @@ import nose from "../assets/images/nepali/Naak.svg";
 import fruit from "../assets/images/Fruits.svg";
 import father from "../assets/images/Father.svg";
 import leaf from "../assets/images/Leaf.svg";
-import rice from "../assets/images/rice.svg";
+import rice from "../assets/images/Rice.svg";
 import flower from "../assets/images/nepali/Fhul.svg";
 import fire from "../assets/images/Fire.svg";
 import night from "../assets/images/Night.svg";
