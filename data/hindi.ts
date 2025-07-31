@@ -29,7 +29,7 @@ import Lawyer from "../assets/images/nepali/Wakil.svg";
 import ConchShell from "../assets/images/nepali/Sankha.svg";
 import Hexagon from "../assets/images/nepali/Satkon.svg";
 import Snake from "../assets/images/nepali/Sarpa.svg";
-import Elephant from "../assets/images/kannada/Aane.svg";
+import Elephant from "../assets/images/Elephant.svg";
 import Warrior from "../assets/images/nepali/Kshetriya.svg";
 import Trident from "../assets/images/nepali/Trishul.svg";
 import Knowledge from "../assets/images/nepali/Gyan.svg";

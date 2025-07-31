@@ -31,7 +31,7 @@ import egg from "../assets/images/Egg.svg";
 import { FlashCardType } from "../containers/flashCardTypes";
 
 // 🧠 FlashCard Data
-export const limbuCards: FlashCardType[] = [
+export const consonantCards: FlashCardType[] = [
     { letter: 'ᤁ', pronunciation: 'kabu', word: 'ᤁᤒᤢ', image: village, translation: 'Village' },
     { letter: 'ᤂ', pronunciation: 'khayekcha', word: 'ᤂᤕᤧᤰᤆᤠ', image: watermelon, translation: 'Watermelon' },
     { letter: 'ᤃ', pronunciation: 'gari', word: 'ᤃᤘᤠ᤺', image: car, translation: 'Car' },
