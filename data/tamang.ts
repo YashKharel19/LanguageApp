@@ -16,7 +16,7 @@ import owl from "../assets/images/Owl.svg";
 import father from "../assets/images/Father.svg";
 import cow from "../assets/images/kannada/Dhana.svg";
 import mother from "../assets/images/Mother.svg";
-import vein from "../assets/images/Baan.svg";
+import vein from "../assets/images/Heart.svg";
 import heat from "../assets/images/Fire.svg";
 import finger from "../assets/images/Finger.svg";
 import fox from "../assets/images/Fox.svg";

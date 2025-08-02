@@ -9,7 +9,7 @@ import cat from "../assets/images/Cat.svg";
 import ice from "../assets/images/Ice.svg";
 import picture from "../assets/images/Picture.svg";
 import giraffe from "../assets/images/Girrafe.svg";
-import kiwi from "../assets/images/nepali/Kiwi.svg";
+import kiwi from "../assets/images/Kiwi.svg";
 import book from "../assets/images/nepali/Gyan.svg";
 import sea from "../assets/images/Sea.svg";
 import nest from "../assets/images/Nest.svg";

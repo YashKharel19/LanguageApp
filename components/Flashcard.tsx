@@ -147,7 +147,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                                     </View>
 
                                     <View className="items-center ">
-                                        <SvgImage width={300} height={300} preserveAspectRatio="xMidYMid meet" />
+                                        <SvgImage width={275} height={275} preserveAspectRatio="xMidYMid meet" />
                                     </View>
 
                                     <Text className="text-2xl text-gray-700 text-center mt-4">
