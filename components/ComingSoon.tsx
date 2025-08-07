@@ -44,7 +44,7 @@ export default function ComingSoon() {
 
     return (
         <ImageBackground
-            source={require('../assets/images/sad.jpg')}
+            source={require('../assets/images/sadbackground.jpg')}
             resizeMode="cover"
 
             imageStyle={{ width: '100%', height: '100%' }}
