@@ -73,12 +73,6 @@ export default function MenuPage() {
                         <Text className="text-white text-lg font-bold text-center">Flashcards</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity
-                        onPress={goToFlashcards}
-                        className="bg-lang-blue px-8 py-4 rounded-2xl w-[80%] shadow"
-                    >
-                        <Text className="text-white text-lg font-bold text-center">Mismatch Games</Text>
-                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
         </ImageBackground>

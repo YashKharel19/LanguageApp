@@ -9,7 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yash048.lumasha",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -43,8 +47,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "39a16164-95ff-48cf-9594-7952ab242644"
+        "projectId": "3c317318-1439-4b33-a3fe-5084481b20a6"
       }
-    }
+    },
+    "owner": "yash048"
   }
 }
