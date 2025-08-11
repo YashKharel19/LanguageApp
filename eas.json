@@ -16,6 +16,9 @@
     },
     "production": {
       "autoIncrement": true,
+      "ios": {
+        "simulator": false
+      },
       "android": {
         "buildType": "app-bundle"
       }

@@ -155,7 +155,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
             {showButton && (
                 <TouchableOpacity
                     onPress={handleGetStarted}
-                    className="bg-lang-orange px-6 py-3 rounded-[15px] mb-3"
+                    className="bg-lang-orange px-6 py-3 rounded-[15px] mb-5"
                 >
                     <Text className="text-white text-lg font-semibold">Get Started</Text>
                 </TouchableOpacity>

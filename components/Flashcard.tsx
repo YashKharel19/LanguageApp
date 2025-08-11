@@ -18,7 +18,7 @@ import Animated, {
 import { FlashCardType } from '../containers/flashCardTypes';
 import * as Speech from 'expo-speech';
 import { Feather } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import AutoSizeLetter from './AutoSizeLetter';
 
@@ -36,7 +36,11 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     const SvgImage = card.image;
     const rotate = useSharedValue(0);
     const wasSwiping = useSharedValue(false);
-    const cardWidth = Math.min(width * 0.9, 400);
+    const insets = useSafeAreaInsets();
+
+    // Responsive card dimensions
+    const cardWidth = Math.min(width * 0.85, 450);
+    const cardHeight = cardWidth * 1.4;
 
     useEffect(() => {
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
@@ -108,13 +112,17 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     };
 
     return (
-        <SafeAreaView className="flex-1">
+        <SafeAreaView
+            edges={['top', 'bottom']}
+            className="flex-1 bg-white"
+            style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+        >
             <GestureDetector gesture={swipe}>
-                <View className="flex-1 justify-center items-center bg-white px-4">
+                <View className="flex-1 justify-center items-center bg-white">
                     <Pressable
                         onPress={handlePress}
-                        style={{ width: cardWidth }}
-                        className="flex-[0.8] relative"
+                        className="relative"
+                        style={{ width: cardWidth, height: cardHeight }}
                     >
                         {/* Front Side */}
                         <Animated.View style={frontStyle}>
@@ -135,7 +143,9 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                                     showsVerticalScrollIndicator={false}
                                 >
                                     <View>
-                                        <Text className="text-4xl font-semibold text-center">{card.word}</Text>
+                                        <Text className="text-4xl font-semibold text-center">
+                                            {card.word}
+                                        </Text>
                                         <View className="flex-row justify-end items-center mt-1 mr-2 flex-wrap">
                                             <Text className="text-sm italic text-gray-500 mr-2">
                                                 {card.pronunciation}
@@ -146,8 +156,12 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                                         </View>
                                     </View>
 
-                                    <View className="items-center ">
-                                        <SvgImage width={275} height={275} preserveAspectRatio="xMidYMid meet" />
+                                    <View className="items-center">
+                                        <SvgImage
+                                            width={cardWidth * 0.7}
+                                            height={cardWidth * 0.7}
+                                            preserveAspectRatio="xMidYMid meet"
+                                        />
                                     </View>
 
                                     <Text className="text-2xl text-gray-700 text-center mt-4">

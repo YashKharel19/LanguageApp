@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Audio } from 'expo-av';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
@@ -23,6 +23,7 @@ export default function FlashcardsScreen() {
     const [direction, setDirection] = useState<'left' | 'right'>('left');
     const translateX = useSharedValue(0);
     const router = useRouter();
+    const insets = useSafeAreaInsets();
 
     useEffect(() => {
         const loadCards = async () => {
@@ -56,7 +57,6 @@ export default function FlashcardsScreen() {
                     case 'Filipino':
                         cardModule = await import('../data/filipino.ts');
                         break;
-
                     default:
                         router.replace('/comingsoon');
                         return;
@@ -90,9 +90,7 @@ export default function FlashcardsScreen() {
         translateX.value = withTiming(
             direction === 'left' ? -width : width,
             { duration: 200 },
-            () => {
-                runOnJS(onFinish)();
-            }
+            () => runOnJS(onFinish)()
         );
     };
 
@@ -125,7 +123,14 @@ export default function FlashcardsScreen() {
     }
 
     return (
-        <SafeAreaView className="flex-1 bg-white px-4">
+        <SafeAreaView
+            edges={['top', 'bottom']}
+            className="flex-1 bg-white px-4"
+            style={{
+                paddingTop: insets.top,
+                paddingBottom: insets.bottom,
+            }}
+        >
             {/* 🔙 Top Nav Buttons */}
             <View className="flex-row justify-between items-center pt-2 pb-4">
                 <TouchableOpacity
@@ -172,7 +177,7 @@ export default function FlashcardsScreen() {
                         className="bg-purple-700 py-3 rounded-lg w-64"
                     >
                         <Text className="text-white text-lg text-center">
-                            {showAnswer ? 'Show Letter' : 'Show Meaning'}
+                            {showAnswer ? 'Show Letter' : 'Show Example'}
                         </Text>
                     </TouchableOpacity>
 
