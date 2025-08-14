@@ -181,8 +181,8 @@ export default function HomePage() {
                 onPress={() => handleLanguageSelect(item)}
                 className={`rounded-2xl m-2 items-center justify-center px-4 py-3 ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'}`}
                 style={{
-                    minWidth: 90,
-                    maxWidth: 120,
+                    minWidth: '28%', // responsive to screen size instead of fixed px
+                    maxWidth: '32%', // prevents overly wide boxes
                     flexGrow: 1,
                     flexShrink: 1,
                     shadowColor: '#000',
@@ -192,12 +192,21 @@ export default function HomePage() {
                     elevation: 4,
                 }}
             >
-                <Text className="text-center text-[14px] font-semibold text-gray-800">
+                <Text
+                    className="text-center font-semibold text-gray-800"
+                    style={{
+                        fontSize: 14,
+                        flexWrap: 'wrap', // allow multi-line if needed
+                    }}
+                    numberOfLines={2} // wrap to 2 lines for long names
+                    adjustsFontSizeToFit // shrink text to fit within box
+                >
                     {item}
                 </Text>
             </TouchableOpacity>
         );
     };
+
 
     return (
         <ImageBackground

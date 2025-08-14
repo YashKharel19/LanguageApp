@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Text, View, LayoutChangeEvent, Dimensions } from 'react-native';
 
 const { width: screenWidth } = Dimensions.get('window');
-const CONTAINER_SIZE_FACTOR = 0.8; // Take 80% of screen width
+const CONTAINER_SIZE_FACTOR = 0.7; // Take 80% of screen width
 const containerSize = screenWidth * CONTAINER_SIZE_FACTOR;
 
 type Props = {
