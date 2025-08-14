@@ -1,68 +1,56 @@
-
 // Image imports
-import apple from "../assets/images/Apple.svg";
-import mouth from "../assets/images/Mouth.svg";
-import snow from "../assets/images/Snow.svg";
-import nose from "../assets/images/nepali/Naak.svg";
-import one from "../assets/images/One.svg";
-import water from "../assets/images/water.svg";
-import tea from "../assets/images/Tea.svg";
-import fish from "../assets/images/Fish.svg";
-import horse from "../assets/images/Horse.svg";
-import spoon from "../assets/images/Spoon.svg";
-import bear from "../assets/images/nepali/Bhalu.svg";
-import parrot from "../assets/images/Parrot.svg";
-import owl from "../assets/images/Owl.svg";
-import father from "../assets/images/Father.svg";
-import cow from "../assets/images/kannada/Dhana.svg";
-import mother from "../assets/images/Mother.svg";
-import vein from "../assets/images/Heart.svg";
-import heat from "../assets/images/Fire.svg";
-import finger from "../assets/images/Finger.svg";
-import fox from "../assets/images/Fox.svg";
-import hat from "../assets/images/kannada/Topi.svg";
-import restaurant from "../assets/images/Restaurantlumasha.svg";
-import milk from "../assets/images/Milk.svg";
-import hare from "../assets/images/nepali/Kharayo.svg";
-import goat from "../assets/images/Goat.svg";
-import frog from "../assets/images/Frog.svg";
-import meat from "../assets/images/Meat.svg";
-import earth from "../assets/images/Earth.svg";
-import himalaya from "../assets/images/Mountain.svg";
-import mango from "../assets/images/Mango.svg";
+import rice from "../assets/images/Rice.svg";
+import peach from "../assets/images/Peach.svg";
+import hill from "../assets/images/Hill.svg";
+import garland from "../assets/images/Garland.svg";
+import aim from "../assets/images/Aim.svg";
+import ladder from "../assets/images/Ladder.svg";
+import god from "../assets/images/God.svg";
+import blessing from "../assets/images/Blessings.svg";
+import incense from "../assets/images/Incense.svg";
+import blouse from "../assets/images/Blouse.svg";
+import pathi from "../assets/images/Paathi.svg";
+import leaf from "../assets/images/Leaf.svg";
+import medicine from "../assets/images/kannada/Aushadhi.svg";
+import Pole from "../assets/images/Pole.svg";
+import nest from "../assets/images/Nest.svg";
+import me from "../assets/images/Me.svg";
+import number from "../assets/images/Number.svg";
+import talk from "../assets/images/Talk.svg";
+import honor from "../assets/images/Shree.svg";
+import light from "../assets/images/Light.svg";
+import self from "../assets/images/Self.svg";
+import nameImg from "../assets/images/name.svg";
+import bonemarrow from "../assets/images/Bonemarrow.svg";
+import Paalo from "../assets/images/Paalo.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
-// Data export
 
+// Data export
 export const consonantCards: FlashCardType[] = [
-    { letter: "ཀ", pronunciation: "ka shu", word: "ཀ་ཤུ", image: apple, translation: "apple" },
-    { letter: "ཁ", pronunciation: "kha", word: "ཁ", image: mouth, translation: "mouth" },
-    { letter: "ག", pronunciation: "gangs", word: "གངས", image: snow, translation: "snow" },
-    { letter: "ང", pronunciation: "ngos", word: "ངོས", image: nose, translation: "nose" },
-    { letter: "ཅ", pronunciation: "gchik", word: "གཅིག", image: one, translation: "one" },
-    { letter: "ཆ", pronunciation: "chu", word: "ཆུ", image: water, translation: "water" },
-    { letter: "ཇ", pronunciation: "ja", word: "ཇ", image: tea, translation: "tea" },
-    { letter: "ཉ", pronunciation: "nya", word: "ཉ", image: fish, translation: "fish" },
-    { letter: "ཏ", pronunciation: "rta", word: "རྟ", image: horse, translation: "horse" },
-    { letter: "ཐ", pronunciation: "thur me", word: "ཐུར་མེ", image: spoon, translation: "spoon" },
-    { letter: "ད", pronunciation: "dom", word: "དོམ", image: bear, translation: "bear" },
-    { letter: "ན", pronunciation: "na'o go", word: "ནའོ་གོ", image: parrot, translation: "parrot" },
-    { letter: "པ", pronunciation: "jyi pa", word: "བྱིས་པ", image: owl, translation: "owl" },
-    { letter: "ཕ", pronunciation: "pa pha", word: "པ་ཕ", image: father, translation: "father" },
-    { letter: "བ", pronunciation: "blug phu", word: "བླུག་ཕུ", image: cow, translation: "cow" },
-    { letter: "མ", pronunciation: "a ma", word: "ཨ་མ", image: mother, translation: "mother" },
-    { letter: "ཙ", pronunciation: "rtse", word: "རྩ", image: vein, translation: "vein" },
-    { letter: "ཚ", pronunciation: "tsha me", word: "ཚ་མེ", image: heat, translation: "heat" },
-    { letter: "ཛ", pronunciation: "ming mgor", word: "མིང་མགོར", image: finger, translation: "finger" },
-    { letter: "ཝ", pronunciation: "wa", word: "ཝ", image: fox, translation: "fox" },
-    { letter: "ཞ", pronunciation: "zhabs med", word: "ཞབས་མེད", image: hat, translation: "hat" },
-    { letter: "ཟ", pronunciation: "za khang", word: "ཟ་ཁང་", image: restaurant, translation: "restaurant" },
-    { letter: "འ", pronunciation: "o ma", word: "འོ་མ", image: milk, translation: "milk" },
-    { letter: "ཡ", pronunciation: "ya", word: "ཡ", image: hare, translation: "hare" },
-    { letter: "ར", pronunciation: "ra", word: "ར", image: goat, translation: "goat" },
-    { letter: "ལ", pronunciation: "lus pa", word: "ལུས་པ", image: frog, translation: "frog" },
-    { letter: "ཤ", pronunciation: "sha", word: "ཤ", image: meat, translation: "meat" },
-    { letter: "ས", pronunciation: "sa", word: "ས", image: earth, translation: "earth" },
-    { letter: "ཧ", pronunciation: "hi ma la ya", word: "ཧི་མ་ལ་ཡ", image: himalaya, translation: "Himalaya" },
-    { letter: "ཨ", pronunciation: "a ma", word: "ཨ་མ", image: mango, translation: "mango" }
+    { letter: "ཀ", pronunciation: "kaan", word: "ཀན་", image: rice, translation: "Rice" },
+    { letter: "ཁ", pronunciation: "khaa-lé", word: "ཁལེ་", image: peach, translation: "Peach" },
+    { letter: "ག", pronunciation: "gaang", word: "གང་", image: hill, translation: "Hill" },
+    { letter: "ང", pronunciation: "ngaa", word: "ང་", image: me, translation: "Me" },
+    { letter: "ཅ", pronunciation: "chaam", word: "ཅམ་", image: ladder, translation: "Ladder" },
+    { letter: "ཆ", pronunciation: "chhaan", word: "ཆན་", image: nameImg, translation: "Name" },
+    { letter: "ཇ", pronunciation: "jaang", word: "ཇང་", image: nest, translation: "Nest" },
+    { letter: "ཊ", pronunciation: "ṭaang", word: "ཊང་", image: bonemarrow, translation: "Bone marrow" },
+    { letter: "ཐ", pronunciation: "ṭhénga", word: "ཐེ་ང་", image: garland, translation: "Garland" },
+    { letter: "ཌ", pronunciation: "ḍaang", word: "ཌང་", image: number, translation: "Number" },
+    { letter: "ཏ", pronunciation: "taam", word: "ཏམ་", image: talk, translation: "Talk" },
+    { letter: "ཐ", pronunciation: "thaa", word: "ཐ་", image: aim, translation: "Aim" },
+    { letter: "ད", pronunciation: "daa", word: "གད་", image: Pole, translation: "Pole" },
+    { letter: "ན", pronunciation: "naang", word: "ནང་", image: Paalo, translation: "Parma" },
+    { letter: "པ", pronunciation: "paal", word: "པལ་", image: honor, translation: "Shree" },
+    { letter: "ཕ", pronunciation: "phaam", word: "ཕམ་", image: pathi, translation: "Paathi" },
+    { letter: "བ", pronunciation: "baa", word: "བ་", image: leaf, translation: "Leaf" },
+    { letter: "མ", pronunciation: "mhaan", word: "མན་", image: medicine, translation: "Medicine" },
+    { letter: "ཡ", pronunciation: "yaal", word: "ཡལ་", image: light, translation: "Light" },
+    { letter: "ར", pronunciation: "rhaang", word: "རང་", image: self, translation: "Self" },
+    { letter: "ལ", pronunciation: "laa", word: "ལ་", image: god, translation: "God" },
+    { letter: "ཝ", pronunciation: "waang", word: "ཝང་", image: blessing, translation: "Blessing" },
+    { letter: "ས", pronunciation: "saang", word: "སང་", image: incense, translation: "Incense" },
+    { letter: "ཧ", pronunciation: "haang-re", word: "ཧང་རེ་", image: blouse, translation: "Blouse" }
 ];
+
