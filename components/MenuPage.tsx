@@ -54,13 +54,16 @@ export default function MenuPage() {
 
     return (
         <ImageBackground
-            source={require('../assets/images/menupage.jpg')}
+            source={require('../assets/images/menu.png')}
             resizeMode="stretch"
             className="flex-1"
         >
             <SafeAreaView className="flex-1 justify-between px-4">
                 <View className="mt-12">
-                    <Text className="text-3xl font-extrabold text-center text-lang-blue tracking-widest">
+                    <Text className="text-3xl font-extrabold text-center tracking-widest" style={{
+                        color: '#FF6B00', // Vibrant orange, eye-catching for kids
+                        fontFamily: 'Comic Sans MS', // Or any playful child-friendly font
+                    }}>
                         Learn the {language} Alphabets
                     </Text>
                 </View>
