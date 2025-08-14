@@ -15,12 +15,11 @@ import Animated, {
     interpolate,
     runOnJS,
 } from 'react-native-reanimated';
-import { FlashCardType } from '../containers/flashCardTypes';
 import * as Speech from 'expo-speech';
 import { Feather } from '@expo/vector-icons';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-
 import AutoSizeLetter from './AutoSizeLetter';
+import { FlashCardType } from '../containers/flashCardTypes';
 
 const { width } = Dimensions.get('window');
 
@@ -38,12 +37,26 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     const wasSwiping = useSharedValue(false);
     const insets = useSafeAreaInsets();
 
-    // Responsive card dimensions
     const cardWidth = Math.min(width * 0.85, 450);
     const cardHeight = cardWidth * 1.4;
 
+    const speak = (text: string, lang = 'ne-NP') => {
+        if (text) {
+            Speech.speak(text, {
+                language: lang,
+                rate: 0.85,
+            });
+        }
+    };
+
+    // Speak letter or word depending on side
     useEffect(() => {
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
+        if (showAnswer) {
+            speak(card.pronunciation || card.word, 'ne-NP');
+        } else {
+            speak(card.letterPronunciation || card.letter, 'ne-NP');
+        }
     }, [showAnswer]);
 
     useEffect(() => {
@@ -102,15 +115,6 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         }
     };
 
-    const speakWord = () => {
-        if (card.pronunciation) {
-            Speech.speak(card.pronunciation, {
-                language: 'en-US',
-                rate: 0.85,
-            });
-        }
-    };
-
     return (
         <SafeAreaView
             edges={['top', 'bottom']}
@@ -128,6 +132,12 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                         <Animated.View style={frontStyle}>
                             <View className="bg-primary-light p-4 rounded-xl w-full h-full items-center justify-center">
                                 <AutoSizeLetter letter={card.letter} />
+                                <Pressable
+                                    onPress={() => speak(card.letterPronunciation || card.letter, 'ne-NP')}
+                                    style={{ position: 'absolute', top: 10, right: 10 }}
+                                >
+                                    <Feather name="volume-2" size={28} color="#374151" />
+                                </Pressable>
                             </View>
                         </Animated.View>
 
@@ -143,17 +153,21 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                                     showsVerticalScrollIndicator={false}
                                 >
                                     <View>
-                                        <Text className="text-4xl font-semibold text-center">
-                                            {card.word}
-                                        </Text>
-                                        <View className="flex-row justify-end items-center mt-1 mr-2 flex-wrap">
-                                            <Text className="text-sm italic text-gray-500 mr-2">
-                                                {card.pronunciation}
+                                        <View className="flex-row justify-between items-center">
+                                            <Text className="text-4xl font-semibold text-center flex-1">
+                                                {card.word}
                                             </Text>
-                                            <Pressable onPress={speakWord}>
-                                                <Feather name="volume-2" size={18} color="#6b7280" />
+                                            <Pressable
+                                                onPress={() => speak(card.pronunciation || card.word, 'ne-NP')}
+                                            >
+                                                <Feather name="volume-2" size={24} color="#374151" />
                                             </Pressable>
                                         </View>
+                                        {card.pronunciation ? (
+                                            <Text className="text-sm italic text-gray-500 text-center mt-1">
+                                                {card.pronunciation}
+                                            </Text>
+                                        ) : null}
                                     </View>
 
                                     <View className="items-center">
