@@ -135,7 +135,7 @@ export default function FlashcardsScreen() {
             }}
         >
             {/* 🔙 Top Nav Buttons */}
-            <View className="flex-row justify-between items-center pt-2 pb-4">
+            <View className="flex-row justify-between items-center pt-2 pb-1">
                 <TouchableOpacity
                     onPress={() => router.back()}
                     className="flex-row items-center bg-white px-3 py-1 rounded-full shadow"
@@ -155,7 +155,7 @@ export default function FlashcardsScreen() {
 
             {/* 📖 Flashcard Area */}
             <View className="flex-1">
-                <View className="flex-[12] justify-center items-center">
+                <View className="flex-[9] justify-center items-center">
                     <Animated.View style={cardStyle}>
                         <Flashcard
                             card={cards[index]}
