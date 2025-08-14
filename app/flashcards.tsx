@@ -59,6 +59,7 @@ export default function FlashcardsScreen() {
                         break;
                     case 'Tibetan':
                         cardModule = await import('../data/tibetan.ts');
+                        break;
                     default:
                         router.replace('/comingsoon');
                         return;
