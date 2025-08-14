@@ -29,8 +29,8 @@ interface Country {
     emoji?: string;
 }
 
-const supportedCountries = ['np', 'in', 'es', 'fr', 'ph'];
-const supportedLanguages = ['Nepali', 'Tamang', 'Limbu', 'Gujrati', 'Punjabi', 'Hindi', 'Kannada', 'Spanish', 'French', 'Filipino'];
+const supportedCountries = ['np', 'in', 'es', 'ph', 'cn'];
+const supportedLanguages = ['Nepali', 'Tamang', 'Limbu', 'Gujrati', 'Punjabi', 'Hindi', 'Kannada', 'Spanish', 'Filipino', 'Tibetan'];
 const supportedLanguagesSet = new Set(supportedLanguages);
 
 export default function HomePage() {

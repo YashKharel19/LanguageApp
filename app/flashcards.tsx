@@ -57,6 +57,8 @@ export default function FlashcardsScreen() {
                     case 'Filipino':
                         cardModule = await import('../data/filipino.ts');
                         break;
+                    case 'Tibetan':
+                        cardModule = await import('../data/tibetan.ts');
                     default:
                         router.replace('/comingsoon');
                         return;
