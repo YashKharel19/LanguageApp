@@ -49,7 +49,6 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         }
     };
 
-    // Speak letter or word depending on side
     useEffect(() => {
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
         if (showAnswer) {
@@ -115,6 +114,21 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         }
     };
 
+    const soundButtonStyle = {
+        position: 'absolute' as 'absolute',
+        top: 16,
+        right: 16,
+        backgroundColor: '#3B82F6',
+        padding: 12,
+        borderRadius: 9999,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5,
+        zIndex: 10,
+    };
+
     return (
         <SafeAreaView
             edges={['top', 'bottom']}
@@ -134,9 +148,9 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                                 <AutoSizeLetter letter={card.letter} />
                                 <Pressable
                                     onPress={() => speak(card.letterPronunciation || card.letter, 'ne-NP')}
-                                    style={{ position: 'absolute', top: 10, right: 10 }}
+                                    style={soundButtonStyle}
                                 >
-                                    <Feather name="volume-2" size={28} color="#374151" />
+                                    <Feather name="volume-2" size={24} color="white" />
                                 </Pressable>
                             </View>
                         </Animated.View>
@@ -144,6 +158,14 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                         {/* Back Side */}
                         <Animated.View style={backStyle}>
                             <View className="bg-primary-light p-4 rounded-xl w-full h-full">
+                                {/* Sound button on top right */}
+                                <Pressable
+                                    onPress={() => speak(card.pronunciation || card.word, 'ne-NP')}
+                                    style={soundButtonStyle}
+                                >
+                                    <Feather name="volume-2" size={24} color="white" />
+                                </Pressable>
+
                                 <ScrollView
                                     contentContainerStyle={{
                                         flexGrow: 1,
@@ -152,19 +174,14 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                                     }}
                                     showsVerticalScrollIndicator={false}
                                 >
-                                    <View>
-                                        <View className="flex-row justify-between items-center">
-                                            <Text className="text-4xl font-semibold text-center flex-1">
-                                                {card.word}
-                                            </Text>
-                                            <Pressable
-                                                onPress={() => speak(card.pronunciation || card.word, 'ne-NP')}
-                                            >
-                                                <Feather name="volume-2" size={24} color="#374151" />
-                                            </Pressable>
-                                        </View>
+                                    <View className="w-full px-4 mt-6">
+                                        <Text style={{ fontSize: cardWidth * 0.2 }} // dynamically 10% of card width
+                                            className="font-semibold text-center w-full"
+                                        >
+                                            {card.word}
+                                        </Text>
                                         {card.pronunciation ? (
-                                            <Text className="text-sm italic text-gray-500 text-center mt-1">
+                                            <Text className="text-sm italic text-gray-500 text-right mt-1">
                                                 {card.pronunciation}
                                             </Text>
                                         ) : null}
