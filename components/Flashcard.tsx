@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     View,
     Text,
@@ -36,6 +36,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     const rotate = useSharedValue(0);
     const wasSwiping = useSharedValue(false);
     const insets = useSafeAreaInsets();
+    const isMounted = useRef(false);
 
     const cardWidth = Math.min(width * 0.85, 450);
     const cardHeight = cardWidth * 1.4;
@@ -49,8 +50,20 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         }
     };
 
+    // Speak letter when card changes (swipe, keyboard, etc.)
     useEffect(() => {
+        speak(card.letterPronunciation || card.letter, 'ne-NP');
+    }, [card]);
+
+    // Flip animation + speak when toggling answer (skip first mount)
+    useEffect(() => {
+        if (!isMounted.current) {
+            isMounted.current = true;
+            return; // skip on initial mount
+        }
+
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
+
         if (showAnswer) {
             speak(card.pronunciation || card.word, 'ne-NP');
         } else {
@@ -58,6 +71,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         }
     }, [showAnswer]);
 
+    // Keyboard navigation for web
     useEffect(() => {
         if (Platform.OS === 'web') {
             const handleKeyDown = (e: KeyboardEvent) => {
@@ -91,6 +105,15 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         height: '100%',
     }));
 
+    // Safe swipe handlers (no inline arrow functions in runOnJS)
+    const handleNext = () => {
+        onNext();
+    };
+
+    const handlePrev = () => {
+        onPrev();
+    };
+
     const swipe = Gesture.Pan()
         .onBegin(() => {
             wasSwiping.value = false;
@@ -102,9 +125,9 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         })
         .onEnd((e) => {
             if (e.translationX < -50 && Math.abs(e.velocityX) > 300) {
-                runOnJS(onNext)();
+                runOnJS(handleNext)();
             } else if (e.translationX > 50 && Math.abs(e.velocityX) > 300) {
-                runOnJS(onPrev)();
+                runOnJS(handlePrev)();
             }
         });
 
@@ -158,7 +181,6 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                         {/* Back Side */}
                         <Animated.View style={backStyle}>
                             <View className="bg-primary-light p-4 rounded-xl w-full h-full">
-                                {/* Sound button on top right */}
                                 <Pressable
                                     onPress={() => speak(card.pronunciation || card.word, 'ne-NP')}
                                     style={soundButtonStyle}
@@ -175,7 +197,8 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                                     showsVerticalScrollIndicator={false}
                                 >
                                     <View className="w-full px-4 mt-6">
-                                        <Text style={{ fontSize: cardWidth * 0.2 }} // dynamically 10% of card width
+                                        <Text
+                                            style={{ fontSize: cardWidth * 0.2 }}
                                             className="font-semibold text-center w-full"
                                         >
                                             {card.word}
