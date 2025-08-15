@@ -263,7 +263,7 @@ export default function HomePage() {
                             onPress={() => setShowCountryDropdown(true)}
                             className="bg-lang-orange px-6 py-3 rounded-[15px] shadow"
                         >
-                            <Text className="text-white text-lg font-semibold">
+                            <Text className="text-white text-2xl font-semibold">
                                 Select Your Country
                             </Text>
                         </TouchableOpacity>
