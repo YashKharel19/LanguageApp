@@ -24,12 +24,12 @@ export default function FlashcardsScreen() {
     const translateX = useSharedValue(0);
     const router = useRouter();
     const insets = useSafeAreaInsets();
-
+    const languageStr = Array.isArray(language) ? language[0] : language;
     useEffect(() => {
         const loadCards = async () => {
             try {
                 let cardModule;
-                switch (language) {
+                switch (languageStr) {
                     case 'Nepali':
                         cardModule = await import('../data/nepali.ts');
                         break;
@@ -159,6 +159,7 @@ export default function FlashcardsScreen() {
                     <Animated.View style={cardStyle}>
                         <Flashcard
                             card={cards[index]}
+                            language={languageStr}
                             showAnswer={showAnswer}
                             onToggle={() => {
                                 setShowAnswer(!showAnswer);

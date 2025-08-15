@@ -25,13 +25,21 @@ const { width } = Dimensions.get('window');
 
 type Props = {
     card: FlashCardType;
+    language: string; // Added language prop
     showAnswer: boolean;
     onToggle: () => void;
     onNext: () => void;
     onPrev: () => void;
 };
 
-export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }: Props) {
+export default function Flashcard({
+    card,
+    language,
+    showAnswer,
+    onToggle,
+    onNext,
+    onPrev,
+}: Props) {
     const SvgImage = card.image;
     const rotate = useSharedValue(0);
     const wasSwiping = useSharedValue(false);
@@ -41,10 +49,25 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
     const cardWidth = Math.min(width * 0.85, 450);
     const cardHeight = cardWidth * 1.4;
 
-    const speak = (text: string, lang = 'ne-NP') => {
+    const languageLocales: Record<string, string> = {
+        Nepali: 'ne-NP',
+        Limbu: 'ne-NP',
+        Tamang: 'ne-NP',
+        Kannada: 'kn-IN',
+        Punjabi: 'pa-IN',
+        Gujrati: 'gu-IN',
+        Hindi: 'hi-IN',
+        Spanish: 'es-ES',
+        Filipino: 'fil-PH',
+        Tibetan: 'bo-CN',
+    };
+
+    const speak = (text: string) => {
+        const locale = languageLocales[language] || 'en-US';
         if (text) {
+            Speech.stop(); // stop ongoing speech
             Speech.speak(text, {
-                language: lang,
+                language: locale,
                 rate: 0.85,
             });
         }
@@ -52,7 +75,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
 
     // Speak letter when card changes (swipe, keyboard, etc.)
     useEffect(() => {
-        speak(card.letterPronunciation || card.letter, 'ne-NP');
+        speak(card.letterPronunciation || card.letter);
     }, [card]);
 
     // Flip animation + speak when toggling answer (skip first mount)
@@ -65,9 +88,9 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
 
         if (showAnswer) {
-            speak(card.pronunciation || card.word, 'ne-NP');
+            speak(card.pronunciation || card.word);
         } else {
-            speak(card.letterPronunciation || card.letter, 'ne-NP');
+            speak(card.letterPronunciation || card.letter);
         }
     }, [showAnswer]);
 
@@ -105,7 +128,6 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         height: '100%',
     }));
 
-    // Safe swipe handlers (no inline arrow functions in runOnJS)
     const handleNext = () => {
         onNext();
     };
@@ -170,7 +192,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                             <View className="bg-primary-light p-4 rounded-xl w-full h-full items-center justify-center">
                                 <AutoSizeLetter letter={card.letter} />
                                 <Pressable
-                                    onPress={() => speak(card.letterPronunciation || card.letter, 'ne-NP')}
+                                    onPress={() => speak(card.letterPronunciation || card.letter)}
                                     style={soundButtonStyle}
                                 >
                                     <Feather name="volume-2" size={24} color="white" />
@@ -182,7 +204,7 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
                         <Animated.View style={backStyle}>
                             <View className="bg-primary-light p-4 rounded-xl w-full h-full">
                                 <Pressable
-                                    onPress={() => speak(card.pronunciation || card.word, 'ne-NP')}
+                                    onPress={() => speak(card.pronunciation || card.word)}
                                     style={soundButtonStyle}
                                 >
                                     <Feather name="volume-2" size={24} color="white" />
