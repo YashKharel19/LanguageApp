@@ -1,5 +1,4 @@
-// app/ComingSoon.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     View,
     Text,
@@ -13,10 +12,12 @@ import { useRouter } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 
 export default function ComingSoon() {
-    const bounceValue = new Animated.Value(0);
+    const bounceValue = useRef(new Animated.Value(0)).current;
     const router = useRouter();
+    const soundRef = useRef<Audio.Sound | null>(null);
 
     useEffect(() => {
+        // Start bounce animation
         Animated.loop(
             Animated.sequence([
                 Animated.timing(bounceValue, {
@@ -31,19 +32,32 @@ export default function ComingSoon() {
                 }),
             ])
         ).start();
-    }, []);
 
-    const playPopSound = async () => {
-        const { sound } = await Audio.Sound.createAsync(
-            require('../assets/sounds/kidsmusic2.mp3')
-        );
-        await sound.playAsync();
-        sound.setOnPlaybackStatusUpdate((status) => {
-            if (status.isLoaded && status.didJustFinish) {
-                sound.unloadAsync();
+        // Load and play sound with looping
+        const loadAndPlaySound = async () => {
+            const { sound } = await Audio.Sound.createAsync(
+                require('../assets/sounds/kidscomingsoon.wav')
+            );
+            soundRef.current = sound;
+
+            // Set looping
+            await sound.setIsLoopingAsync(true);
+
+            // Play
+            await sound.playAsync();
+        };
+
+        loadAndPlaySound();
+
+        // Cleanup on unmount
+        return () => {
+            if (soundRef.current) {
+                soundRef.current.stopAsync();
+                soundRef.current.unloadAsync();
+                soundRef.current = null;
             }
-        });
-    };
+        };
+    }, []);
 
     return (
         <ImageBackground
@@ -52,10 +66,8 @@ export default function ComingSoon() {
             imageStyle={{ width: '100%', height: '100%' }}
             className="flex-1 justify-start items-center"
         >
-
             {/* Top Navigation Buttons */}
             <View className="absolute top-12 left-5 right-5 flex-row justify-between">
-                {/* Back Button */}
                 <TouchableOpacity
                     onPress={() => router.back()}
                     className="flex-row items-center bg-white px-3 py-1 rounded-full shadow mt-8"
@@ -64,7 +76,6 @@ export default function ComingSoon() {
                     <Text className="ml-2 text-base font-medium">Back</Text>
                 </TouchableOpacity>
 
-                {/* Home Button */}
                 <TouchableOpacity
                     onPress={() => router.replace('/')}
                     className="flex-row items-center bg-white px-3 py-1 rounded-full shadow mt-8"
@@ -79,7 +90,7 @@ export default function ComingSoon() {
                 style={{
                     transform: [{ translateY: bounceValue }],
                     marginTop: 282,
-                    marginBottom: 300
+                    marginBottom: 300,
                 }}
             >
                 <Image
@@ -93,7 +104,6 @@ export default function ComingSoon() {
             <Text className="text-3xl font-bold text-white mt-6">
                 Coming Soon
             </Text>
-
         </ImageBackground>
     );
 }
