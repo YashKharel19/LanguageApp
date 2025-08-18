@@ -157,7 +157,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                     onPress={handleGetStarted}
                     className="bg-lang-orange px-6 py-3 rounded-[15px] mb-12"
                 >
-                    <Text className="text-white text-3xl font-semibold">Get Started</Text>
+                    <Text className="text-white text-2xl font-semibold">Get Started</Text>
                 </TouchableOpacity>
             )}
         </ImageBackground>
