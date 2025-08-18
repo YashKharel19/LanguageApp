@@ -1,5 +1,4 @@
-// app/ComingSoon.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     View,
     Text,
@@ -9,11 +8,16 @@ import {
     Animated,
 } from 'react-native';
 import { Audio } from 'expo-av';
+import { useRouter } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 
 export default function ComingSoon() {
-    const bounceValue = new Animated.Value(0);
+    const bounceValue = useRef(new Animated.Value(0)).current;
+    const router = useRouter();
+    const soundRef = useRef<Audio.Sound | null>(null);
 
     useEffect(() => {
+        // Start bounce animation
         Animated.loop(
             Animated.sequence([
                 Animated.timing(bounceValue, {
@@ -28,58 +32,78 @@ export default function ComingSoon() {
                 }),
             ])
         ).start();
-    }, []);
 
-    const playPopSound = async () => {
-        const { sound } = await Audio.Sound.createAsync(
-            require('../assets/sounds/kidsmusic2.mp3') // Make sure this sound exists
-        );
-        await sound.playAsync();
-        sound.setOnPlaybackStatusUpdate((status) => {
-            if (status.isLoaded && status.didJustFinish) {
-                sound.unloadAsync();
+        // Load and play sound with looping
+        const loadAndPlaySound = async () => {
+            const { sound } = await Audio.Sound.createAsync(
+                require('../assets/sounds/kidscomingsoon.wav')
+            );
+            soundRef.current = sound;
+
+            // Set looping
+            await sound.setIsLoopingAsync(true);
+
+            // Play
+            await sound.playAsync();
+        };
+
+        loadAndPlaySound();
+
+        // Cleanup on unmount
+        return () => {
+            if (soundRef.current) {
+                soundRef.current.stopAsync();
+                soundRef.current.unloadAsync();
+                soundRef.current = null;
             }
-        });
-    };
+        };
+    }, []);
 
     return (
         <ImageBackground
-            source={require('../assets/images/Splashscreen.png')}
-            resizeMode="stretch"
-            className="flex-1 justify-center items-center p-6"
+            source={require('../assets/images/sadbackground.jpg')}
+            resizeMode="cover"
+            imageStyle={{ width: '100%', height: '100%' }}
+            className="flex-1 justify-start items-center"
         >
+            {/* Top Navigation Buttons */}
+            <View className="absolute top-12 left-5 right-5 flex-row justify-between">
+                <TouchableOpacity
+                    onPress={() => router.back()}
+                    className="flex-row items-center bg-white px-3 py-1 rounded-full shadow mt-8"
+                >
+                    <Feather name="arrow-left" size={20} color="#000" />
+                    <Text className="ml-2 text-base font-medium">Back</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => router.replace('/')}
+                    className="flex-row items-center bg-white px-3 py-1 rounded-full shadow mt-8"
+                >
+                    <Feather name="home" size={20} color="#000" />
+                    <Text className="ml-2 text-base font-medium">Home</Text>
+                </TouchableOpacity>
+            </View>
+
+            {/* Animated Image */}
             <Animated.View
                 style={{
                     transform: [{ translateY: bounceValue }],
-                    marginBottom: 20,
+                    marginTop: 282,
+                    marginBottom: 300,
                 }}
             >
                 <Image
-                    source={require('../assets/images/sad.png')} // Add your character image
+                    source={require('../assets/images/sad.png')}
                     style={{ width: 200, height: 200 }}
                     resizeMode="contain"
                 />
             </Animated.View>
 
-            <View className="items-center bg-white/70 px-6 py-4 rounded-2xl shadow-md">
-                <Text className="text-3xl text-purple-700 font-bold mb-2">
-                    Oopsie! 🚧
-                </Text>
-                <Text className="text-lg text-center text-gray-800">
-                    Flashcards for this language aren't ready yet.
-                </Text>
-                <Text className="text-base text-center text-gray-700 mt-1">
-                    Come back soon to learn more fun letters!
-                </Text>
-
-                <TouchableOpacity
-                    onPress={playPopSound}
-                    className="bg-yellow-400 px-6 py-3 rounded-full mt-4 shadow-md"
-                    activeOpacity={0.8}
-                >
-                    <Text className="text-white text-lg font-bold">🎈 Tap Me!</Text>
-                </TouchableOpacity>
-            </View>
+            {/* Coming Soon Text */}
+            <Text className="text-3xl font-bold text-white mt-6">
+                Coming Soon
+            </Text>
         </ImageBackground>
     );
 }

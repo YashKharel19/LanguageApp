@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const letters = ['L', 'u', 'ma', 'षा'];
 
@@ -68,8 +69,13 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
     };
 
     const handleGetStarted = async () => {
+        // try {
+        // await AsyncStorage.setItem('hasSeenFlashScreen', 'true'); // <-- Add this line
         await stopBackgroundMusic();
         onComplete();
+        // } catch (error) {
+        //     console.error('Error setting flash screen flag:', error);
+        // }
     };
 
     const getColorForLetter = (letter: string) => {
@@ -91,9 +97,9 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
 
     return (
         <ImageBackground
-            source={require('../assets/images/Splashscreen.png')}
-            resizeMode="stretch"
-            className="flex-1 justify-between items-center px-4 py-8"
+            source={require('../assets/images/Splashscreen3.jpg')}
+            resizeMode="cover"
+            className="flex-1 justify-between items-center"
         >
             <View style={{ marginTop: screenHeight * 0.15 }} className="items-center">
                 {/* Animated Logo */}
@@ -149,9 +155,9 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
             {showButton && (
                 <TouchableOpacity
                     onPress={handleGetStarted}
-                    className="bg-lang-orange px-6 py-3 rounded-[15px]"
+                    className="bg-lang-orange px-6 py-3 rounded-[15px] mb-12"
                 >
-                    <Text className="text-white text-lg font-semibold">Get Started</Text>
+                    <Text className="text-white text-2xl font-semibold">Get Started</Text>
                 </TouchableOpacity>
             )}
         </ImageBackground>

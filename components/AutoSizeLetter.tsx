@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Text, View, LayoutChangeEvent, Dimensions } from 'react-native';
 
 const { width: screenWidth } = Dimensions.get('window');
-const CONTAINER_SIZE_FACTOR = 0.8;
+const CONTAINER_SIZE_FACTOR = 0.7; // Take 80% of screen width
 const containerSize = screenWidth * CONTAINER_SIZE_FACTOR;
 
 type Props = {
@@ -10,41 +10,47 @@ type Props = {
 };
 
 const AutoSizeLetter = ({ letter }: Props) => {
-    const [fontSizeClass, setFontSizeClass] = useState<'text-8xl' | 'text-6xl'>('text-8xl');
-    const [measurementStage, setMeasurementStage] = useState<'initial' | 'adjusted'>('initial');
+    const [fontSize, setFontSize] = useState(containerSize * 0.6); // Start big
+    const [measured, setMeasured] = useState(false);
 
-    const handleLayout = (event: LayoutChangeEvent) => {
-        if (measurementStage === 'adjusted') return; // Prevent further adjustments
+    const handleLayout = useCallback(
+        (event: LayoutChangeEvent) => {
+            if (measured) return; // only adjust once
 
-        const { width } = event.nativeEvent.layout;
-        const maxAllowed = containerSize * 0.8;
-        console.log(width)
-        console.log(maxAllowed)
+            const { width } = event.nativeEvent.layout;
+            const maxAllowed = containerSize * 0.8;
 
-        if (width > maxAllowed) {
-            // If too big, go smaller and re-measure one more time
-            setFontSizeClass('text-6xl');
-        }
-        else {
-            setFontSizeClass('text-8xl');
-        }
+            if (width > maxAllowed) {
+                // Shrink proportionally
+                const scaleFactor = maxAllowed / width;
+                setFontSize((prev) => prev * scaleFactor);
+            }
 
-        setMeasurementStage('adjusted'); // Don't measure again
-    };
+            setMeasured(true);
+        },
+        [measured]
+    );
 
     return (
         <View
             className="flex-1 justify-center items-center"
-            style={{ width: containerSize, height: containerSize }}
+            style={{
+                width: containerSize,
+                height: containerSize,
+            }}
         >
             <Text
                 onLayout={handleLayout}
-                className={`text-black text-center ${fontSizeClass}`}
+                style={{
+                    fontSize,
+                    color: 'black',
+                    textAlign: 'center',
+                }}
             >
                 {letter}
             </Text>
         </View>
     );
 };
-
 export default AutoSizeLetter;
+

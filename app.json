@@ -1,22 +1,27 @@
 {
   "expo": {
-    "name": "lumalingo",
-    "slug": "lumalingo",
+    "name": "lumasha",
+    "slug": "lumasha",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/favicon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yash048.lumasha",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/favicon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.yash048.lumalingo"
+      "package": "com.yash048.lumasha"
     },
     "web": {
       "bundler": "metro",
@@ -28,7 +33,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/favicon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -43,8 +48,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "39a16164-95ff-48cf-9594-7952ab242644"
+        "projectId": "3c317318-1439-4b33-a3fe-5084481b20a6"
       }
-    }
+    },
+    "owner": "yash048"
   }
 }

@@ -9,9 +9,9 @@ import Animated, {
     runOnJS,
 } from 'react-native-reanimated';
 import { Audio } from 'expo-av';
-import { useLocalSearchParams } from 'expo-router';
-import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Feather } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 
@@ -23,23 +23,45 @@ export default function FlashcardsScreen() {
     const [direction, setDirection] = useState<'left' | 'right'>('left');
     const translateX = useSharedValue(0);
     const router = useRouter();
-    // 🔁 Dynamically import cards based on selected language
-
-
+    const insets = useSafeAreaInsets();
+    const languageStr = Array.isArray(language) ? language[0] : language;
     useEffect(() => {
         const loadCards = async () => {
             try {
                 let cardModule;
-                switch (language) {
+                switch (languageStr) {
                     case 'Nepali':
                         cardModule = await import('../data/nepali.ts');
+                        break;
+                    case 'Limbu':
+                        cardModule = await import('../data/limbu.ts');
+                        break;
+                    case 'Tamang':
+                        cardModule = await import('../data/tamang.ts');
                         break;
                     case 'Kannada':
                         cardModule = await import('../data/kannada.ts');
                         break;
-                    // Add supported languages here
+                    case 'Punjabi':
+                        cardModule = await import('../data/punjabi.ts');
+                        break;
+                    case 'Gujrati':
+                        cardModule = await import('../data/gujrati.ts');
+                        break;
+                    case 'Hindi':
+                        cardModule = await import('../data/hindi.ts');
+                        break;
+                    case 'Spanish':
+                        cardModule = await import('../data/spanish.ts');
+                        break;
+                    case 'Filipino':
+                        cardModule = await import('../data/filipino.ts');
+                        break;
+                    case 'Tibetan':
+                        cardModule = await import('../data/tibetan.ts');
+                        break;
                     default:
-                        router.replace('/comingsoon'); // Redirect to child-friendly page
+                        router.replace('/comingsoon');
                         return;
                 }
                 setCards(cardModule.consonantCards || []);
@@ -50,7 +72,6 @@ export default function FlashcardsScreen() {
 
         loadCards();
     }, [language]);
-
 
     const playSound = async (file: any) => {
         const { sound } = await Audio.Sound.createAsync(file);
@@ -72,9 +93,7 @@ export default function FlashcardsScreen() {
         translateX.value = withTiming(
             direction === 'left' ? -width : width,
             { duration: 200 },
-            () => {
-                runOnJS(onFinish)();
-            }
+            () => runOnJS(onFinish)()
         );
     };
 
@@ -107,13 +126,40 @@ export default function FlashcardsScreen() {
     }
 
     return (
-        <SafeAreaView className="flex-1 bg-white px-4 pt-safe">
+        <SafeAreaView
+            edges={['top', 'bottom']}
+            className="flex-1 bg-white px-4"
+            style={{
+                paddingTop: insets.top,
+                paddingBottom: insets.bottom,
+            }}
+        >
+            {/* 🔙 Top Nav Buttons */}
+            <View className="flex-row justify-between items-center pt-2 pb-1">
+                <TouchableOpacity
+                    onPress={() => router.back()}
+                    className="flex-row items-center bg-white px-3 py-1 rounded-full shadow"
+                >
+                    <Feather name="arrow-left" size={20} color="#000" />
+                    <Text className="ml-2 text-base font-medium">Back</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => router.replace('/')}
+                    className="flex-row items-center bg-white px-3 py-1 rounded-full shadow"
+                >
+                    <Feather name="home" size={20} color="#000" />
+                    <Text className="ml-2 text-base font-medium">Home</Text>
+                </TouchableOpacity>
+            </View>
+
+            {/* 📖 Flashcard Area */}
             <View className="flex-1">
-                {/* Flashcard Section (70%) */}
-                <View className="flex-[8] justify-center items-center">
+                <View className="flex-[9] justify-center items-center">
                     <Animated.View style={cardStyle}>
                         <Flashcard
                             card={cards[index]}
+                            language={languageStr}
                             showAnswer={showAnswer}
                             onToggle={() => {
                                 setShowAnswer(!showAnswer);
@@ -125,8 +171,8 @@ export default function FlashcardsScreen() {
                     </Animated.View>
                 </View>
 
-                {/* Button Section (30%) */}
-                <View className="flex-[2] justify-end items-center pb-6 space-y-4">
+                {/* 🔘 Action Buttons */}
+                <View className="flex-[1] justify-end items-center pb-6 space-y-4">
                     <TouchableOpacity
                         onPress={() => {
                             setShowAnswer(!showAnswer);
@@ -135,7 +181,7 @@ export default function FlashcardsScreen() {
                         className="bg-purple-700 py-3 rounded-lg w-64"
                     >
                         <Text className="text-white text-lg text-center">
-                            {showAnswer ? 'Show Letter' : 'Show Meaning'}
+                            {showAnswer ? 'Show Letter' : 'Show Example'}
                         </Text>
                     </TouchableOpacity>
 
@@ -149,6 +195,4 @@ export default function FlashcardsScreen() {
             </View>
         </SafeAreaView>
     );
-
-
 }

@@ -150,7 +150,7 @@ export const languagesByCountry: Record<string, string[]> = {
         "Marathi",
         "Tamil",
         "Urdu",
-        "Gujarati",
+        "Gujrati",
         "Punjabi",
         "Malayalam",
         "Odia",

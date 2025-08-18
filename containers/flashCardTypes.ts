@@ -4,6 +4,7 @@ import { SvgProps } from 'react-native-svg';
 
 export type FlashCardType = {
     letter: string;
+    letterPronunciation: string;
     word: string;
     pronunciation: string;
     image: FC<SvgProps>;

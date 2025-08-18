@@ -1,55 +1,87 @@
-// import { FlashCardType } from "../containers/flashCardTypes";
+// assets/data/consonants.ts
 
-// // You can replace the image names (e.g., Aam, Kitab) with actual imports or URLs later
-// export const consonantCards: FlashCardType[] = [
-//     { letter: "ਅ", word: "ਅਖਰ", pronunciation: "Akhar", image: Akhar, translation: "Letter" },
-//     { letter: "ਆ", word: "ਆਮ", pronunciation: "Aam", image: Aam, translation: "Mango" },
-//     { letter: "ਇ", word: "ਇੱਥੇ", pronunciation: "Itthe", image: Itthe, translation: "Here" },
-//     { letter: "ਈ", word: "ਈਟ", pronunciation: "Eet", image: Eet, translation: "Brick" },
-//     { letter: "ਉ", word: "ਉਂਘ", pronunciation: "Oongh", image: Oongh, translation: "Nap" },
-//     { letter: "ਊ", word: "ਊਠ", pronunciation: "Ooth", image: Ooth, translation: "Camel" },
-//     { letter: "ਏ", word: "ਏਕ", pronunciation: "Ek", image: Ek, translation: "One" },
-//     { letter: "ਐ", word: "ਐਨਕ", pronunciation: "Ainak", image: Ainak, translation: "Glasses" },
-//     { letter: "ਓ", word: "ਓਲ੍ਹ", pronunciation: "Olh", image: Olh, translation: "Shade" },
-//     { letter: "ਔ", word: "ਔਲ", pronunciation: "Aul", image: Aul, translation: "Baby owl" },
+// Import all 41 local SVG files manually (based on English translation)
+import Camel from "../assets/images/Camel.svg";
+import Mango from "../assets/images/Mango.svg";
+import Brick from "../assets/images/Brick.svg";
+import Apple from "../assets/images/Apple.svg";
+import Elephant from "../assets/images/Elephant.svg";
+import Pen from "../assets/images/Pen.svg";
+import Well from "../assets/images/Well.svg";
+import Cow from "../assets/images/kannada/Dhana.svg";
+import House from "../assets/images/nepali/Ghara.svg";
+import Moon from "../assets/images/Moon.svg";
+import Umbrella from "../assets/images/nepali/Chata.svg";
+import Ship from "../assets/images/Ship.svg";
+import Broom from "../assets/images/Broom.svg";
+import Tomato from "../assets/images/Tomato.svg";
+import Cart from "../assets/images/nepali/Thela.svg";
+import Frog from "../assets/images/Frog.svg";
+import Drum from "../assets/images/Drum.svg";
+import Garlic from "../assets/images/nepali/Lasun.svg";
+import Parrot from "../assets/images/Parrot.svg";
+import Pouch from "../assets/images/nepali/Thaili.svg";
+import Door from "../assets/images/Door.svg";
+import Bow from "../assets/images/nepali/Dhanush.svg";
+import Lemon from "../assets/images/Lemon.svg";
+import Kite from "../assets/images/Kite.svg";
+import Flower from "../assets/images/nepali/Fhul.svg";
+import Monkey from "../assets/images/Monkey.svg";
+import Bear from "../assets/images/nepali/Baan.svg";
+import Fish from "../assets/images/Fish.svg";
+import Friend from "../assets/images/Friend.svg";
+import King from "../assets/images/kannada/Arasa.svg";
+import Red from "../assets/images/Red.svg";
+import RollingPin from "../assets/images/Rollingpin.svg";
+import Watch from "../assets/images/Watch.svg";
+import Lion from "../assets/images/Lion.svg";
+import Rabbit from "../assets/images/nepali/Kharayo.svg";
+import Balloon from "../assets/images/Baloon.svg";
+import Land from "../assets/images/Land.svg";
+import Fruit from "../assets/images/Fruits.svg";
+import Boy from "../assets/images/Boy.svg";
 
-//     { letter: "ਕ", word: "ਕਿਤਾਬ", pronunciation: "Kitab", image: Kitab, translation: "Book" },
-//     { letter: "ਖ", word: "ਖੀਰ", pronunciation: "Kheer", image: Kheer, translation: "Rice pudding" },
-//     { letter: "ਗ", word: "ਗੋਲਾ", pronunciation: "Gola", image: Gola, translation: "Ball" },
-//     { letter: "ਘ", word: "ਘਰ", pronunciation: "Ghar", image: Ghar, translation: "House" },
-//     { letter: "ਚ", word: "ਚਮਚ", pronunciation: "Chamach", image: Chamach, translation: "Spoon" },
-//     { letter: "ਛ", word: "ਛਤਾ", pronunciation: "Chhata", image: Chhata, translation: "Umbrella" },
-//     { letter: "ਜ", word: "ਜਲ", pronunciation: "Jal", image: Jal, translation: "Water" },
-//     { letter: "ਝ", word: "ਝੰਡਾ", pronunciation: "Jhanda", image: Jhanda, translation: "Flag" },
+import { FlashCardType } from "../containers/flashCardTypes";
 
-//     { letter: "ਟ", word: "ਟੋਪੀ", pronunciation: "Topi", image: Topi, translation: "Cap" },
-//     { letter: "ਠ", word: "ਠੰਡ", pronunciation: "Thand", image: Thand, translation: "Cold" },
-//     { letter: "ਡ", word: "ਡੱਬਾ", pronunciation: "Dabba", image: Dabba, translation: "Box" },
-//     { letter: "ਢ", word: "ਢੋਲ", pronunciation: "Dhol", image: Dhol, translation: "Drum" },
-//     { letter: "ਣ", word: "ਣੀਲ", pronunciation: "Neel", image: Neel, translation: "Blue" },
-//     { letter: "ਤ", word: "ਤਾਰਾ", pronunciation: "Tara", image: Tara, translation: "Star" },
-//     { letter: "ਥ", word: "ਥੇਲਾ", pronunciation: "Thela", image: Thela, translation: "Bag" },
-//     { letter: "ਦ", word: "ਦਰਵਾਜਾ", pronunciation: "Darwaza", image: Darwaza, translation: "Door" },
-//     { letter: "ਧ", word: "ਧੋਪ", pronunciation: "Dhop", image: Dhop, translation: "Sunlight" },
-//     { letter: "ਨ", word: "ਨੱਕ", pronunciation: "Nakk", image: Nakk, translation: "Nose" },
+export const consonantCards: FlashCardType[] = [
+    { letter: "ੳ", word: "ਊਠ", pronunciation: "Ūṭha", letterPronunciation: "ū", image: Camel, translation: "Camel" },
+    { letter: "ਅ", word: "ਅਬ", pronunciation: "Amb", letterPronunciation: "a", image: Mango, translation: "Mango" },
+    { letter: "ੲ", word: "ਇੱਟ", pronunciation: "īṭṭ", letterPronunciation: "ī", image: Brick, translation: "Brick" },
+    { letter: "ਸ", word: "ਸੇਬ", pronunciation: "Sēba", letterPronunciation: "sa", image: Apple, translation: "Apple" },
+    { letter: "ਹ", word: "ਹਾਥੀ", pronunciation: "Hāthī", letterPronunciation: "ha", image: Elephant, translation: "Elephant" },
+    { letter: "ਕ", word: "ਕਲਮ", pronunciation: "Kalam", letterPronunciation: "ka", image: Pen, translation: "Pen" },
+    { letter: "ਖ", word: "ਖੂਹ", pronunciation: "Kūā", letterPronunciation: "kha", image: Well, translation: "Well" },
+    { letter: "ਗ", word: "ਗਾਂ", pronunciation: "Gā", letterPronunciation: "ga", image: Cow, translation: "Cow" },
+    { letter: "ਘ", word: "ਘਰ", pronunciation: "Ghara", letterPronunciation: "gha", image: House, translation: "House" },
+    { letter: "ਚ", word: "ਚੰਦ", pronunciation: "Chand", letterPronunciation: "cha", image: Moon, translation: "Moon" },
+    { letter: "ਛ", word: "ਛੱਤਰੀ", pronunciation: "Chhatarī", letterPronunciation: "chha", image: Umbrella, translation: "Umbrella" },
+    { letter: "ਜ", word: "ਜਹਾਜ਼", pronunciation: "Jahāz", letterPronunciation: "ja", image: Ship, translation: "Ship" },
+    { letter: "ਝ", word: "ਝਾੜੂ", pronunciation: "Jhāṛū", letterPronunciation: "jha", image: Broom, translation: "Broom" },
+    { letter: "ਟ", word: "ਟਮਾਟਰ", pronunciation: "ṭa-mā-ṭar", letterPronunciation: "ṭa", image: Tomato, translation: "Tomato" },
+    { letter: "ਠ", word: "ਠੇਲ੍ਹਾ", pronunciation: "ṭhea-lhā", letterPronunciation: "ṭha", image: Cart, translation: "Cart" },
+    { letter: "ਡ", word: "ਡੱਡੂ", pronunciation: "Ḍaḍū", letterPronunciation: "ḍa", image: Frog, translation: "Frog" },
+    { letter: "ਢ", word: "ਢੋਲ", pronunciation: "Ḍhōla", letterPronunciation: "ḍha", image: Drum, translation: "Drum" },
+    { letter: "ਣ", word: "ਲਸਣ", pronunciation: "Lasaṇa", letterPronunciation: "ṇa", image: Garlic, translation: "Garlic" },
+    { letter: "ਤ", word: "ਤੋਤਾ", pronunciation: "Tota", letterPronunciation: "ta", image: Parrot, translation: "Parrot" },
+    { letter: "ਥ", word: "ਥੈਲੀ", pronunciation: "Thailī", letterPronunciation: "tha", image: Pouch, translation: "Pouch" },
+    { letter: "ਦ", word: "ਦਰਵਾਜ਼ਾ", pronunciation: "Darwāja", letterPronunciation: "da", image: Door, translation: "Door" },
+    { letter: "ਧ", word: "ਧਨੁਸ਼", pronunciation: "Dhanush", letterPronunciation: "dha", image: Bow, translation: "Bow" },
+    { letter: "ਨ", word: "ਨਿੰਬੂ", pronunciation: "Nimbū", letterPronunciation: "na", image: Lemon, translation: "Lemon" },
+    { letter: "ਪ", word: "ਪਤੰਗ", pronunciation: "patang", letterPronunciation: "pa", image: Kite, translation: "Kite" },
+    { letter: "ਫ", word: "ਫੁੱਲ", pronunciation: "Phula", letterPronunciation: "pha", image: Flower, translation: "Flower" },
+    { letter: "ਬ", word: "ਬਾਂਦਰ", pronunciation: "Bāndar", letterPronunciation: "ba", image: Monkey, translation: "Monkey" },
+    { letter: "ਭ", word: "ਭਾਲੂ", pronunciation: "Bhālū", letterPronunciation: "bha", image: Bear, translation: "Bear" },
+    { letter: "ਮ", word: "ਮੱਛਲੀ", pronunciation: "Machlī", letterPronunciation: "ma", image: Fish, translation: "Fish" },
+    { letter: "ਯ", word: "ਯਾਰ", pronunciation: "yār", letterPronunciation: "ya", image: Friend, translation: "Friend" },
+    { letter: "ਰ", word: "ਰਾਜਾ", pronunciation: "raaja", letterPronunciation: "ra", image: King, translation: "King" },
+    { letter: "ਲ", word: "ਲਾਲ", pronunciation: "lāl", letterPronunciation: "la", image: Red, translation: "Red" },
+    { letter: "ਵ", word: "ਬੇਲਣਾ", pronunciation: "Belnaa", letterPronunciation: "va", image: RollingPin, translation: "Rolling Pin" },
+    { letter: "ੜ", word: "ਘੜੀ", pronunciation: "ghaṛī", letterPronunciation: "ṛa", image: Watch, translation: "Watch" },
+    { letter: "ਸ਼", word: "ਸ਼ੇਰ", pronunciation: "shēr", letterPronunciation: "sha", image: Lion, translation: "Lion" },
+    { letter: "ਖ਼", word: "ਖਰਗੋਸ਼", pronunciation: "Kharagōśa", letterPronunciation: "kha", image: Rabbit, translation: "Rabbit" },
+    { letter: "ਗ਼", word: "ਗ਼ੁਬਾਰਾ", pronunciation: "ġubārāa", letterPronunciation: "ga", image: Balloon, translation: "Balloon" },
+    { letter: "ਜ਼", word: "ਜ਼ਮੀਨ", pronunciation: "Zamīn", letterPronunciation: "za", image: Land, translation: "Land" },
+    { letter: "ਫ਼", word: "ਫ਼ਲ", pronunciation: "Phal", letterPronunciation: "fa", image: Fruit, translation: "Fruit" },
+    { letter: "ਲ਼", word: "ਲੜਕਾ", pronunciation: "Laṛkā", letterPronunciation: "la", image: Boy, translation: "Boy" },
+];
 
-//     { letter: "ਪ", word: "ਪੈਸਾ", pronunciation: "Paisa", image: Paisa, translation: "Money" },
-//     { letter: "ਫ", word: "ਫੁਲ", pronunciation: "Phul", image: Phul, translation: "Flower" },
-//     { letter: "ਬ", word: "ਬਿਲੀ", pronunciation: "Billi", image: Billi, translation: "Cat" },
-//     { letter: "ਭ", word: "ਭਾਲੂ", pronunciation: "Bhaloo", image: Bhaloo, translation: "Bear" },
-//     { letter: "ਮ", word: "ਮਿੱਟੀ", pronunciation: "Mitti", image: Mitti, translation: "Soil" },
-//     { letter: "ਯ", word: "ਯਕ", pronunciation: "Yak", image: Yak, translation: "Yak" },
-//     { letter: "ਰ", word: "ਰਸੀ", pronunciation: "Rassi", image: Rassi, translation: "Rope" },
-//     { letter: "ਲ", word: "ਲੱਤ", pronunciation: "Latt", image: Latt, translation: "Leg" },
-//     { letter: "ਵ", word: "ਵਾਹਨ", pronunciation: "Vahan", image: Vahan, translation: "Vehicle" },
-
-//     { letter: "ਸ਼", word: "ਸ਼ਬਦ", pronunciation: "Shabad", image: Shabad, translation: "Word" },
-//     { letter: "ਸ", word: "ਸੂਰਜ", pronunciation: "Sooraj", image: Sooraj, translation: "Sun" },
-//     { letter: "ਹ", word: "ਹਥੌੜਾ", pronunciation: "Hathora", image: Hathora, translation: "Hammer" },
-//     { letter: "ਖ਼", word: "ਖ਼ੁਰਾਕ", pronunciation: "Khurak", image: Khurak, translation: "Food" },
-//     { letter: "ਗ਼", word: "ਗ਼ਮ", pronunciation: "Gham", image: Gham, translation: "Sorrow" },
-//     { letter: "ਜ਼", word: "ਜ਼ਮੀਨ", pronunciation: "Zameen", image: Zameen, translation: "Land" },
-//     { letter: "ਫ਼", word: "ਫ਼ਲ", pronunciation: "Phal", image: Phal, translation: "Fruit" },
-//     { letter: "ਲ਼", word: "ਲ਼ਾੜੀ", pronunciation: "Ladi", image: Ladi, translation: "Doll" },
-//     { letter: "਱", word: "਱ੱਬ", pronunciation: "Rabb", image: Rabb, translation: "God" },
-// ];

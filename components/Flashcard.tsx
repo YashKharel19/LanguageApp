@@ -1,5 +1,4 @@
-// components/Flashcard.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     View,
     Text,
@@ -16,35 +15,86 @@ import Animated, {
     interpolate,
     runOnJS,
 } from 'react-native-reanimated';
-import { FlashCardType } from '../containers/flashCardTypes';
 import * as Speech from 'expo-speech';
 import { Feather } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import AutoSizeLetter from './AutoSizeLetter';
+import { FlashCardType } from '../containers/flashCardTypes';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 type Props = {
     card: FlashCardType;
+    language: string; // Added language prop
     showAnswer: boolean;
     onToggle: () => void;
     onNext: () => void;
     onPrev: () => void;
 };
 
-export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }: Props) {
+export default function Flashcard({
+    card,
+    language,
+    showAnswer,
+    onToggle,
+    onNext,
+    onPrev,
+}: Props) {
     const SvgImage = card.image;
     const rotate = useSharedValue(0);
     const wasSwiping = useSharedValue(false);
-    const cardWidth = width * 0.9;
-    const maxCardHeight = 600;
-    const cardHeight = Math.min(height * 0.66, maxCardHeight);
+    const insets = useSafeAreaInsets();
+    const isMounted = useRef(false);
 
+    const cardWidth = Math.min(width * 0.85, 450);
+    const cardHeight = cardWidth * 1.4;
+
+    const languageLocales: Record<string, string> = {
+        Nepali: 'ne-NP',
+        Limbu: 'ne-NP',
+        Tamang: 'ne-NP',
+        Kannada: 'kn-IN',
+        Punjabi: 'pa-IN',
+        Gujrati: 'gu-IN',
+        Hindi: 'hi-IN',
+        Spanish: 'es-ES',
+        Filipino: 'fil-PH',
+        Tibetan: 'bo-CN',
+    };
+
+    const speak = (text: string) => {
+        const locale = languageLocales[language] || 'en-US';
+        if (text) {
+            Speech.stop(); // stop ongoing speech
+            Speech.speak(text, {
+                language: locale,
+                rate: 0.85,
+            });
+        }
+    };
+
+    // Speak letter when card changes (swipe, keyboard, etc.)
     useEffect(() => {
+        speak(card.letterPronunciation || card.letter);
+    }, [card]);
+
+    // Flip animation + speak when toggling answer (skip first mount)
+    useEffect(() => {
+        if (!isMounted.current) {
+            isMounted.current = true;
+            return; // skip on initial mount
+        }
+
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
+
+        if (showAnswer) {
+            speak(card.pronunciation || card.word);
+        } else {
+            speak(card.letterPronunciation || card.letter);
+        }
     }, [showAnswer]);
 
+    // Keyboard navigation for web
     useEffect(() => {
         if (Platform.OS === 'web') {
             const handleKeyDown = (e: KeyboardEvent) => {
@@ -63,8 +113,8 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         ],
         backfaceVisibility: 'hidden',
         position: 'absolute',
-        width: cardWidth,
-        height: cardHeight,
+        width: '100%',
+        height: '100%',
     }));
 
     const backStyle = useAnimatedStyle(() => ({
@@ -74,9 +124,17 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         ],
         backfaceVisibility: 'hidden',
         position: 'absolute',
-        width: cardWidth,
-        height: cardHeight,
+        width: '100%',
+        height: '100%',
     }));
+
+    const handleNext = () => {
+        onNext();
+    };
+
+    const handlePrev = () => {
+        onPrev();
+    };
 
     const swipe = Gesture.Pan()
         .onBegin(() => {
@@ -89,9 +147,9 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         })
         .onEnd((e) => {
             if (e.translationX < -50 && Math.abs(e.velocityX) > 300) {
-                runOnJS(onNext)();
+                runOnJS(handleNext)();
             } else if (e.translationX > 50 && Math.abs(e.velocityX) > 300) {
-                runOnJS(onPrev)();
+                runOnJS(handlePrev)();
             }
         });
 
@@ -101,55 +159,92 @@ export default function Flashcard({ card, showAnswer, onToggle, onNext, onPrev }
         }
     };
 
-    const speakWord = () => {
-        if (card.pronunciation) {
-            Speech.speak(card.pronunciation, {
-                language: 'en-US',
-                rate: 0.85,
-            });
-        }
+    const soundButtonStyle = {
+        position: 'absolute' as 'absolute',
+        top: 16,
+        right: 16,
+        backgroundColor: '#3B82F6',
+        padding: 12,
+        borderRadius: 9999,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5,
+        zIndex: 10,
     };
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView
+            edges={['top', 'bottom']}
+            className="flex-1 bg-white"
+            style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+        >
             <GestureDetector gesture={swipe}>
-                <View className="items-center justify-center bg-white px-4">
+                <View className="flex-1 justify-center items-center bg-white">
                     <Pressable
                         onPress={handlePress}
+                        className="relative"
                         style={{ width: cardWidth, height: cardHeight }}
-                        className="relative overflow-hidden mb-6"
                     >
                         {/* Front Side */}
                         <Animated.View style={frontStyle}>
-                            <View className="bg-primary-light p-4 rounded-sm w-full h-full items-center justify-center">
+                            <View className="bg-primary-light p-4 rounded-xl w-full h-full items-center justify-center">
                                 <AutoSizeLetter letter={card.letter} />
+                                <Pressable
+                                    onPress={() => speak(card.letterPronunciation || card.letter)}
+                                    style={soundButtonStyle}
+                                >
+                                    <Feather name="volume-2" size={24} color="white" />
+                                </Pressable>
                             </View>
                         </Animated.View>
 
                         {/* Back Side */}
                         <Animated.View style={backStyle}>
-                            <ScrollView
-                                className="bg-primary-light p-4 rounded-sm w-full h-full"
-                                contentContainerStyle={{ justifyContent: 'space-between', flexGrow: 1 }}
-                            >
-                                <View>
-                                    <Text className="text-4xl font-semibold text-center">{card.word}</Text>
-                                    <View className="flex-row justify-end items-center mt-1 mr-8">
-                                        <Text className="text-sm italic text-gray-500 mr-2">
-                                            {card.pronunciation}
+                            <View className="bg-primary-light p-4 rounded-xl w-full h-full">
+                                <Pressable
+                                    onPress={() => speak(card.pronunciation || card.word)}
+                                    style={soundButtonStyle}
+                                >
+                                    <Feather name="volume-2" size={24} color="white" />
+                                </Pressable>
+
+                                <ScrollView
+                                    contentContainerStyle={{
+                                        flexGrow: 1,
+                                        justifyContent: 'space-between',
+                                        paddingBottom: 20,
+                                    }}
+                                    showsVerticalScrollIndicator={false}
+                                >
+                                    <View className="w-full px-4 mt-6">
+                                        <Text
+                                            style={{ fontSize: cardWidth * 0.2 }}
+                                            className="font-semibold text-center w-full"
+                                        >
+                                            {card.word}
                                         </Text>
-                                        <Pressable onPress={speakWord}>
-                                            <Feather name="volume-2" size={18} color="#6b7280" />
-                                        </Pressable>
+                                        {card.pronunciation ? (
+                                            <Text className="text-sm italic text-gray-500 text-right mt-1">
+                                                {card.pronunciation}
+                                            </Text>
+                                        ) : null}
                                     </View>
-                                </View>
 
-                                <View className="items-center my-4">
-                                    <SvgImage width={340} height={340} />
-                                </View>
+                                    <View className="items-center">
+                                        <SvgImage
+                                            width={cardWidth * 0.7}
+                                            height={cardWidth * 0.7}
+                                            preserveAspectRatio="xMidYMid meet"
+                                        />
+                                    </View>
 
-                                <Text className="text-2xl text-gray-700 text-center mt-4">{card.translation}</Text>
-                            </ScrollView>
+                                    <Text className="text-2xl text-gray-700 text-center mt-4">
+                                        {card.translation}
+                                    </Text>
+                                </ScrollView>
+                            </View>
                         </Animated.View>
                     </Pressable>
                 </View>
