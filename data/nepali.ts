@@ -46,8 +46,8 @@ export const consonantCards: FlashCardType[] = [
   { letter: "ग", word: "गमला", letterPronunciation: "ga", pronunciation: "gamalā", image: Gamala, translation: "Pot" },
   { letter: "घ", word: "घर", letterPronunciation: "gha", pronunciation: "ghara", image: Ghara, translation: "House" },
   { letter: "ङ", word: "नङ", letterPronunciation: "ṅa", pronunciation: "naṅa", image: Nanga, translation: "Nail" },
-  { letter: "च", word: "चरा", letterPronunciation: "cha", pronunciation: "carā", image: Chara, translation: "Bird" },
-  { letter: "छ", word: "छाता", letterPronunciation: "chha", pronunciation: "chātā", image: Chhata, translation: "Umbrella" },
+  { letter: "च", word: "चरा", letterPronunciation: "cha", pronunciation: "chara", image: Chara, translation: "Bird" },
+  { letter: "छ", word: "छाता", letterPronunciation: "chha", pronunciation: "chhātā", image: Chhata, translation: "Umbrella" },
   { letter: "ज", word: "जरायो", letterPronunciation: "ja", pronunciation: "jarāyo", image: Jarayo, translation: "Deer" },
   { letter: "झ", word: "झरना", letterPronunciation: "jha", pronunciation: "jharanā", image: Jharana, translation: "Waterfall" },
   { letter: "ञ", word: "ञ्याउगोरु सिङ्गे ञ", letterPronunciation: "ña", pronunciation: "ña", image: Nyau, translation: "" },
@@ -56,7 +56,7 @@ export const consonantCards: FlashCardType[] = [
   { letter: "ड", word: "डमरु", letterPronunciation: "ḍa", pronunciation: "ḍamaru", image: Damru, translation: "Small Drum" },
   { letter: "ढ", word: "ढुङ्गा", letterPronunciation: "ḍha", pronunciation: "ḍhuṅgā", image: Dhunga, translation: "Stone" },
   { letter: "ण", word: "वाण", letterPronunciation: "ṇa", pronunciation: "bāṇa", image: Baan, translation: "Arrow" },
-  { letter: "त", word: "तराजु", letterPronunciation: "ta", pronunciation: "tārāju", image: Taraju, translation: "Weighing Scale" },
+  { letter: "त", word: "तराजु", letterPronunciation: "tah", pronunciation: "tārāju", image: Taraju, translation: "Weighing Scale" },
   { letter: "थ", word: "थैली", letterPronunciation: "tha", pronunciation: "thā'ilī", image: Thaili, translation: "Pouch" },
   { letter: "द", word: "दमकल", letterPronunciation: "da", pronunciation: "damakala", image: Damkal, translation: "Fire Brigade" },
   { letter: "ध", word: "धनुष", letterPronunciation: "dha", pronunciation: "dhanuṣa", image: Dhanush, translation: "Bow" },
@@ -76,6 +76,6 @@ export const consonantCards: FlashCardType[] = [
   { letter: "ह", word: "हलो", letterPronunciation: "ha", pronunciation: "halō", image: Halo, translation: "Plow" },
   { letter: "क्ष", word: "क्षत्रिय", letterPronunciation: "kṣa", pronunciation: "kṣetrīya", image: Kshatriya, translation: "Warrior" },
   { letter: "त्र", word: "त्रिशुल", letterPronunciation: "tra", pronunciation: "triśūla", image: Trishul, translation: "Trident" },
-  { letter: "ज्ञ", word: "ज्ञान", letterPronunciation: "gya", pronunciation: "jñāna", image: Gyan, translation: "Knowledge" }
+  { letter: "ज्ञ", word: "ज्ञान", letterPronunciation: "gya", pronunciation: "gyāna", image: Gyan, translation: "Knowledge" }
 ];
 
