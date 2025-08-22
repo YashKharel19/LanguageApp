@@ -42,7 +42,7 @@ export const consonantCards: FlashCardType[] = [
     { letter: 'ग', letterPronunciation: 'ga', pronunciation: 'Gamalā', word: 'गमला', translation: 'Pot', image: Pot },
     { letter: 'घ', letterPronunciation: 'gha', pronunciation: 'Ghara', word: 'घर', translation: 'House', image: House },
     { letter: 'ङ', letterPronunciation: 'ṅa', pronunciation: 'ang-oor', word: 'अंगूर', translation: 'Grapes', image: Grapes },
-    { letter: 'च', letterPronunciation: 'cha', pronunciation: 'chidiya', word: 'चड़िया', translation: 'Bird', image: Bird },
+    { letter: 'च', letterPronunciation: 'cha', pronunciation: 'chidiyaa', word: 'चिड़िया', translation: 'Bird', image: Bird },
     { letter: 'छ', letterPronunciation: 'chha', pronunciation: 'chaata', word: 'छाता', translation: 'Umbrella', image: Umbrella },
     { letter: 'ज', letterPronunciation: 'ja', pronunciation: 'jahaaj', word: 'जहाज', translation: 'Ship', image: Ship },
     { letter: 'झ', letterPronunciation: 'jha', pronunciation: 'Jharanā', word: 'झरना', translation: 'Waterfall', image: Waterfall },
