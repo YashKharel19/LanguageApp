@@ -25,6 +25,7 @@ export default function FlashcardsScreen() {
     const router = useRouter();
     const insets = useSafeAreaInsets();
     const languageStr = Array.isArray(language) ? language[0] : language;
+
     useEffect(() => {
         const loadCards = async () => {
             try {
@@ -154,42 +155,55 @@ export default function FlashcardsScreen() {
             </View>
 
             {/* 📖 Flashcard Area */}
-            <View className="flex-1">
-                <View className="flex-[9] justify-center items-center">
-                    <Animated.View style={cardStyle}>
-                        <Flashcard
-                            card={cards[index]}
-                            language={languageStr}
-                            showAnswer={showAnswer}
-                            onToggle={() => {
-                                setShowAnswer(!showAnswer);
-                                playSound(require('../assets/sounds/flip.mp3'));
-                            }}
-                            onNext={nextCard}
-                            onPrev={previousCard}
-                        />
-                    </Animated.View>
-                </View>
-
-                {/* 🔘 Action Buttons */}
-                <View className="flex-[1] justify-end items-center pb-6 space-y-4">
-                    <TouchableOpacity
-                        onPress={() => {
+            <View className="flex-1 justify-center items-center">
+                <Animated.View style={cardStyle}>
+                    <Flashcard
+                        card={cards[index]}
+                        language={languageStr}
+                        showAnswer={showAnswer}
+                        onToggle={() => {
                             setShowAnswer(!showAnswer);
                             playSound(require('../assets/sounds/flip.mp3'));
                         }}
-                        className="bg-purple-700 py-3 rounded-lg w-64"
+                        onNext={nextCard}
+                        onPrev={previousCard}
+                    />
+                </Animated.View>
+            </View>
+
+            {/* 🔘 Action Buttons */}
+            <View className="pb-8">
+                {/* Flip Button */}
+                <TouchableOpacity
+                    onPress={() => {
+                        setShowAnswer(!showAnswer);
+                        playSound(require('../assets/sounds/flip.mp3'));
+                    }}
+                    className="bg-purple-700 py-3 rounded-xl mb-6 w-3/4 self-center"
+                >
+                    <Text className="text-white text-lg text-center font-semibold">
+                        {showAnswer ? 'Show Letter' : 'Show Example'}
+                    </Text>
+                </TouchableOpacity>
+
+                {/* Navigation Buttons */}
+                <View className="flex-row self-center w-3/4">
+                    <TouchableOpacity
+                        onPress={previousCard}
+                        className="flex-1 bg-purple-700 py-3 rounded-xl mr-3"
                     >
-                        <Text className="text-white text-lg text-center">
-                            {showAnswer ? 'Show Letter' : 'Show Example'}
+                        <Text className="text-white text-lg text-center font-semibold">
+                            ⬅ Prev
                         </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={nextCard}
-                        className="bg-purple-700 py-3 rounded-lg mt-2 w-64"
+                        className="flex-1 bg-purple-700 py-3 rounded-xl ml-3"
                     >
-                        <Text className="text-white text-lg text-center">Next Card</Text>
+                        <Text className="text-white text-lg text-center font-semibold">
+                            Next ➡
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>
