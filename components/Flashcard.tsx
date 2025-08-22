@@ -25,7 +25,7 @@ const { width } = Dimensions.get('window');
 
 type Props = {
     card: FlashCardType;
-    language: string; // Added language prop
+    language: string;
     showAnswer: boolean;
     onToggle: () => void;
     onNext: () => void;
@@ -65,7 +65,7 @@ export default function Flashcard({
     const speak = (text: string) => {
         const locale = languageLocales[language] || 'en-US';
         if (text) {
-            Speech.stop(); // stop ongoing speech
+            Speech.stop();
             Speech.speak(text, {
                 language: locale,
                 rate: 0.85,
@@ -73,16 +73,16 @@ export default function Flashcard({
         }
     };
 
-    // Speak letter when card changes (swipe, keyboard, etc.)
+    // Speak letter when card changes
     useEffect(() => {
         speak(card.letterPronunciation || card.letter);
     }, [card]);
 
-    // Flip animation + speak when toggling answer (skip first mount)
+    // Flip animation + speak when toggling
     useEffect(() => {
         if (!isMounted.current) {
             isMounted.current = true;
-            return; // skip on initial mount
+            return;
         }
 
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
@@ -192,7 +192,10 @@ export default function Flashcard({
                             <View className="bg-primary-light p-4 rounded-xl w-full h-full items-center justify-center">
                                 <AutoSizeLetter letter={card.letter} />
                                 <Pressable
-                                    onPress={() => speak(card.letterPronunciation || card.letter)}
+                                    onPress={(e) => {
+                                        e.stopPropagation(); // prevent flip
+                                        speak(card.letterPronunciation || card.letter);
+                                    }}
                                     style={soundButtonStyle}
                                 >
                                     <Feather name="volume-2" size={24} color="white" />
@@ -204,7 +207,10 @@ export default function Flashcard({
                         <Animated.View style={backStyle}>
                             <View className="bg-primary-light p-4 rounded-xl w-full h-full">
                                 <Pressable
-                                    onPress={() => speak(card.pronunciation || card.word)}
+                                    onPress={(e) => {
+                                        e.stopPropagation(); // prevent flip
+                                        speak(card.pronunciation || card.word);
+                                    }}
                                     style={soundButtonStyle}
                                 >
                                     <Feather name="volume-2" size={24} color="white" />
