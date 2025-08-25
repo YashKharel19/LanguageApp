@@ -1,17 +1,17 @@
-import Cat from "../assets/images/korean/Cat.svg";
-import Butterfly from "../assets/images/korean/Butterfly.svg";
-import Moon from "../assets/images/korean/Moon.svg";
-import Radio from "../assets/images/korean/Radio.svg";
-import Water from "../assets/images/korean/Water.svg";
-import Banana from "../assets/images/korean/Banana.svg";
-import Apple from "../assets/images/korean/Apple.svg";
-import Child from "../assets/images/korean/Child.svg";
-import Paper from "../assets/images/korean/Paper.svg";
-import Car from "../assets/images/korean/Car.svg";
-import Nose from "../assets/images/korean/Nose.svg";
-import Rabbit from "../assets/images/korean/Rabbit.svg";
-import Pizza from "../assets/images/korean/Pizza.svg";
-import Sky from "../assets/images/korean/Sky.svg";
+import Cat from "../assets/images/Cat.svg";
+import Butterfly from "../assets/images/Butterfly.svg";
+import Moon from "../assets/images/Moon.svg";
+import Radio from "../assets/images/Radio.svg";
+import Water from "../assets/images/Water.svg";
+import Banana from "../assets/images/Banana.svg";
+import Apple from "../assets/images/Apple.svg";
+import Child from "../assets/images/nepali/Bachha.svg";
+import Paper from "../assets/images/Paper.svg";
+import Car from "../assets/images/Car.svg";
+import Nose from "../assets/images/nepali/Naak.svg";
+import Rabbit from "../assets/images/nepali/Kharayo.svg";
+import Pizza from "../assets/images/Pizza.svg";
+import Sky from "../assets/images/Sky.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 
