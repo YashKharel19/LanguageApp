@@ -29,10 +29,9 @@ interface Country {
     emoji?: string;
 }
 
-const supportedCountries = ['np', 'in', 'es', 'ph', 'cn', 'fr', 'bf', 'pt', 'st', 'pt', 'ir', 'kr'];
+const supportedCountries = ['np', 'in', 'es', 'ph', 'cn', 'fr', 'bf', 'pt', 'st', 'pt', 'ir', 'kr', 'ao', 'as', 'cv', 'gq', 'gw', 'mz', 'tl'];
 const supportedLanguages = [
-    'Nepali', 'Tamang', 'Limbu', 'Gujrati', 'Punjabi', 'Hindi',
-    'Kannada', 'Spanish', 'Filipino', 'Tibetan', 'Portuguese', 'French', 'Persian', 'Korean'
+    'Nepali', 'Tamang', 'Limbu', 'Gujrati', 'Punjabi', 'Hindi', 'Kannada', 'Spanish', 'Filipino', 'Tibetan', 'Portuguese', 'French', 'Persian', 'Korean'
 ];
 const supportedLanguagesSet = new Set(supportedLanguages);
 

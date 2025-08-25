@@ -27,7 +27,7 @@ import Zebra from "../assets/images/Zebra.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 
-export const frenchAlphabetCards: FlashCardType[] = [
+export const consonantCards: FlashCardType[] = [
     { letter: "A", word: "Avion", letterPronunciation: "ah", pronunciation: "ah-vyohn", image: Airplane, translation: "Airplane" },
     { letter: "B", word: "Banane", letterPronunciation: "bé", pronunciation: "bah-nahn", image: Banana, translation: "Banana" },
     { letter: "C", word: "Chat", letterPronunciation: "cé", pronunciation: "sha", image: Cat, translation: "Cat" },

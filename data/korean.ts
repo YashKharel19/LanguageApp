@@ -15,7 +15,7 @@ import Sky from "../assets/images/Sky.svg";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 
-export const koreanConsonantCards: FlashCardType[] = [
+export const consonantCards: FlashCardType[] = [
     { letter: "ㄱ", word: "고양이", letterPronunciation: "giyeok", pronunciation: "go-yang-i", image: Cat, translation: "Cat" },
     { letter: "ㄴ", word: "나비", letterPronunciation: "nieun", pronunciation: "na-bi", image: Butterfly, translation: "Butterfly" },
     { letter: "ㄷ", word: "달", letterPronunciation: "digeut", pronunciation: "dal", image: Moon, translation: "Moon" },

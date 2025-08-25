@@ -35,7 +35,7 @@ import cheetah from "../assets/images/Cheetah.svg";
 import { FlashCardType } from "../containers/flashCardTypes";
 
 // 🧠 Flashcard Array
-export const persianCards: FlashCardType[] = [
+export const consonantCards: FlashCardType[] = [
     { letter: 'ا', letterPronunciation: 'â', pronunciation: 'Ab', word: 'آب', translation: 'Water', image: water },
     { letter: 'ب', letterPronunciation: 'be', pronunciation: 'Baba', word: 'بابا', translation: 'Father', image: father },
     { letter: 'پ', letterPronunciation: 'pe', pronunciation: 'Parande', word: 'پرنده', translation: 'Bird', image: bird },
