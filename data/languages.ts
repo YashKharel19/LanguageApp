@@ -170,7 +170,7 @@ export const languagesByCountry: Record<string, string[]> = {
         "Kashmiri"
     ],
     iq: ["Arabic", "Kurdish"],
-    ir: ["Persian (Farsi)"],
+    ir: ["Persian"],
     is: ["Icelandic"],
     it: ["Italian"],
     jm: ["English"],

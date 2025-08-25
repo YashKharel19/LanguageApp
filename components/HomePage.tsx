@@ -29,10 +29,10 @@ interface Country {
     emoji?: string;
 }
 
-const supportedCountries = ['np', 'in', 'es', 'ph', 'cn'];
+const supportedCountries = ['np', 'in', 'es', 'ph', 'cn', 'fr', 'bf', 'pt', 'st', 'pt', 'ir', 'kr'];
 const supportedLanguages = [
     'Nepali', 'Tamang', 'Limbu', 'Gujrati', 'Punjabi', 'Hindi',
-    'Kannada', 'Spanish', 'Filipino', 'Tibetan'
+    'Kannada', 'Spanish', 'Filipino', 'Tibetan', 'Portuguese', 'French', 'Persian', 'Korean'
 ];
 const supportedLanguagesSet = new Set(supportedLanguages);
 
@@ -231,7 +231,7 @@ export default function HomePage() {
                     <View className="mx-6 items-center">
                         <GradientText text="Start" colors={['#0000FF', '#00FF00']} />
                         <GradientText text="Learning" colors={['#FFA500', '#FF0000']} />
-                        <GradientText text="in Your" colors={['#00BFFF', '#1E90FF']} />
+                        <GradientText text="in Your" colors={['#FF0000', '#FFA500']} />
                         <GradientText text="Language" colors={['#FF0000', '#FF4D4D']} />
                     </View>
 
