@@ -28,13 +28,46 @@ interface Country {
     emoji?: string;
 }
 
-const supportedCountries = ['np', 'in', 'es', 'ph', 'cn', 'fr', 'bf', 'pt', 'st', 'pt', 'ir', 'kr', 'ao', 'as', 'cv', 'gq', 'gw', 'mz', 'tl'];
+const supportedCountries = [
+    'np',
+    'in',
+    'es',
+    'ph',
+    'cn',
+    'fr',
+    'bf',
+    'pt',
+    'st',
+    'pt',
+    'ir',
+    'kr',
+    'ao',
+    'as',
+    'cv',
+    'gq',
+    'gw',
+    'mz',
+    'tl',
+];
 const supportedLanguages = [
-    'Nepali', 'Tamang', 'Limbu', 'Gujrati', 'Punjabi', 'Hindi', 'Kannada', 'Spanish', 'Filipino', 'Tibetan', 'Portuguese', 'French', 'Persian', 'Korean'
+    'Nepali',
+    'Tamang',
+    'Limbu',
+    'Gujrati',
+    'Punjabi',
+    'Hindi',
+    'Kannada',
+    'Spanish',
+    'Filipino',
+    'Tibetan',
+    'Portuguese',
+    'French',
+    'Persian',
+    'Korean',
 ];
 const supportedLanguagesSet = new Set(supportedLanguages);
 
-const screenWidth = Dimensions.get('window').width;
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 export default function HomePage() {
     const router = useRouter();
@@ -101,18 +134,34 @@ export default function HomePage() {
         setLanguageOptions([]);
     };
 
+    // Responsive gradient text
     const GradientText = ({ text, colors }: { text: string; colors: [string, string] }) => (
         <MaskedView
             maskElement={
-                <View className="items-center">
-                    <Text className="text-3xl font-extrabold tracking-widest text-center">
+                <View style={{ alignItems: 'center' }}>
+                    <Text
+                        style={{
+                            fontSize: screenWidth * 0.08,
+                            fontWeight: '800',
+                            letterSpacing: 2,
+                            textAlign: 'center',
+                        }}
+                    >
                         {text}
                     </Text>
                 </View>
             }
         >
             <LinearGradient colors={colors} start={[0, 0]} end={[1, 1]}>
-                <Text className="opacity-0 text-3xl font-extrabold tracking-widest text-center">
+                <Text
+                    style={{
+                        fontSize: screenWidth * 0.08,
+                        fontWeight: '800',
+                        letterSpacing: 2,
+                        textAlign: 'center',
+                        opacity: 0,
+                    }}
+                >
                     {text}
                 </Text>
             </LinearGradient>
@@ -123,37 +172,41 @@ export default function HomePage() {
 
     const sortedCountries = [
         ...supportedCountries
-            .map(code => countries.find(c => c.code === code))
+            .map((code) => countries.find((c) => c.code === code))
             .filter(Boolean) as Country[],
         ...countries
-            .filter(c => !supportedCountries.includes(c.code))
+            .filter((c) => !supportedCountries.includes(c.code))
             .sort((a, b) => a.label.localeCompare(b.label)),
     ];
 
-    const filteredCountries = countrySearchText.trim() === ''
-        ? sortedCountries
-        : sortedCountries.filter((country) => {
-            const search = countrySearchText.trim().toLowerCase();
-            return (
-                country.label.toLowerCase().includes(search) ||
-                country.code.toLowerCase().includes(search)
-            );
-        });
+    const filteredCountries =
+        countrySearchText.trim() === ''
+            ? sortedCountries
+            : sortedCountries.filter((country) => {
+                const search = countrySearchText.trim().toLowerCase();
+                return (
+                    country.label.toLowerCase().includes(search) ||
+                    country.code.toLowerCase().includes(search)
+                );
+            });
 
     const filteredLanguages = [
-        ...languageOptions.filter(l => supportedLanguagesSet.has(l)),
-        ...languageOptions.filter(l => !supportedLanguagesSet.has(l)).sort((a, b) => a.localeCompare(b)),
+        ...languageOptions.filter((l) => supportedLanguagesSet.has(l)),
+        ...languageOptions
+            .filter((l) => !supportedLanguagesSet.has(l))
+            .sort((a, b) => a.localeCompare(b)),
     ].filter((lang) =>
         lang.toLowerCase().includes(languageSearchText.trim().toLowerCase())
     );
 
-    // Country item (same as your original)
+    // Country item
     const renderCountryItem = ({ item }: { item: Country }) => {
         const isSupported = supportedCountries.includes(item.code);
         return (
             <TouchableOpacity
                 onPress={() => handleCountrySelect(item.code)}
-                className={`w-[70px] h-[90px] m-2 rounded-2xl items-center justify-center shadow-md active:scale-95 ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'}`}
+                className={`w-[70px] h-[90px] m-2 rounded-2xl items-center justify-center shadow-md active:scale-95 ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'
+                    }`}
                 style={{
                     shadowColor: '#000',
                     shadowOffset: { width: 0, height: 2 },
@@ -170,11 +223,11 @@ export default function HomePage() {
         );
     };
 
-    // Language item (dynamic width, no right cropping)
+    // Language item
     const renderLanguageItem = ({ item, index }: { item: string; index: number }) => {
         const isSupported = supportedLanguagesSet.has(item);
         const numColumns = 3;
-        const containerWidth = screenWidth * 0.70;
+        const containerWidth = screenWidth * 0.7;
         const spacing = 8;
         const itemWidth = (containerWidth - spacing * (numColumns - 1)) / numColumns;
         const isLastInRow = (index + 1) % numColumns === 0;
@@ -182,7 +235,8 @@ export default function HomePage() {
         return (
             <TouchableOpacity
                 onPress={() => handleLanguageSelect(item)}
-                className={`rounded-2xl items-center justify-center ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'}`}
+                className={`rounded-2xl items-center justify-center ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'
+                    }`}
                 style={{
                     width: itemWidth,
                     minHeight: 60,
@@ -197,7 +251,7 @@ export default function HomePage() {
             >
                 <Text
                     className="text-center font-semibold text-gray-800"
-                    style={{ fontSize: 14, flexWrap: 'wrap' }}
+                    style={{ fontSize: screenWidth * 0.035, flexWrap: 'wrap' }}
                     numberOfLines={2}
                     adjustsFontSizeToFit
                 >
@@ -220,15 +274,20 @@ export default function HomePage() {
                     <View className="flex-col items-center">
                         {featuredCountries.slice(0, 3).map((countryCode, index) =>
                             countryCode === 'np' ? (
-                                <FlagOnPole key={`flag-left-${index}`} source={require('../assets/flag/nepal.png')} isImage side="left" />
+                                <FlagOnPole
+                                    key={`flag-left-${index}`}
+                                    source={require('../assets/flag/nepal.png')}
+                                    isImage
+                                    side="left"
+                                />
                             ) : (
                                 <FlagOnPole key={`flag-left-${index}`} isoCode={countryCode} side="left" />
                             )
                         )}
                     </View>
 
-                    <View className="mx-6 items-center">
-                        <GradientText text="Start" colors={['#0000FF', '#00FF00']} />
+                    <View className="mx-6 items-center" style={{ marginTop: -screenHeight * 0.08 }}>
+                        <GradientText text="Start" colors={['#FF0000', '#FFA500']} />
                         <GradientText text="Learning" colors={['#FFA500', '#FF0000']} />
                         <GradientText text="in Your" colors={['#FF0000', '#FFA500']} />
                         <GradientText text="Language" colors={['#FF0000', '#FF4D4D']} />
@@ -248,9 +307,7 @@ export default function HomePage() {
                             onPress={() => setShowCountryDropdown(true)}
                             className="bg-lang-orange px-6 py-3 rounded-[15px] shadow"
                         >
-                            <Text className="text-white text-2xl font-semibold">
-                                Select Your Country
-                            </Text>
+                            <Text className="text-white text-2xl font-semibold">Select Your Country</Text>
                         </TouchableOpacity>
                     </View>
                 )}
@@ -283,7 +340,10 @@ export default function HomePage() {
                                         renderItem={renderCountryItem}
                                         keyExtractor={(item: Country) => item.code}
                                         numColumns={3}
-                                        columnWrapperStyle={{ justifyContent: 'space-between', marginBottom: 8 }}
+                                        columnWrapperStyle={{
+                                            justifyContent: 'space-between',
+                                            marginBottom: 8,
+                                        }}
                                         contentContainerStyle={{ paddingHorizontal: 0 }}
                                         showsVerticalScrollIndicator
                                         keyboardShouldPersistTaps="handled"

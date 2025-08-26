@@ -266,7 +266,7 @@ export const languagesByCountry: Record<string, string[]> = {
     pa: ["Spanish"],
     pe: ["Spanish", "Quechua", "Aymara"],
     pg: ["English", "Tok Pisin", "Hiri Motu"],
-    ph: ["Filipino", "English"],
+    ph: ["Filipino"],
     pk: ["Urdu", "English"],
     pl: ["Polish"],
     pt: ["Portuguese"],
