@@ -25,6 +25,7 @@ export default function FlashcardsScreen() {
     const router = useRouter();
     const insets = useSafeAreaInsets();
     const languageStr = Array.isArray(language) ? language[0] : language;
+    const { width, height } = Dimensions.get('window');
 
     useEffect(() => {
         const loadCards = async () => {
@@ -140,6 +141,7 @@ export default function FlashcardsScreen() {
     }
 
     return (
+
         <SafeAreaView
             edges={['top', 'bottom']}
             className="flex-1 bg-white px-4"
@@ -149,7 +151,10 @@ export default function FlashcardsScreen() {
             }}
         >
             {/* 🔙 Top Nav Buttons */}
-            <View className="flex-row justify-between items-center pt-2 pb-1">
+            <View
+                className="flex-row justify-between items-center"
+                style={{ marginBottom: height * 0.04 }} // dynamic space below top nav
+            >
                 <TouchableOpacity
                     onPress={() => router.back()}
                     className="flex-row items-center bg-white px-3 py-1 rounded-full shadow"
@@ -168,7 +173,10 @@ export default function FlashcardsScreen() {
             </View>
 
             {/* 📖 Flashcard Area */}
-            <View className="flex-1 justify-center items-center">
+            <View
+                className="flex-1 justify-center items-center"
+                style={{ marginBottom: height * 0.05 }} // dynamic space above bottom buttons
+            >
                 <Animated.View style={cardStyle}>
                     <Flashcard
                         card={cards[index]}
@@ -185,14 +193,15 @@ export default function FlashcardsScreen() {
             </View>
 
             {/* 🔘 Action Buttons */}
-            <View className="pb-8">
+            <View>
                 {/* Flip Button */}
                 <TouchableOpacity
                     onPress={() => {
                         setShowAnswer(!showAnswer);
                         playSound(require('../assets/sounds/flip.mp3'));
                     }}
-                    className="bg-purple-700 py-3 rounded-xl mb-6 w-3/4 self-center"
+                    className="bg-purple-700 py-3 rounded-xl mb-4 w-3/4 self-center"
+                    style={{ marginBottom: height * 0.02 }}
                 >
                     <Text className="text-white text-lg text-center font-semibold">
                         {showAnswer ? 'Show Letter' : 'Show Example'}
@@ -200,7 +209,7 @@ export default function FlashcardsScreen() {
                 </TouchableOpacity>
 
                 {/* Navigation Buttons */}
-                <View className="flex-row self-center w-3/4">
+                <View className="flex-row self-center w-3/4" style={{ marginBottom: height * 0.02 }}>
                     <TouchableOpacity
                         onPress={previousCard}
                         className="flex-1 bg-purple-700 py-3 rounded-xl mr-3"
@@ -222,4 +231,6 @@ export default function FlashcardsScreen() {
             </View>
         </SafeAreaView>
     );
+
+
 }
