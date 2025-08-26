@@ -227,7 +227,7 @@ export default function HomePage() {
     const renderLanguageItem = ({ item, index }: { item: string; index: number }) => {
         const isSupported = supportedLanguagesSet.has(item);
         const numColumns = 3;
-        const containerWidth = screenWidth * 0.7;
+        const containerWidth = screenWidth * 0.65;
         const spacing = 8;
         const itemWidth = (containerWidth - spacing * (numColumns - 1)) / numColumns;
         const isLastInRow = (index + 1) % numColumns === 0;
