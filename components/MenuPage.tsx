@@ -10,6 +10,9 @@ export default function MenuPage() {
     const router = useRouter();
     const soundRef = useRef<Audio.Sound | null>(null);
 
+    const redOrangeColors = ['#fff'];
+    // Orange and Red
+
     const playBackgroundMusic = async () => {
         try {
             const { sound } = await Audio.Sound.createAsync(
@@ -52,20 +55,35 @@ export default function MenuPage() {
         } as const);
     };
 
+    const renderLine = (text: string) => (
+        <View style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {text.split('').map((char, index) => (
+                <Text
+                    key={index}
+                    style={{
+                        fontSize: 36,
+                        fontWeight: 'bold',
+                        fontFamily: 'Comic Sans MS',
+                        color: redOrangeColors[index % redOrangeColors.length],
+                    }}
+                >
+                    {char}
+                </Text>
+            ))}
+        </View>
+    );
+
     return (
         <ImageBackground
-            source={require('../assets/images/menufinal.png')}
+            source={require('../assets/images/menupage.png')}
             resizeMode="stretch"
             className="flex-1"
         >
             <SafeAreaView className="flex-1 justify-between px-4">
-                <View className="mt-12">
-                    <Text className="text-3xl font-extrabold text-center tracking-widest" style={{
-                        color: '#FF6B00', // Vibrant orange, eye-catching for kids
-                        fontFamily: 'Comic Sans MS', // Or any playful child-friendly font
-                    }}>
-                        Learn the {language} Alphabets
-                    </Text>
+                <View className="mt-14 space-y-2">
+                    {renderLine(`Learn`)}
+                    {renderLine(`${language}`)}
+                    {renderLine(`Alphabets`)}
                 </View>
 
                 <View className="mb-16 space-y-4 items-center gap-4">
@@ -75,7 +93,6 @@ export default function MenuPage() {
                     >
                         <Text className="text-white text-lg font-bold text-center">Flashcards</Text>
                     </TouchableOpacity>
-
                 </View>
             </SafeAreaView>
         </ImageBackground>

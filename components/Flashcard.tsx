@@ -226,7 +226,7 @@ export default function Flashcard({
                                 >
                                     <View className="w-full px-4 mt-6">
                                         <Text
-                                            style={{ fontSize: cardWidth * 0.2 }}
+                                            style={{ fontSize: cardWidth * 0.155 }}
                                             className="font-semibold text-center w-full"
                                         >
                                             {card.word}
