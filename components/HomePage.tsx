@@ -7,9 +7,8 @@ import {
     Modal,
     Pressable,
     Keyboard,
-    Image,
+    Dimensions,
 } from 'react-native';
-
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import MaskedView from '@react-native-masked-view/masked-view';
@@ -35,6 +34,8 @@ const supportedLanguages = [
 ];
 const supportedLanguagesSet = new Set(supportedLanguages);
 
+const screenWidth = Dimensions.get('window').width;
+
 export default function HomePage() {
     const router = useRouter();
     const soundRef = useRef<Audio.Sound | null>(null);
@@ -49,11 +50,7 @@ export default function HomePage() {
         try {
             const { sound } = await Audio.Sound.createAsync(
                 require('../assets/sounds/kidsmusic3.mp3'),
-                {
-                    shouldPlay: true,
-                    isLooping: true,
-                    volume: 0.7,
-                }
+                { shouldPlay: true, isLooping: true, volume: 0.7 }
             );
             soundRef.current = sound;
         } catch (error) {
@@ -77,9 +74,7 @@ export default function HomePage() {
             setLanguageOptions([]);
 
             playBackgroundMusic();
-            return () => {
-                stopBackgroundMusic();
-            };
+            return () => stopBackgroundMusic();
         }, [])
     );
 
@@ -147,13 +142,12 @@ export default function HomePage() {
 
     const filteredLanguages = [
         ...languageOptions.filter(l => supportedLanguagesSet.has(l)),
-        ...languageOptions
-            .filter(l => !supportedLanguagesSet.has(l))
-            .sort((a, b) => a.localeCompare(b)),
+        ...languageOptions.filter(l => !supportedLanguagesSet.has(l)).sort((a, b) => a.localeCompare(b)),
     ].filter((lang) =>
         lang.toLowerCase().includes(languageSearchText.trim().toLowerCase())
     );
 
+    // Country item (same as your original)
     const renderCountryItem = ({ item }: { item: Country }) => {
         const isSupported = supportedCountries.includes(item.code);
         return (
@@ -176,17 +170,24 @@ export default function HomePage() {
         );
     };
 
-    const renderLanguageItem = ({ item }: { item: string }) => {
+    // Language item (dynamic width, no right cropping)
+    const renderLanguageItem = ({ item, index }: { item: string; index: number }) => {
         const isSupported = supportedLanguagesSet.has(item);
+        const numColumns = 3;
+        const containerWidth = screenWidth * 0.8;
+        const spacing = 8;
+        const itemWidth = (containerWidth - spacing * (numColumns - 1)) / numColumns;
+        const isLastInRow = (index + 1) % numColumns === 0;
+
         return (
             <TouchableOpacity
                 onPress={() => handleLanguageSelect(item)}
-                className={`rounded-2xl m-2 items-center justify-center px-4 py-3 ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'}`}
+                className={`rounded-2xl items-center justify-center ${isSupported ? 'bg-[#FFA500]' : 'bg-gray-200'}`}
                 style={{
-                    minWidth: '28%',
-                    maxWidth: '32%',
-                    flexGrow: 1,
-                    flexShrink: 1,
+                    width: itemWidth,
+                    minHeight: 60,
+                    marginRight: isLastInRow ? 0 : spacing,
+                    marginBottom: spacing,
                     shadowColor: '#000',
                     shadowOffset: { width: 0, height: 2 },
                     shadowOpacity: 0.2,
@@ -214,8 +215,8 @@ export default function HomePage() {
             className="flex-1"
         >
             <SafeAreaView className="flex-1 justify-between">
+                {/* Header with flags and gradient text */}
                 <View className="mt-4 flex-row items-center justify-center px-4">
-                    {/* Left flags */}
                     <View className="flex-col items-center">
                         {featuredCountries.slice(0, 3).map((countryCode, index) =>
                             countryCode === 'np' ? (
@@ -226,7 +227,6 @@ export default function HomePage() {
                         )}
                     </View>
 
-                    {/* Center gradient text */}
                     <View className="mx-6 items-center">
                         <GradientText text="Start" colors={['#0000FF', '#00FF00']} />
                         <GradientText text="Learning" colors={['#FFA500', '#FF0000']} />
@@ -234,7 +234,6 @@ export default function HomePage() {
                         <GradientText text="Language" colors={['#FF0000', '#FF4D4D']} />
                     </View>
 
-                    {/* Right flags */}
                     <View className="flex-col items-center">
                         {featuredCountries.slice(3, 6).map((countryCode, index) => (
                             <FlagOnPole key={`flag-right-${index}`} isoCode={countryCode} side="right" />
@@ -242,6 +241,7 @@ export default function HomePage() {
                     </View>
                 </View>
 
+                {/* Country button */}
                 {!showCountryDropdown && (
                     <View className="items-center my-6">
                         <TouchableOpacity
@@ -255,10 +255,10 @@ export default function HomePage() {
                     </View>
                 )}
 
-                {/* Country Selection Modal */}
+                {/* Country modal */}
                 <Modal
                     visible={showCountryDropdown && !selectedCountry}
-                    transparent={true}
+                    transparent
                     animationType="fade"
                     onRequestClose={closeCountryDropdown}
                 >
@@ -283,10 +283,9 @@ export default function HomePage() {
                                         renderItem={renderCountryItem}
                                         keyExtractor={(item: Country) => item.code}
                                         numColumns={3}
-                                        contentContainerStyle={{ alignItems: 'center', paddingVertical: 8 }}
-                                        showsVerticalScrollIndicator={true}
-                                        initialNumToRender={12}
-                                        removeClippedSubviews={true}
+                                        columnWrapperStyle={{ justifyContent: 'space-between', marginBottom: 8 }}
+                                        contentContainerStyle={{ paddingHorizontal: 0 }}
+                                        showsVerticalScrollIndicator
                                         keyboardShouldPersistTaps="handled"
                                     />
                                 </View>
@@ -298,10 +297,10 @@ export default function HomePage() {
                     </Pressable>
                 </Modal>
 
-                {/* Language Selection Modal */}
+                {/* Language modal */}
                 <Modal
                     visible={selectedCountry !== null && !selectedLanguage}
-                    transparent={true}
+                    transparent
                     animationType="fade"
                     onRequestClose={closeLanguageSelection}
                 >
@@ -324,11 +323,11 @@ export default function HomePage() {
                                     <FlatList
                                         data={filteredLanguages}
                                         renderItem={renderLanguageItem}
-                                        keyExtractor={(item: string) => item}
+                                        keyExtractor={(item, index) => `${item}-${index}`}
                                         numColumns={3}
-                                        columnWrapperStyle={{ justifyContent: 'center' }}
-                                        contentContainerStyle={{ alignItems: 'center', paddingHorizontal: 8, paddingBottom: 12 }}
-                                        showsVerticalScrollIndicator={true}
+                                        columnWrapperStyle={{ justifyContent: 'flex-start' }}
+                                        contentContainerStyle={{ paddingHorizontal: 0 }}
+                                        showsVerticalScrollIndicator
                                         keyboardShouldPersistTaps="handled"
                                     />
                                 </View>
