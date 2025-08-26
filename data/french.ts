@@ -19,7 +19,7 @@ import Rose from "../assets/images/Rose.svg";
 import Sun from "../assets/images/Sun.svg";
 import Tiger from "../assets/images/Tiger.svg";
 import Uniform from "../assets/images/Uniform.svg";
-import Car from "../assets/images/nepali/Car.svg";
+import Car from "../assets/images/Car.svg";
 import Wagon from "../assets/images/Wagon.svg";
 import Xylophone from "../assets/images/Xylophone.svg";
 import Yogurt from "../assets/images/Yogurt.svg";

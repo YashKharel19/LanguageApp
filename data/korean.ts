@@ -2,7 +2,7 @@ import Cat from "../assets/images/Cat.svg";
 import Butterfly from "../assets/images/Butterfly.svg";
 import Moon from "../assets/images/Moon.svg";
 import Radio from "../assets/images/Radio.svg";
-import Water from "../assets/images/Water.svg";
+import Water from "../assets/images/water.svg";
 import Banana from "../assets/images/Banana.svg";
 import Apple from "../assets/images/Apple.svg";
 import Child from "../assets/images/nepali/Bachha.svg";

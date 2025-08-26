@@ -65,7 +65,7 @@ export default function FlashcardsScreen() {
                         cardModule = await import('../data/korean.ts');
                         break;
                     case 'Portuguese':
-                        cardModule = await import('../data/portugese.ts');
+                        cardModule = await import('../data/portuguese.ts');
                         break;
                     case 'French':
                         cardModule = await import('../data/french.ts');

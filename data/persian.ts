@@ -1,30 +1,30 @@
 // 📦 Image Imports (renamed to English translations)
-import water from "../assets/images/Water.svg";
+import water from "../assets/images/water.svg";
 import father from "../assets/images/Father.svg";
-import bird from "../assets/images/Bird.svg";
+import bird from "../assets/images/nepali/Cara.svg";
 import ball from "../assets/images/Ball.svg";
-import wealth from "../assets/images/Wealth.svg";
+import wealth from "../assets/images/Money.svg";
 import forest from "../assets/images/Forest.svg";
 import tea from "../assets/images/Tea.svg";
 import pond from "../assets/images/Pond.svg";
-import house from "../assets/images/House.svg";
+import house from "../assets/images/nepali/Ghara.svg";
 import hand from "../assets/images/Hand.svg";
 import corn from "../assets/images/Corn.svg";
 import friend from "../assets/images/Friend.svg";
-import giraffe from "../assets/images/Giraffe.svg";
+import giraffe from "../assets/images/Girrafe.svg";
 import jacket from "../assets/images/Jacket.svg";
 import apple from "../assets/images/Apple.svg";
 import lion from "../assets/images/Lion.svg";
 import box from "../assets/images/kannada/Dabbi.svg";
 import weak from "../assets/images/Weak.svg";
-import rope from "../assets/images/Rope.svg";
+import rope from "../assets/images/Knot.svg";
 import plate from "../assets/images/Plate.svg";
 import honey from "../assets/images/Honey.svg";
 import food from "../assets/images/kannada/Oota.svg";
 import elephant from "../assets/images/Elephant.svg";
 import heart from "../assets/images/Heart.svg";
 import book from "../assets/images/nepali/Gyan.svg";
-import flower from "../assets/images/Flower.svg";
+import flower from "../assets/images/nepali/Fhul.svg";
 import lip from "../assets/images/Lip.svg";
 import mother from "../assets/images/Mother.svg";
 import bread from "../assets/images/Bread.svg";
@@ -36,7 +36,7 @@ import { FlashCardType } from "../containers/flashCardTypes";
 
 // 🧠 Flashcard Array
 export const consonantCards: FlashCardType[] = [
-    { letter: 'ا', letterPronunciation: 'â', pronunciation: 'Ab', word: 'آب', translation: 'Water', image: water },
+    { letter: 'ا', letterPronunciation: 'aa', pronunciation: 'Ab', word: 'آب', translation: 'Water', image: water },
     { letter: 'ب', letterPronunciation: 'be', pronunciation: 'Baba', word: 'بابا', translation: 'Father', image: father },
     { letter: 'پ', letterPronunciation: 'pe', pronunciation: 'Parande', word: 'پرنده', translation: 'Bird', image: bird },
     { letter: 'ت', letterPronunciation: 'te', pronunciation: 'Tup', word: 'توپ', translation: 'Ball', image: ball },
