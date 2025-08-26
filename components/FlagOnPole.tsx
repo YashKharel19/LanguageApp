@@ -11,9 +11,9 @@ interface FlagOnPoleProps {
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-// Scale values
-const poleWidth = screenWidth * 0.12;
-const poleHeight = screenHeight * 0.005;
+// Scale values (✅ pole length increased to reach wall)
+const poleWidth = screenWidth * 0.25;  // was 0.12 → now longer
+const poleHeight = screenHeight * 0.0035;
 const flagWidth = screenWidth * 0.16;
 const flagHeight = flagWidth * 0.67;
 
@@ -31,12 +31,11 @@ export default function FlagOnPole({
                 {/* Pole */}
                 <View style={styles.pole} />
 
-                {/* Gap */}
+                {/* Gap between pole and flag */}
                 <View style={{ width: screenWidth * 0.02 }} />
 
                 {/* Flag */}
                 {isImage ? (
-                    // Nepal custom flag
                     <Image
                         source={source}
                         style={[styles.nepalFlag, isLeft ? styles.nepalLeft : styles.nepalRight]}
@@ -75,11 +74,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
     },
 
-    // Pole
+    // Pole (longer now so it touches wall)
     pole: {
         width: poleWidth,
         height: poleHeight,
-        backgroundColor: '#8B4513',
+        backgroundColor: '#C0C0C0',
         borderRadius: 2,
         shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
