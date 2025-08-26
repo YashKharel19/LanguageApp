@@ -10,7 +10,7 @@ export default function MenuPage() {
     const router = useRouter();
     const soundRef = useRef<Audio.Sound | null>(null);
 
-    const redOrangeColors = ['#FF6B00', '#FF3D00', '#116400ff', '#190dfbff'];
+    const redOrangeColors = ['#fff'];
     // Orange and Red
 
     const playBackgroundMusic = async () => {
