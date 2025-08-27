@@ -60,6 +60,10 @@ export default function Flashcard({
         Spanish: 'es-ES',
         Filipino: 'fil-PH',
         Tibetan: 'bo-CN',
+        French: 'fr-FR',
+        Portuguese: 'pt-PT',
+        Korean: 'kr-KR',
+        Persian: 'ir-IR'
     };
 
     const speak = (text: string) => {

@@ -18,7 +18,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
 
         const timer = setTimeout(() => {
             setShowButton(true);
-        }, 4000);
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, []);

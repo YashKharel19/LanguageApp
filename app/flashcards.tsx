@@ -74,7 +74,9 @@ export default function FlashcardsScreen() {
                     case 'Persian':
                         cardModule = await import('../data/persian.ts');
                         break;
-
+                    case 'English':
+                        cardModule = await import('../data/english.ts');
+                        break;
                     default:
                         router.replace('/comingsoon');
                         return;
