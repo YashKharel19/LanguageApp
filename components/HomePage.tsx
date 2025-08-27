@@ -33,6 +33,8 @@ const supportedCountries = [
     'in',
     'es',
     'ph',
+    'ca',
+    'us',
     'cn',
     'fr',
     'bf',
@@ -64,6 +66,7 @@ const supportedLanguages = [
     'French',
     'Persian',
     'Korean',
+    'English'
 ];
 const supportedLanguagesSet = new Set(supportedLanguages);
 
