@@ -38,7 +38,6 @@ const supportedCountries = [
     'cn',
     'fr',
     'bf',
-    'pt',
     'st',
     'pt',
     'ir',
