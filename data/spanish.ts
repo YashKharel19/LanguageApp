@@ -27,6 +27,17 @@ import xylophone from "../assets/images/Xylophone.svg";
 import yatch from "../assets/images/Ferry.svg";
 import shoes from "../assets/images/Shoes.svg";
 
+import Zero from "../assets/images/What.svg"
+import One from "../assets/images/numbers/1.svg";
+import Two from "../assets/images/numbers/2.svg";
+import Three from "../assets/images/numbers/3.svg";
+import Four from "../assets/images/numbers/4.svg";
+import Five from "../assets/images/numbers/5.svg";
+import Six from "../assets/images/numbers/6.svg";
+import Seven from "../assets/images/numbers/7.svg";
+import Eight from "../assets/images/numbers/8.svg";
+import Nine from "../assets/images/numbers/9.svg";
+
 import { FlashCardType } from "../containers/flashCardTypes";
 
 // 🧠 Flashcard Array
@@ -60,3 +71,15 @@ export const consonantCards: FlashCardType[] = [
     { letter: 'Z', pronunciation: 'sah-PAH-toh', letterPronunciation: 'zeta', word: 'Zapato', translation: 'Shoes', image: shoes },
 ];
 
+export const numberCards: FlashCardType[] = [
+    { letter: "0", word: "cero", letterPronunciation: "SEH-ro", pronunciation: "SEH-ro", image: Zero, translation: "Zero" },
+    { letter: "1", word: "uno", letterPronunciation: "OO-no", pronunciation: "OO-no", image: One, translation: "One" },
+    { letter: "2", word: "dos", letterPronunciation: "dos", pronunciation: "dos", image: Two, translation: "Two" },
+    { letter: "3", word: "tres", letterPronunciation: "tres", pronunciation: "tres", image: Three, translation: "Three" },
+    { letter: "4", word: "cuatro", letterPronunciation: "KWA-tro", pronunciation: "KWA-tro", image: Four, translation: "Four" },
+    { letter: "5", word: "cinco", letterPronunciation: "SEEN-ko", pronunciation: "SEEN-ko", image: Five, translation: "Five" },
+    { letter: "6", word: "seis", letterPronunciation: "says", pronunciation: "says", image: Six, translation: "Six" },
+    { letter: "7", word: "siete", letterPronunciation: "SYE-te", pronunciation: "SYE-te", image: Seven, translation: "Seven" },
+    { letter: "8", word: "ocho", letterPronunciation: "OH-cho", pronunciation: "OH-cho", image: Eight, translation: "Eight" },
+    { letter: "9", word: "nueve", letterPronunciation: "NWE-ve", pronunciation: "NWE-ve", image: Nine, translation: "Nine" },
+];

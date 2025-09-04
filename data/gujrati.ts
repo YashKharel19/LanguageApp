@@ -47,6 +47,17 @@ import Damage from "../assets/images/Damage.svg";
 import Elephant from "../assets/images/Elephant.svg";
 import Wise from "../assets/images/Wise.svg";
 
+import Zero from "../assets/images/What.svg"
+import One from "../assets/images/numbers/1.svg";
+import Two from "../assets/images/numbers/2.svg";
+import Three from "../assets/images/numbers/3.svg";
+import Four from "../assets/images/numbers/4.svg";
+import Five from "../assets/images/numbers/5.svg";
+import Six from "../assets/images/numbers/6.svg";
+import Seven from "../assets/images/numbers/7.svg";
+import Eight from "../assets/images/numbers/8.svg";
+import Nine from "../assets/images/numbers/9.svg";
+
 import { FlashCardType } from "../containers/flashCardTypes";
 
 export const consonantCards: FlashCardType[] = [
@@ -99,4 +110,17 @@ export const consonantCards: FlashCardType[] = [
     { letter: "ળ", letterPronunciation: "la", word: "ળણ", pronunciation: "", image: What, translation: "" },
     { letter: "ક્ષ", letterPronunciation: "Ksha", word: "ક્ષતિ", pronunciation: "Kshati", image: Damage, translation: "Damage" },
     { letter: "જ્ઞ", letterPronunciation: "gya", word: "જ્ઞાની", pronunciation: "Gyaani", image: Wise, translation: "Wise person" },
+];
+
+export const numberCards: FlashCardType[] = [
+    { letter: "૦", word: "શૂન્ય", letterPronunciation: "shoon-ya", pronunciation: "shoon-ya", image: Zero, translation: "Zero" },
+    { letter: "૧", word: "એક", letterPronunciation: "ek", pronunciation: "ek", image: One, translation: "One" },
+    { letter: "૨", word: "બે", letterPronunciation: "beh", pronunciation: "beh", image: Two, translation: "Two" },
+    { letter: "૩", word: "ત્રણ", letterPronunciation: "tran", pronunciation: "tran", image: Three, translation: "Three" },
+    { letter: "૪", word: "ચાર", letterPronunciation: "chaar", pronunciation: "chaar", image: Four, translation: "Four" },
+    { letter: "૫", word: "પાંચ", letterPronunciation: "paanch", pronunciation: "paanch", image: Five, translation: "Five" },
+    { letter: "૬", word: "છ", letterPronunciation: "chhah", pronunciation: "chhah", image: Six, translation: "Six" },
+    { letter: "૭", word: "સાત", letterPronunciation: "saat", pronunciation: "saat", image: Seven, translation: "Seven" },
+    { letter: "૮", word: "આઠ", letterPronunciation: "aath", pronunciation: "aath", image: Eight, translation: "Eight" },
+    { letter: "૯", word: "નવ", letterPronunciation: "nav", pronunciation: "nav", image: Nine, translation: "Nine" },
 ];

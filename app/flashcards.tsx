@@ -91,8 +91,7 @@ export default function FlashcardsScreen() {
                 } else if (categoryStr === 'alphabets' && cardModule.consonantCards) {
                     setCards(cardModule.consonantCards);
                 } else {
-                    console.warn(`No dataset found for ${languageStr} - ${categoryStr}`);
-                    setCards([]);
+                    router.replace('/comingsoon');
                 }
             } catch (error) {
                 console.error('Error loading language cards:', error);

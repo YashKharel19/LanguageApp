@@ -25,6 +25,17 @@ import Xylophone from "../assets/images/Xylophone.svg";
 import Yogurt from "../assets/images/Yogurt.svg";
 import Zebra from "../assets/images/Zebra.svg";
 
+import Zero from "../assets/images/What.svg"
+import One from "../assets/images/numbers/1.svg";
+import Two from "../assets/images/numbers/2.svg";
+import Three from "../assets/images/numbers/3.svg";
+import FourNumber from "../assets/images/numbers/4.svg";
+import Five from "../assets/images/numbers/5.svg";
+import Six from "../assets/images/numbers/6.svg";
+import Seven from "../assets/images/numbers/7.svg";
+import Eight from "../assets/images/numbers/8.svg";
+import Nine from "../assets/images/numbers/9.svg";
+
 import { FlashCardType } from "../containers/flashCardTypes";
 
 export const consonantCards: FlashCardType[] = [
@@ -54,4 +65,18 @@ export const consonantCards: FlashCardType[] = [
     { letter: "X", word: "Xylophone", letterPronunciation: "iks", pronunciation: "gzee-loh-fohn", image: Xylophone, translation: "Xylophone" },
     { letter: "Y", word: "Yaourt", letterPronunciation: "i grec", pronunciation: "yah-oor", image: Yogurt, translation: "Yogurt" },
     { letter: "Z", word: "Zèbre", letterPronunciation: "zed", pronunciation: "zeh-bruh", image: Zebra, translation: "Zebra" }
+];
+
+
+export const numberCards: FlashCardType[] = [
+    { letter: "0", word: "zéro", letterPronunciation: "zeh-ro", pronunciation: "ZEH-ro", image: Zero, translation: "Zero" },
+    { letter: "1", word: "un", letterPronunciation: "uh(n)", pronunciation: "UH(n)", image: One, translation: "One" },
+    { letter: "2", word: "deux", letterPronunciation: "duh", pronunciation: "DUH", image: Two, translation: "Two" },
+    { letter: "3", word: "trois", letterPronunciation: "trwah", pronunciation: "TRWAH", image: Three, translation: "Three" },
+    { letter: "4", word: "quatre", letterPronunciation: "katr", pronunciation: "KATR", image: FourNumber, translation: "Four" },
+    { letter: "5", word: "cinq", letterPronunciation: "sank", pronunciation: "SANK", image: Five, translation: "Five" },
+    { letter: "6", word: "six", letterPronunciation: "sees", pronunciation: "SEES", image: Six, translation: "Six" },
+    { letter: "7", word: "sept", letterPronunciation: "set", pronunciation: "SET", image: Seven, translation: "Seven" },
+    { letter: "8", word: "huit", letterPronunciation: "weet", pronunciation: "WEET", image: Eight, translation: "Eight" },
+    { letter: "9", word: "neuf", letterPronunciation: "nuhf", pronunciation: "NUHF", image: Nine, translation: "Nine" },
 ];
