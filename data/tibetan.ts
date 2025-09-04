@@ -31,6 +31,18 @@ import earth from "../assets/images/Earth.svg";
 import himalaya from "../assets/images/Mountain.svg";
 import mango from "../assets/images/Mango.svg";
 
+
+import Zero from "../assets/images/What.svg"
+import One from "../assets/images/numbers/1.svg";
+import Two from "../assets/images/numbers/2.svg";
+import Three from "../assets/images/numbers/3.svg";
+import Four from "../assets/images/numbers/4.svg";
+import Five from "../assets/images/numbers/5.svg";
+import Six from "../assets/images/numbers/6.svg";
+import Seven from "../assets/images/numbers/7.svg";
+import Eight from "../assets/images/numbers/8.svg";
+import Nine from "../assets/images/numbers/9.svg";
+
 import { FlashCardType } from "../containers/flashCardTypes";
 // Data export
 
@@ -67,3 +79,15 @@ export const consonantCards: FlashCardType[] = [
     { letter: "ཨ", pronunciation: "a ma", letterPronunciation: "a", word: "ཨ་མ", image: mango, translation: "mango" }
 ];
 
+export const numberCards: FlashCardType[] = [
+    { letter: "༠", word: "ཀྲུང་ཀྲུང", letterPronunciation: "tson", pronunciation: "TSON", image: Zero, translation: "Zero" },
+    { letter: "༡", word: "གཅིག", letterPronunciation: "chik", pronunciation: "CHIK", image: One, translation: "One" },
+    { letter: "༢", word: "གཉིས", letterPronunciation: "nyi", pronunciation: "NYI", image: Two, translation: "Two" },
+    { letter: "༣", word: "གསུམ", letterPronunciation: "sum", pronunciation: "SUM", image: Three, translation: "Three" },
+    { letter: "༤", word: "བཞི", letterPronunciation: "shi", pronunciation: "SHI", image: Four, translation: "Four" },
+    { letter: "༥", word: "ལྔ", letterPronunciation: "nga", pronunciation: "NGA", image: Five, translation: "Five" },
+    { letter: "༦", word: "དྲུག", letterPronunciation: "druk", pronunciation: "DRUK", image: Six, translation: "Six" },
+    { letter: "༧", word: "བདུན", letterPronunciation: "dun", pronunciation: "DUN", image: Seven, translation: "Seven" },
+    { letter: "༨", word: "བརྒྱད", letterPronunciation: "gyad", pronunciation: "GYAD", image: Eight, translation: "Eight" },
+    { letter: "༩", word: "དགུ", letterPronunciation: "gu", pronunciation: "GU", image: Nine, translation: "Nine" },
+];

@@ -24,6 +24,17 @@ import nameImg from "../assets/images/name.svg";
 import bonemarrow from "../assets/images/Bonemarrow.svg";
 import Paalo from "../assets/images/Paalo.svg";
 
+import Zero from "../assets/images/What.svg"
+import One from "../assets/images/numbers/1.svg";
+import Two from "../assets/images/numbers/2.svg";
+import Three from "../assets/images/numbers/3.svg";
+import Four from "../assets/images/numbers/4.svg";
+import Five from "../assets/images/numbers/5.svg";
+import Six from "../assets/images/numbers/6.svg";
+import Seven from "../assets/images/numbers/7.svg";
+import Eight from "../assets/images/numbers/8.svg";
+import Nine from "../assets/images/numbers/9.svg";
+
 import { FlashCardType } from "../containers/flashCardTypes";
 
 // Data export

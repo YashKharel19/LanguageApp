@@ -32,6 +32,17 @@ import exercise from "../assets/images/Exercise.svg";
 import gift from "../assets/images/Gift.svg";
 import cheetah from "../assets/images/Cheetah.svg";
 
+import Zero from "../assets/images/What.svg"
+import One from "../assets/images/numbers/1.svg";
+import Two from "../assets/images/numbers/2.svg";
+import Three from "../assets/images/numbers/3.svg";
+import Four from "../assets/images/numbers/4.svg";
+import Five from "../assets/images/numbers/5.svg";
+import Six from "../assets/images/numbers/6.svg";
+import Seven from "../assets/images/numbers/7.svg";
+import Eight from "../assets/images/numbers/8.svg";
+import Nine from "../assets/images/numbers/9.svg";
+
 import { FlashCardType } from "../containers/flashCardTypes";
 
 // 🧠 Flashcard Array
@@ -68,4 +79,18 @@ export const consonantCards: FlashCardType[] = [
     { letter: 'و', letterPronunciation: 'vâv', pronunciation: 'Varzesh', word: 'ورزش', translation: 'Exercise', image: exercise },
     { letter: 'ه', letterPronunciation: 'he', pronunciation: 'Hedye', word: 'هدیه', translation: 'Gift', image: gift },
     { letter: 'ی', letterPronunciation: 'ye', pronunciation: 'Yuzpalang', word: 'یوزپلنگ', translation: 'Cheetah', image: cheetah },
+];
+
+
+export const numberCards: FlashCardType[] = [
+    { letter: "۰", word: "صفر", letterPronunciation: "sefr", pronunciation: "SEFR", image: Zero, translation: "Zero" },
+    { letter: "۱", word: "یک", letterPronunciation: "yek", pronunciation: "YEK", image: One, translation: "One" },
+    { letter: "۲", word: "دو", letterPronunciation: "do", pronunciation: "DO", image: Two, translation: "Two" },
+    { letter: "۳", word: "سه", letterPronunciation: "seh", pronunciation: "SEH", image: Three, translation: "Three" },
+    { letter: "۴", word: "چهار", letterPronunciation: "chahar", pronunciation: "CHA-har", image: Four, translation: "Four" },
+    { letter: "۵", word: "پنج", letterPronunciation: "panj", pronunciation: "PANJ", image: Five, translation: "Five" },
+    { letter: "۶", word: "شش", letterPronunciation: "shesh", pronunciation: "SHESH", image: Six, translation: "Six" },
+    { letter: "۷", word: "هفت", letterPronunciation: "haft", pronunciation: "HAFT", image: Seven, translation: "Seven" },
+    { letter: "۸", word: "هشت", letterPronunciation: "hasht", pronunciation: "HASHT", image: Eight, translation: "Eight" },
+    { letter: "۹", word: "نه", letterPronunciation: "noh", pronunciation: "NOH", image: Nine, translation: "Nine" },
 ];

@@ -26,6 +26,17 @@ import XRay from "../assets/images/Xray.svg";
 import Yelo from "../assets/images/Ice.svg";
 import Zebra from "../assets/images/Zebra.svg";
 
+import Zero from "../assets/images/What.svg"
+import One from "../assets/images/numbers/1.svg";
+import Two from "../assets/images/numbers/2.svg";
+import Three from "../assets/images/numbers/3.svg";
+import Four from "../assets/images/numbers/4.svg";
+import Five from "../assets/images/numbers/5.svg";
+import Six from "../assets/images/numbers/6.svg";
+import Seven from "../assets/images/numbers/7.svg";
+import Eight from "../assets/images/numbers/8.svg";
+import Nine from "../assets/images/numbers/9.svg";
+
 import { FlashCardType } from "../containers/flashCardTypes";
 
 export const consonantCards: FlashCardType[] = [
@@ -58,3 +69,15 @@ export const consonantCards: FlashCardType[] = [
     { letter: 'Z', letterPronunciation: 'z', pronunciation: 'ZEE-brah', word: 'Zebra', translation: 'Zebra', image: Zebra },
 ];
 
+export const numberCards: FlashCardType[] = [
+    { letter: "0", word: "sero", letterPronunciation: "seh-ro", pronunciation: "SEH-ro", image: Zero, translation: "Zero" },
+    { letter: "1", word: "isa", letterPronunciation: "ee-sa", pronunciation: "EE-sa", image: One, translation: "One" },
+    { letter: "2", word: "dalawa", letterPronunciation: "da-la-wa", pronunciation: "DA-la-wa", image: Two, translation: "Two" },
+    { letter: "3", word: "tatlo", letterPronunciation: "tat-lo", pronunciation: "TAT-lo", image: Three, translation: "Three" },
+    { letter: "4", word: "apat", letterPronunciation: "a-pat", pronunciation: "A-pat", image: Four, translation: "Four" },
+    { letter: "5", word: "lima", letterPronunciation: "lee-ma", pronunciation: "LEE-ma", image: Five, translation: "Five" },
+    { letter: "6", word: "anim", letterPronunciation: "a-neem", pronunciation: "A-neem", image: Six, translation: "Six" },
+    { letter: "7", word: "pito", letterPronunciation: "pee-to", pronunciation: "PEE-to", image: Seven, translation: "Seven" },
+    { letter: "8", word: "walo", letterPronunciation: "wa-lo", pronunciation: "WA-lo", image: Eight, translation: "Eight" },
+    { letter: "9", word: "siyam", letterPronunciation: "see-yam", pronunciation: "SEE-yam", image: Nine, translation: "Nine" },
+];

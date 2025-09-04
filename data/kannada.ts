@@ -45,6 +45,18 @@ import Shine from "../assets/images/Shine.svg";
 import Drum from "../assets/images/Drum.svg";
 import Housefly from "../assets/images/Housefly.svg";
 
+
+import Zero from "../assets/images/What.svg"
+import One from "../assets/images/numbers/1.svg";
+import Two from "../assets/images/numbers/2.svg";
+import Three from "../assets/images/numbers/3.svg";
+import Four from "../assets/images/numbers/4.svg";
+import Five from "../assets/images/numbers/5.svg";
+import Six from "../assets/images/numbers/6.svg";
+import Seven from "../assets/images/numbers/7.svg";
+import Eight from "../assets/images/numbers/8.svg";
+import Nine from "../assets/images/numbers/9.svg";
+
 import { FlashCardType } from "../containers/flashCardTypes";
 
 export const consonantCards: FlashCardType[] = [
@@ -95,4 +107,17 @@ export const consonantCards: FlashCardType[] = [
     { letter: "ಷ", letterPronunciation: "Ṣa", word: "ಷಟ್ಕೋನ", pronunciation: "Shatkona", image: Hexagon, translation: "Hexagon" },
     { letter: "ಸ", letterPronunciation: "Sa", word: "ಸರ", pronunciation: "Sara", image: Sara, translation: "Necklace" },
     { letter: "ಹ", letterPronunciation: "Ha", word: "ಹಡಗು", pronunciation: "Hadagu", image: Ship, translation: "Ship" },
+];
+
+export const numberCards: FlashCardType[] = [
+    { letter: "೦", word: "ಸೊನ್ನೆ", letterPronunciation: "son-ne", pronunciation: "SON-ne", image: Zero, translation: "Zero" },
+    { letter: "೧", word: "ಒಂದು", letterPronunciation: "on-du", pronunciation: "ON-du", image: One, translation: "One" },
+    { letter: "೨", word: "ಎರಡು", letterPronunciation: "e-ra-du", pronunciation: "E-ra-du", image: Two, translation: "Two" },
+    { letter: "೩", word: "ಮೂರು", letterPronunciation: "moo-roo", pronunciation: "MOO-roo", image: Three, translation: "Three" },
+    { letter: "೪", word: "ನಾಲ್ಕು", letterPronunciation: "naal-ku", pronunciation: "NAAL-ku", image: Four, translation: "Four" },
+    { letter: "೫", word: "ಐದು", letterPronunciation: "ai-du", pronunciation: "AI-du", image: Five, translation: "Five" },
+    { letter: "೬", word: "ಆರು", letterPronunciation: "aa-ru", pronunciation: "AA-ru", image: Six, translation: "Six" },
+    { letter: "೭", word: "ಏಳು", letterPronunciation: "e-lu", pronunciation: "E-lu", image: Seven, translation: "Seven" },
+    { letter: "೮", word: "ಎಂಟು", letterPronunciation: "en-tu", pronunciation: "EN-tu", image: Eight, translation: "Eight" },
+    { letter: "೯", word: "ಒಂಬತ್ತು", letterPronunciation: "om-bat-tu", pronunciation: "OM-bat-tu", image: Nine, translation: "Nine" },
 ];
