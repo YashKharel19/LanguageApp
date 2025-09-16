@@ -36,49 +36,49 @@ export default function FlashcardsScreen() {
                 // 🔹 Load correct language dataset
                 switch (languageStr) {
                     case 'Nepali':
-                        cardModule = await import('../data/nepali.ts');
+                        cardModule = await import('../data/nepali');
                         break;
                     case 'Limbu':
-                        cardModule = await import('../data/limbu.ts');
+                        cardModule = await import('../data/limbu');
                         break;
                     case 'Tamang':
-                        cardModule = await import('../data/tamang.ts');
+                        cardModule = await import('../data/tamang');
                         break;
                     case 'Kannada':
-                        cardModule = await import('../data/kannada.ts');
+                        cardModule = await import('../data/kannada');
                         break;
                     case 'Punjabi':
-                        cardModule = await import('../data/punjabi.ts');
+                        cardModule = await import('../data/punjabi');
                         break;
                     case 'Gujrati':
-                        cardModule = await import('../data/gujrati.ts');
+                        cardModule = await import('../data/gujrati');
                         break;
                     case 'Hindi':
-                        cardModule = await import('../data/hindi.ts');
+                        cardModule = await import('../data/hindi');
                         break;
                     case 'Spanish':
-                        cardModule = await import('../data/spanish.ts');
+                        cardModule = await import('../data/spanish');
                         break;
                     case 'Filipino':
-                        cardModule = await import('../data/filipino.ts');
+                        cardModule = await import('../data/filipino');
                         break;
                     case 'Tibetan':
-                        cardModule = await import('../data/tibetan.ts');
+                        cardModule = await import('../data/tibetan');
                         break;
                     case 'Korean':
-                        cardModule = await import('../data/korean.ts');
+                        cardModule = await import('../data/korean');
                         break;
                     case 'Portuguese':
-                        cardModule = await import('../data/portuguese.ts');
+                        cardModule = await import('../data/portuguese');
                         break;
                     case 'French':
-                        cardModule = await import('../data/french.ts');
+                        cardModule = await import('../data/french');
                         break;
                     case 'Persian':
-                        cardModule = await import('../data/persian.ts');
+                        cardModule = await import('../data/persian');
                         break;
                     case 'English':
-                        cardModule = await import('../data/english.ts');
+                        cardModule = await import('../data/english');
                         break;
                     default:
                         router.replace('/comingsoon');

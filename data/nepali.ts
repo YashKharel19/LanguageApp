@@ -52,7 +52,7 @@ import Nine from "../assets/images/numbers/9.svg";
 import { FlashCardType } from "../containers/flashCardTypes";
 
 export const consonantCards: FlashCardType[] = [
-  { letter: "क", word: "कछुवा", letterPronunciation: "ka", pronunciation: "kachuvā", image: Kachuwa, translation: "Tortoise" },
+  { letter: "क", word: "कछुवा", letterPronunciation: "ka", pronunciation: "kətʃuːwa", image: Kachuwa, translation: "Tortoise" },
   { letter: "ख", word: "खरायो", letterPronunciation: "kha", pronunciation: "kharāyō", image: Kharayo, translation: "Rabbit" },
   { letter: "ग", word: "गमला", letterPronunciation: "ga", pronunciation: "gamalā", image: Gamala, translation: "Pot" },
   { letter: "घ", word: "घर", letterPronunciation: "gha", pronunciation: "ghara", image: Ghara, translation: "House" },
