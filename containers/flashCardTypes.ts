@@ -9,4 +9,6 @@ export type FlashCardType = {
     pronunciation: string;
     image: FC<SvgProps>;
     translation: string;
+    audioLetter?: any;
+    audioWord?: any;
 };

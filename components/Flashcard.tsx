@@ -16,6 +16,7 @@ import Animated, {
     runOnJS,
 } from 'react-native-reanimated';
 import * as Speech from 'expo-speech';
+import { Audio } from 'expo-av';
 import { Feather } from '@expo/vector-icons';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import AutoSizeLetter from './AutoSizeLetter';
@@ -66,20 +67,35 @@ export default function Flashcard({
         Persian: 'ir-IR'
     };
 
-    const speak = (text: string) => {
-        const locale = languageLocales[language] || 'en-US';
-        if (text) {
-            Speech.stop();
-            Speech.speak(text, {
-                language: locale,
-                rate: 0.85,
-            });
+    // 🔹 Play audio file with expo-av
+    const playAudio = async (audioFile: any) => {
+        try {
+            const { sound } = await Audio.Sound.createAsync(audioFile);
+            await sound.playAsync();
+        } catch (e) {
+            console.warn("Audio play error:", e);
+        }
+    };
+
+    // 🔹 Smart speak: audio for Nepali, TTS for others
+    const speak = (text: string, audioFile?: any) => {
+        if (language === "Nepali" && audioFile) {
+            playAudio(audioFile);
+        } else {
+            const locale = languageLocales[language] || 'en-US';
+            if (text) {
+                Speech.stop();
+                Speech.speak(text, {
+                    language: locale,
+                    rate: 0.85,
+                });
+            }
         }
     };
 
     // Speak letter when card changes
     useEffect(() => {
-        speak(card.letterPronunciation || card.letter);
+        speak(card.letterPronunciation || card.letter, card.audioLetter);
     }, [card]);
 
     // Flip animation + speak when toggling
@@ -92,9 +108,9 @@ export default function Flashcard({
         rotate.value = withTiming(showAnswer ? 180 : 0, { duration: 500 });
 
         if (showAnswer) {
-            speak(card.pronunciation || card.word);
+            speak(card.pronunciation || card.word, card.audioWord);
         } else {
-            speak(card.letterPronunciation || card.letter);
+            speak(card.letterPronunciation || card.letter, card.audioLetter);
         }
     }, [showAnswer]);
 
@@ -197,8 +213,8 @@ export default function Flashcard({
                                 <AutoSizeLetter letter={card.letter} />
                                 <Pressable
                                     onPress={(e) => {
-                                        e.stopPropagation(); // prevent flip
-                                        speak(card.letterPronunciation || card.letter);
+                                        e.stopPropagation();
+                                        speak(card.letterPronunciation || card.letter, card.audioLetter);
                                     }}
                                     style={soundButtonStyle}
                                 >
@@ -212,8 +228,8 @@ export default function Flashcard({
                             <View className="bg-primary-light p-4 rounded-xl w-full h-full">
                                 <Pressable
                                     onPress={(e) => {
-                                        e.stopPropagation(); // prevent flip
-                                        speak(card.pronunciation || card.word);
+                                        e.stopPropagation();
+                                        speak(card.pronunciation || card.word, card.audioWord);
                                     }}
                                     style={soundButtonStyle}
                                 >
