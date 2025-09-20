@@ -61,7 +61,7 @@ import Word1 from "../assets/sounds/punjabi/word1.mp3";
 import Word2 from "../assets/sounds/punjabi/word2.mp3";
 import Word3 from "../assets/sounds/punjabi/word3.mp3";
 import Word4 from "../assets/sounds/punjabi/word4.mp3";
-import Word5 from "../assets/sounds/punjabi/word5.m4a";
+import Word5 from "../assets/sounds/punjabi/word5.mp3";
 import Word6 from "../assets/sounds/punjabi/word6.mp3";
 import Word7 from "../assets/sounds/punjabi/word7.mp3";
 import Word8 from "../assets/sounds/punjabi/word8.mp3";

@@ -79,7 +79,7 @@ export default function Flashcard({
 
     // 🔹 Smart speak: audio for Nepali, TTS for others
     const speak = (text: string, audioFile?: any) => {
-        if (language === "Nepali" && audioFile) {
+        if ((language === "Nepali" || language === "Punjabi") && audioFile) {
             playAudio(audioFile);
         } else {
             const locale = languageLocales[language] || 'en-US';
