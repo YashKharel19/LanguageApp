@@ -1,62 +1,62 @@
 // assets/data/consonants.ts
 
 // Import all local SVG files
-// import Mango from "../assets/images/nepali/Baan.svg";o.svg";
-// import Sky from "../assets/images/nepali/Baan.svg";svg";
-// import Brick from "../assets/images/nepali/Baan.svg";k.svg";
-// import Swim from "../assets/images/nepali/Baan.svg";.svg";
-// import Basket from "../assets/images/nepali/Baan.svg";et.svg";
-// import Sand from "../assets/images/nepali/Baan.svg";.svg";
-// import Sage from "../assets/images/nepali/Baan.svg";.svg";
-// import Debt from "../assets/images/nepali/Baan.svg";.svg";
-// import Om from "../assets/images/nepali/Baan.svg";vg";
-// import Condition from "../assets/images/nepali/Baan.svg";ition.svg";
-// import Medicine from "../assets/images/nepali/Baan.svg";cine.svg";
+// import Mango from "../assets/images/nepali/Baan.png";o.png";
+// import Sky from "../assets/images/nepali/Baan.png";svg";
+// import Brick from "../assets/images/nepali/Baan.png";k.png";
+// import Swim from "../assets/images/nepali/Baan.png";.png";
+// import Basket from "../assets/images/nepali/Baan.png";et.png";
+// import Sand from "../assets/images/nepali/Baan.png";.png";
+// import Sage from "../assets/images/nepali/Baan.png";.png";
+// import Debt from "../assets/images/nepali/Baan.png";.png";
+// import Om from "../assets/images/nepali/Baan.png";vg";
+// import Condition from "../assets/images/nepali/Baan.png";ition.png";
+// import Medicine from "../assets/images/nepali/Baan.png";cine.png";
 
-import Lotus from "../assets/images/Lotus.svg";
-import Telescope from "../assets/images/Telescope.svg";
-import Knot from "../assets/images/Knot.svg";
-import Horse from "../assets/images/Horse.svg";
-import What from "../assets/images/What.svg"
-import Picture from "../assets/images/Picture.svg";
-import Umbrella from "../assets/images/nepali/Chata.svg";
-import Water from "../assets/images/water.svg";
-import Coconut from "../assets/images/Coconut.svg";
-import Waterfall from "../assets/images/nepali/Jharna.svg";
-import Tomato from "../assets/images/Tomato.svg";
-import Cold from "../assets/images/nepali/Baan.svg";
-import Bucket from "../assets/images/Bucket.svg";
-import Devotee from "../assets/images/Devotee.svg";
-import Sword from "../assets/images/kannada/Khadga.svg";
-import Plate from "../assets/images/Plate.svg";
-import Milk from "../assets/images/Milk.svg";
-import Wealth from "../assets/images/Money.svg";
-import Bird from "../assets/images/nepali/Cara.svg";
-import Flower from "../assets/images/nepali/Fhul.svg";
-import Child from "../assets/images/nepali/Bachha.svg";
-import Drum from "../assets/images/Drum.svg";
-import House from "../assets/images/nepali/Ghara.svg";
-import Journey from "../assets/images/Journey.svg";
-import Bear from "../assets/images/nepali/Bhalu.svg";
-import Garlic from "../assets/images/nepali/Lasun.svg";
-import Occupation from "../assets/images/Occupation.svg"
-import Shame from "../assets/images/nepali/Baan.svg";
-import Hexagon from "../assets/images/nepali/Satkon.svg";
-import Sun from "../assets/images/Sun.svg";
-import Damage from "../assets/images/Damage.svg";
-import Elephant from "../assets/images/Elephant.svg";
-import Wise from "../assets/images/Wise.svg";
+import Lotus from "../assets/images/Lotus.png";
+import Telescope from "../assets/images/Telescope.png";
+import Knot from "../assets/images/Knot.png";
+import Horse from "../assets/images/Horse.png";
+import What from "../assets/images/What.png"
+import Picture from "../assets/images/Picture.png";
+import Umbrella from "../assets/images/nepali/Chata.png";
+import Water from "../assets/images/water.png";
+import Coconut from "../assets/images/Coconut.png";
+import Waterfall from "../assets/images/nepali/Jharna.png";
+import Tomato from "../assets/images/Tomato.png";
+import Cold from "../assets/images/nepali/Baan.png";
+import Bucket from "../assets/images/Bucket.png";
+import Devotee from "../assets/images/Devotee.png";
+import Sword from "../assets/images/kannada/Khadga.png";
+import Plate from "../assets/images/Plate.png";
+import Milk from "../assets/images/Milk.png";
+import Wealth from "../assets/images/Money.png";
+import Bird from "../assets/images/nepali/Cara.png";
+import Flower from "../assets/images/nepali/Fhul.png";
+import Child from "../assets/images/nepali/Bachha.png";
+import Drum from "../assets/images/Drum.png";
+import House from "../assets/images/nepali/Ghara.png";
+import Journey from "../assets/images/Journey.png";
+import Bear from "../assets/images/nepali/Bhalu.png";
+import Garlic from "../assets/images/nepali/Lasun.png";
+import Occupation from "../assets/images/Occupation.png"
+import Shame from "../assets/images/nepali/Baan.png";
+import Hexagon from "../assets/images/nepali/Satkon.png";
+import Sun from "../assets/images/Sun.png";
+import Damage from "../assets/images/Damage.png";
+import Elephant from "../assets/images/Elephant.png";
+import Wise from "../assets/images/Wise.png";
 
-import Zero from "../assets/images/What.svg"
-import One from "../assets/images/numbers/1.svg";
-import Two from "../assets/images/numbers/2.svg";
-import Three from "../assets/images/numbers/3.svg";
-import Four from "../assets/images/numbers/4.svg";
-import Five from "../assets/images/numbers/5.svg";
-import Six from "../assets/images/numbers/6.svg";
-import Seven from "../assets/images/numbers/7.svg";
-import Eight from "../assets/images/numbers/8.svg";
-import Nine from "../assets/images/numbers/9.svg";
+import Zero from "../assets/images/What.png"
+import One from "../assets/images/numbers/1.png";
+import Two from "../assets/images/numbers/2.png";
+import Three from "../assets/images/numbers/3.png";
+import Four from "../assets/images/numbers/4.png";
+import Five from "../assets/images/numbers/5.png";
+import Six from "../assets/images/numbers/6.png";
+import Seven from "../assets/images/numbers/7.png";
+import Eight from "../assets/images/numbers/8.png";
+import Nine from "../assets/images/numbers/9.png";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 

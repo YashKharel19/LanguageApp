@@ -6,6 +6,7 @@ import {
     Platform,
     Dimensions,
     ScrollView,
+    Image
 } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -259,10 +260,13 @@ export default function Flashcard({
                                     </View>
 
                                     <View className="items-center">
-                                        <SvgImage
-                                            width={cardWidth * 0.7}
-                                            height={cardWidth * 0.7}
-                                            preserveAspectRatio="xMidYMid meet"
+                                        <Image
+                                            source={card.image}
+                                            style={{
+                                                width: cardWidth * 0.7,
+                                                height: cardWidth * 0.7,
+                                                resizeMode: "contain", // keeps aspect ratio
+                                            }}
                                         />
                                     </View>
 
