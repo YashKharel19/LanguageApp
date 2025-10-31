@@ -50,8 +50,8 @@ export default function FlashcardsScreen() {
                     case 'Punjabi':
                         cardModule = await import('../data/punjabi');
                         break;
-                    case 'Gujrati':
-                        cardModule = await import('../data/gujrati');
+                    case 'Gujarati':
+                        cardModule = await import('../data/gujarati');
                         break;
                     case 'Hindi':
                         cardModule = await import('../data/hindi');

@@ -57,7 +57,7 @@ export default function Flashcard({
         Tamang: 'ne-NP',
         Kannada: 'kn-IN',
         Punjabi: 'pa-IN',
-        Gujrati: 'gu-IN',
+        Gujarati: 'gu-IN',
         Hindi: 'hi-IN',
         Spanish: 'es-ES',
         Filipino: 'fil-PH',

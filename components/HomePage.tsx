@@ -54,7 +54,7 @@ const supportedLanguages = [
     'Nepali',
     'Tamang',
     'Limbu',
-    'Gujrati',
+    'Gujarati',
     'Punjabi',
     'Hindi',
     'Kannada',
