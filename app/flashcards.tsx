@@ -80,6 +80,15 @@ export default function FlashcardsScreen() {
                     case 'English':
                         cardModule = await import('../data/english');
                         break;
+                    case 'Bengali':
+                        cardModule = await import('../data/bengali');
+                        break;
+                    case 'Telugu':
+                        cardModule = await import('../data/telugu');
+                        break;
+                    case 'Malayalam':
+                        cardModule = await import('../data/malayalam');
+                        break;
                     default:
                         router.replace('/comingsoon');
                         return;
