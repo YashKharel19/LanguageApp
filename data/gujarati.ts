@@ -1,18 +1,4 @@
-// assets/data/consonants.ts
-
-// Import all local SVG files
-// import Mango from "../assets/images/nepali/Baan.png";o.png";
-// import Sky from "../assets/images/nepali/Baan.png";svg";
-// import Brick from "../assets/images/nepali/Baan.png";k.png";
-// import Swim from "../assets/images/nepali/Baan.png";.png";
-// import Basket from "../assets/images/nepali/Baan.png";et.png";
-// import Sand from "../assets/images/nepali/Baan.png";.png";
-// import Sage from "../assets/images/nepali/Baan.png";.png";
-// import Debt from "../assets/images/nepali/Baan.png";.png";
-// import Om from "../assets/images/nepali/Baan.png";vg";
-// import Condition from "../assets/images/nepali/Baan.png";ition.png";
-// import Medicine from "../assets/images/nepali/Baan.png";cine.png";
-
+//images
 import Lotus from "../assets/images/Lotus.png";
 import Telescope from "../assets/images/Telescope.png";
 import Knot from "../assets/images/Knot.png";
@@ -61,20 +47,7 @@ import Nine from "../assets/images/numbers/9.png";
 import { FlashCardType } from "../containers/flashCardTypes";
 
 export const consonantCards: FlashCardType[] = [
-    //   { letter: "અ", word: "અદધો", pronunciation: "Adhō", image: Mango, translation: "Mango" },
-    //   { letter: "આ", word: "આકાશ", pronunciation: "Akash", image: Sky, translation: "Sky" },
-    //   { letter: "ઇ", word: "ઇંટ", pronunciation: "Iṇṭa", image: Brick, translation: "Brick" },
-    //   { letter: "ઈ", word: "ઈજું", pronunciation: "Īju", image: Swim, translation: "Swim" },
-    //   { letter: "ઉ", word: "ઉંડી", pronunciation: "Uṇḍī", image: Basket, translation: "Basket" },
-    //   { letter: "ઊ", word: "ઊંબ્રો", pronunciation: "Ūṁbrō", image: Sand, translation: "Sand" },
-    //   { letter: "ઋ", word: "ઋષિ", pronunciation: "rushi", image: Sage, translation: "Sage" },
-    //   { letter: "ૠ", word: "ઋણ", pronunciation: "rin", image: Debt, translation: "Debt" },
-    //   { letter: "ૐ", word: "ૐ", pronunciation: "Om", image: Om, translation: "Om" },
-    //   { letter: "ઐ", word: "ઐથું", pronunciation: "Aithu", image: Condition, translation: "Condition" },
-    //   { letter: "ઑ", word: "ઔષધિ", pronunciation: "Auṣadhi", image: Medicine, translation: "Medicine" },
-    //   { letter: "ઔ", word: "ઔષધિ", pronunciation: "Aushadhi", image: Medicine, translation: "Medicine" },
-
-    { letter: "ક", letterPronunciation: "ka", word: "કમલ", pronunciation: "Kamal", image: Lotus, translation: "Lotus flower" },
+    { letter: "ક", letterPronunciation: "ka", word: "કમળ", pronunciation: "Kamal", image: Lotus, translation: "Lotus flower" },
     { letter: "ખ", letterPronunciation: "kha", word: "ખગોળ", pronunciation: "Khagol", image: Telescope, translation: "Telescope" },
     { letter: "ગ", letterPronunciation: "ga", word: "ગાંઠ", pronunciation: "Gaanth", image: Knot, translation: "Knot" },
     { letter: "ઘ", letterPronunciation: "gha", word: "ઘોડો", pronunciation: "Horse", image: Horse, translation: "Horse" },
