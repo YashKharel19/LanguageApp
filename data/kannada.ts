@@ -74,6 +74,7 @@ export const consonantCards: FlashCardType[] = [
     { letter: "ಔ", letterPronunciation: "auh", word: "ಔಷಧಿ", pronunciation: "Auṣadhi", image: Medicine, translation: "Medicine" },
     { letter: "ಅಂ", letterPronunciation: "umm", word: "", pronunciation: "Um", image: What, translation: "" },
     { letter: "ಅ:", letterPronunciation: "uhḥ", word: "ಆಹ್ವಾನ", pronunciation: "auhvaana", image: Invitation, translation: "Invitation" },
+
     { letter: "ಕ", letterPronunciation: "Ka", word: "ಕಮಲ", pronunciation: "Kamala", image: Lotus, translation: "Lotus" },
     { letter: "ಖ", letterPronunciation: "Kha", word: "ಖಡ್ಗ", pronunciation: "Khaḍga", image: Khadga, translation: "Sword" },
     { letter: "ಗ", letterPronunciation: "Ga", word: "ಗೋಧಿ", pronunciation: "Gōdhi", image: Wheat, translation: "Wheat" },
