@@ -65,7 +65,8 @@ export default function Flashcard({
         French: 'fr-FR',
         Portuguese: 'pt-PT',
         Korean: 'kr-KR',
-        Persian: 'ir-IR'
+        Persian: 'ir-IR',
+
     };
 
     // 🔹 Play audio file with expo-av
@@ -80,7 +81,7 @@ export default function Flashcard({
 
     // 🔹 Smart speak: audio for Nepali, TTS for others
     const speak = (text: string, audioFile?: any) => {
-        if ((language === "Nepali" || language === "Punjabi") && audioFile) {
+        if ((language === "Nepali" || language === "Punjabi" || language === "Bengali") && audioFile) {
             playAudio(audioFile);
         } else {
             const locale = languageLocales[language] || 'en-US';
