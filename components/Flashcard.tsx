@@ -81,7 +81,7 @@ export default function Flashcard({
 
     // 🔹 Smart speak: audio for Nepali, TTS for others
     const speak = (text: string, audioFile?: any) => {
-        if ((language === "Nepali" || language === "Punjabi" || language === "Bengali" || language === "French" || language === "Gujarati" || language === "Hindi" || language === 'Kannada' || language === 'Korean') && audioFile) {
+        if ((language === "Nepali" || language === "Punjabi" || language === "Bengali" || language === "French" || language === "Gujarati" || language === "Hindi" || language === 'Kannada' || language === 'Korean' || language === 'Malayalam') && audioFile) {
             playAudio(audioFile);
         } else {
             const locale = languageLocales[language] || 'en-US';
