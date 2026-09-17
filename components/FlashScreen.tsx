@@ -1,59 +1,74 @@
-import { View, Text, Animated, Easing, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withRepeat,
+    withTiming,
+    withDelay,
+    Easing,
+} from 'react-native-reanimated';
 
 const letters = ['L', 'u', 'ma', 'षा'];
 
 export default function FlashScreen({ onComplete }: { onComplete: () => void }) {
-    const animatedLetters = useRef(letters.map(() => new Animated.Value(0))).current;
+    const animatedLetters = letters.map(() => useSharedValue(0));
+    const taglineOpacity = useSharedValue(0);
     const soundRef = useRef<Audio.Sound | null>(null);
     const [showButton, setShowButton] = useState(false);
+
+    const screenHeight = Dimensions.get('window').height;
+
+    // Animated styles for letters
+    const animatedStyles = animatedLetters.map((val) =>
+        useAnimatedStyle(() => ({
+            transform: [{ translateY: val.value }],
+        }))
+    );
+
+    // Animated style for tagline fade-in
+    const taglineStyle = useAnimatedStyle(() => ({
+        opacity: taglineOpacity.value,
+    }));
 
     useEffect(() => {
         animateLetters();
         playBackgroundMusic();
+        fadeInTagline();
 
-        const timer = setTimeout(() => {
-            setShowButton(true);
-        }, 2000);
-
+        const timer = setTimeout(() => setShowButton(true), 2000);
         return () => clearTimeout(timer);
     }, []);
 
+    // Smooth continuous dancing animation
     const animateLetters = () => {
-        animatedLetters.forEach((anim, i) => {
-            Animated.loop(
-                Animated.sequence([
-                    Animated.delay(i * 100),
-                    Animated.timing(anim, {
-                        toValue: -12,
-                        duration: 400,
-                        easing: Easing.bounce,
-                        useNativeDriver: true,
+        animatedLetters.forEach((val, i) => {
+            val.value = withDelay(
+                i * 150, // stagger letters
+                withRepeat(
+                    withTiming(-12, {
+                        duration: 600,
+                        easing: Easing.inOut(Easing.sin), // smooth up-and-down
                     }),
-                    Animated.timing(anim, {
-                        toValue: 0,
-                        duration: 400,
-                        easing: Easing.linear,
-                        useNativeDriver: true,
-                    }),
-                ])
-            ).start();
+                    -1,
+                    true // auto-reverse for smooth motion
+                )
+            );
         });
+    };
+
+    const fadeInTagline = () => {
+        taglineOpacity.value = withTiming(1, { duration: 1500 });
     };
 
     const playBackgroundMusic = async () => {
         try {
             const { sound } = await Audio.Sound.createAsync(
                 require('../assets/sounds/kidsmusic.mp3'),
-                {
-                    shouldPlay: true,
-                    isLooping: true,
-                    volume: 0.7,
-                }
+                { shouldPlay: true, isLooping: true, volume: 0.7 }
             );
             soundRef.current = sound;
         } catch (error) {
@@ -69,13 +84,8 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
     };
 
     const handleGetStarted = async () => {
-        // try {
-        // await AsyncStorage.setItem('hasSeenFlashScreen', 'true'); // <-- Add this line
         await stopBackgroundMusic();
         onComplete();
-        // } catch (error) {
-        //     console.error('Error setting flash screen flag:', error);
-        // }
     };
 
     const getColorForLetter = (letter: string) => {
@@ -93,8 +103,6 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
         }
     };
 
-    const screenHeight = Dimensions.get('window').height;
-
     return (
         <ImageBackground
             source={require('../assets/images/Splashscreen3.jpg')}
@@ -107,7 +115,7 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                     {letters.map((letter, index) => (
                         <Animated.Text
                             key={index}
-                            style={{ transform: [{ translateY: animatedLetters[index] }] }}
+                            style={animatedStyles[index]}
                             className={`text-4xl font-bold mx-1 ${getColorForLetter(letter)}`}
                         >
                             {letter}
@@ -115,40 +123,32 @@ export default function FlashScreen({ onComplete }: { onComplete: () => void }) 
                     ))}
                 </View>
 
-                {/* Gradient Tagline */}
-                <MaskedView
-                    maskElement={
-                        <View>
-                            <Text className="text-2xl font-bold tracking-widest text-center">
-                                LEARN LOCAL,
-                            </Text>
-                            <Text
-                                className="text-2xl font-bold tracking-widest"
-                                style={{ paddingLeft: 120 }}
-                            >
-                                SPEAK GLOBAL
-                            </Text>
-                        </View>
-                    }
-                >
-                    <LinearGradient
-                        colors={['#f79313', '#fbcd3c', '#f0665d', '#ff0000']}
-                        start={[0, 0]}
-                        end={[1, 1]}
+                {/* Gradient Tagline with fade-in */}
+                <Animated.View style={taglineStyle}>
+                    <MaskedView
+                        maskElement={
+                            <View>
+                                <Text className="text-2xl font-bold tracking-widest text-center">LEARN LOCAL,</Text>
+                                <Text className="text-2xl font-bold tracking-widest" style={{ paddingLeft: 120 }}>
+                                    SPEAK GLOBAL
+                                </Text>
+                            </View>
+                        }
                     >
-                        <View>
-                            <Text className="opacity-0 text-2xl font-bold tracking-widest text-center">
-                                LEARN LOCAL,
-                            </Text>
-                            <Text
-                                className="opacity-0 text-2xl font-bold tracking-widest"
-                                style={{ paddingLeft: 120 }}
-                            >
-                                SPEAK GLOBAL
-                            </Text>
-                        </View>
-                    </LinearGradient>
-                </MaskedView>
+                        <LinearGradient
+                            colors={['#f79313', '#fbcd3c', '#f0665d', '#ff0000']}
+                            start={[0, 0]}
+                            end={[1, 1]}
+                        >
+                            <View>
+                                <Text className="opacity-0 text-2xl font-bold tracking-widest text-center">LEARN LOCAL,</Text>
+                                <Text className="opacity-0 text-2xl font-bold tracking-widest" style={{ paddingLeft: 120 }}>
+                                    SPEAK GLOBAL
+                                </Text>
+                            </View>
+                        </LinearGradient>
+                    </MaskedView>
+                </Animated.View>
             </View>
 
             {/* Bottom Button */}

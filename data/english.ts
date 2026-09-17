@@ -1,30 +1,41 @@
 // englishCards.ts
-import Apple from "../assets/images/Apple.svg";
-import Ball from "../assets/images/Ball.svg";
-import Cat from "../assets/images/Cat.svg";
-import Dog from "../assets/images/Dog.svg";
-import Elephant from "../assets/images/Elephant.svg";
-import Fish from "../assets/images/Fish.svg";
-import Giraffe from "../assets/images/Girrafe.svg";
-import House from "../assets/images/nepali/Ghara.svg";
-import Ice from "../assets/images/Ice.svg";
-import Jacket from "../assets/images/Jacket.svg";
-import Kite from "../assets/images/Kite.svg";
-import Lion from "../assets/images/Lion.svg";
-import Moon from "../assets/images/Moon.svg";
-import Nose from "../assets/images/nepali/Naak.svg";
-import Orange from "../assets/images/Orange.svg";
-import Pencil from "../assets/images/Pencil.svg";
-import Queen from "../assets/images/Queen.svg";
-import Rabbit from "../assets/images/nepali/Kharayo.svg";
-import Sky from "../assets/images/Sky.svg";
-import Tree from "../assets/images/Tree.svg";
-import Umbrella from "../assets/images/nepali/Chata.svg";
-import Van from "../assets/images/Van.svg";
-import Water from "../assets/images/water.svg";
-import Xylophone from "../assets/images/Xylophone.svg";
-import Yak from "../assets/images/nepali/Goru.svg";
-import Zebra from "../assets/images/Zebra.svg";
+import Apple from "../assets/images/Apple.png";
+import Ball from "../assets/images/Ball.png";
+import Cat from "../assets/images/Cat.png";
+import Dog from "../assets/images/Dog.png";
+import Elephant from "../assets/images/Elephant.png";
+import Fish from "../assets/images/Fish.png";
+import Giraffe from "../assets/images/Girrafe.png";
+import House from "../assets/images/nepali/Ghara.png";
+import Ice from "../assets/images/Ice.png";
+import Jacket from "../assets/images/Jacket.png";
+import Kite from "../assets/images/Kite.png";
+import Lion from "../assets/images/Lion.png";
+import Moon from "../assets/images/Moon.png";
+import Nose from "../assets/images/nepali/Naak.png";
+import Orange from "../assets/images/Orange.png";
+import Pencil from "../assets/images/Pencil.png";
+import Queen from "../assets/images/Queen.png";
+import Rabbit from "../assets/images/nepali/Kharayo.png";
+import Sky from "../assets/images/Sky.png";
+import Tree from "../assets/images/Tree.png";
+import Umbrella from "../assets/images/nepali/Chata.png";
+import Van from "../assets/images/Van.png";
+import Water from "../assets/images/water.png";
+import Xylophone from "../assets/images/Xylophone.png";
+import Yak from "../assets/images/nepali/Goru.png";
+import Zebra from "../assets/images/Zebra.png";
+
+import Zero from "../assets/images/What.png"
+import One from "../assets/images/numbers/1.png";
+import Two from "../assets/images/numbers/2.png";
+import Three from "../assets/images/numbers/3.png";
+import Four from "../assets/images/numbers/4.png";
+import Five from "../assets/images/numbers/5.png";
+import Six from "../assets/images/numbers/6.png";
+import Seven from "../assets/images/numbers/7.png";
+import Eight from "../assets/images/numbers/8.png";
+import Nine from "../assets/images/numbers/9.png";
 
 import { FlashCardType } from "../containers/flashCardTypes";
 
@@ -55,4 +66,17 @@ export const consonantCards: FlashCardType[] = [
     { letter: "X", word: "Xylophone", letterPronunciation: "x", pronunciation: "xylophone", image: Xylophone, translation: "Xylophone" },
     { letter: "Y", word: "Yak", letterPronunciation: "y", pronunciation: "yak", image: Yak, translation: "Yak" },
     { letter: "Z", word: "Zebra", letterPronunciation: "z", pronunciation: "zebra", image: Zebra, translation: "Zebra" }
+];
+
+export const numberCards: FlashCardType[] = [
+    { letter: "0", word: "zero", letterPronunciation: "zee-ro", pronunciation: "ZEE-ro", image: Zero, translation: "Zero" },
+    { letter: "1", word: "one", letterPronunciation: "wuhn", pronunciation: "WUHn", image: One, translation: "One" },
+    { letter: "2", word: "two", letterPronunciation: "too", pronunciation: "TOO", image: Two, translation: "Two" },
+    { letter: "3", word: "three", letterPronunciation: "three", pronunciation: "THREE", image: Three, translation: "Three" },
+    { letter: "4", word: "four", letterPronunciation: "for", pronunciation: "FOR", image: Four, translation: "Four" },
+    { letter: "5", word: "five", letterPronunciation: "fyev", pronunciation: "FIVE", image: Five, translation: "Five" },
+    { letter: "6", word: "six", letterPronunciation: "siks", pronunciation: "SIX", image: Six, translation: "Six" },
+    { letter: "7", word: "seven", letterPronunciation: "SEV-uhn", pronunciation: "SEV-uhn", image: Seven, translation: "Seven" },
+    { letter: "8", word: "eight", letterPronunciation: "ayt", pronunciation: "EIGHT", image: Eight, translation: "Eight" },
+    { letter: "9", word: "nine", letterPronunciation: "nyn", pronunciation: "NINE", image: Nine, translation: "Nine" },
 ];

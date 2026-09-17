@@ -13,10 +13,10 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default function FlashcardsScreen() {
-    const { language } = useLocalSearchParams();
+    const { language, category } = useLocalSearchParams<{ language: string; category: string }>();
     const [cards, setCards] = useState<FlashCardType[]>([]);
     const [index, setIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
@@ -24,71 +24,91 @@ export default function FlashcardsScreen() {
     const translateX = useSharedValue(0);
     const router = useRouter();
     const insets = useSafeAreaInsets();
+
     const languageStr = Array.isArray(language) ? language[0] : language;
-    const { width, height } = Dimensions.get('window');
+    const categoryStr = Array.isArray(category) ? category[0] : category;
 
     useEffect(() => {
         const loadCards = async () => {
             try {
-                let cardModule;
+                let cardModule: any;
+
+                // 🔹 Load correct language dataset
                 switch (languageStr) {
                     case 'Nepali':
-                        cardModule = await import('../data/nepali.ts');
+                        cardModule = await import('../data/nepali');
                         break;
                     case 'Limbu':
-                        cardModule = await import('../data/limbu.ts');
+                        cardModule = await import('../data/limbu');
                         break;
                     case 'Tamang':
-                        cardModule = await import('../data/tamang.ts');
+                        cardModule = await import('../data/tamang');
                         break;
                     case 'Kannada':
-                        cardModule = await import('../data/kannada.ts');
+                        cardModule = await import('../data/kannada');
                         break;
                     case 'Punjabi':
-                        cardModule = await import('../data/punjabi.ts');
+                        cardModule = await import('../data/punjabi');
                         break;
-                    case 'Gujrati':
-                        cardModule = await import('../data/gujrati.ts');
+                    case 'Gujarati':
+                        cardModule = await import('../data/gujarati');
                         break;
                     case 'Hindi':
-                        cardModule = await import('../data/hindi.ts');
+                        cardModule = await import('../data/hindi');
                         break;
                     case 'Spanish':
-                        cardModule = await import('../data/spanish.ts');
+                        cardModule = await import('../data/spanish');
                         break;
                     case 'Filipino':
-                        cardModule = await import('../data/filipino.ts');
+                        cardModule = await import('../data/filipino');
                         break;
                     case 'Tibetan':
-                        cardModule = await import('../data/tibetan.ts');
+                        cardModule = await import('../data/tibetan');
                         break;
                     case 'Korean':
-                        cardModule = await import('../data/korean.ts');
+                        cardModule = await import('../data/korean');
                         break;
                     case 'Portuguese':
-                        cardModule = await import('../data/portuguese.ts');
+                        cardModule = await import('../data/portuguese');
                         break;
                     case 'French':
-                        cardModule = await import('../data/french.ts');
+                        cardModule = await import('../data/french');
                         break;
                     case 'Persian':
-                        cardModule = await import('../data/persian.ts');
+                        cardModule = await import('../data/persian');
                         break;
                     case 'English':
-                        cardModule = await import('../data/english.ts');
+                        cardModule = await import('../data/english');
+                        break;
+                    case 'Bengali':
+                        cardModule = await import('../data/bengali');
+                        break;
+                    case 'Telugu':
+                        cardModule = await import('../data/telugu');
+                        break;
+                    case 'Malayalam':
+                        cardModule = await import('../data/malayalam');
                         break;
                     default:
                         router.replace('/comingsoon');
                         return;
                 }
-                setCards(cardModule.consonantCards || []);
+
+                // 🔹 Pick alphabets or numbers from the loaded module
+                if (categoryStr === 'numbers' && cardModule.numberCards) {
+                    setCards(cardModule.numberCards);
+                } else if (categoryStr === 'alphabets' && cardModule.consonantCards) {
+                    setCards(cardModule.consonantCards);
+                } else {
+                    router.replace('/comingsoon');
+                }
             } catch (error) {
                 console.error('Error loading language cards:', error);
             }
         };
 
         loadCards();
-    }, [language]);
+    }, [languageStr, categoryStr]);
 
     const playSound = async (file: any) => {
         const { sound } = await Audio.Sound.createAsync(file);
@@ -143,7 +163,6 @@ export default function FlashcardsScreen() {
     }
 
     return (
-
         <SafeAreaView
             edges={['top', 'bottom']}
             className="flex-1 bg-white px-4"
@@ -152,10 +171,10 @@ export default function FlashcardsScreen() {
                 paddingBottom: insets.bottom,
             }}
         >
-            {/* 🔙 Top Nav Buttons */}
+            {/* Top Navigation */}
             <View
                 className="flex-row justify-between items-center"
-                style={{ marginBottom: height * 0.04 }} // dynamic space below top nav
+                style={{ marginBottom: height * 0.04 }}
             >
                 <TouchableOpacity
                     onPress={() => router.back()}
@@ -174,10 +193,10 @@ export default function FlashcardsScreen() {
                 </TouchableOpacity>
             </View>
 
-            {/* 📖 Flashcard Area */}
+            {/* Flashcard Area */}
             <View
                 className="flex-1 justify-center items-center"
-                style={{ marginBottom: height * 0.05 }} // dynamic space above bottom buttons
+                style={{ marginBottom: height * 0.05 }}
             >
                 <Animated.View style={cardStyle}>
                     <Flashcard
@@ -194,9 +213,8 @@ export default function FlashcardsScreen() {
                 </Animated.View>
             </View>
 
-            {/* 🔘 Action Buttons */}
+            {/* Action Buttons */}
             <View>
-                {/* Flip Button */}
                 <TouchableOpacity
                     onPress={() => {
                         setShowAnswer(!showAnswer);
@@ -206,12 +224,18 @@ export default function FlashcardsScreen() {
                     style={{ marginBottom: height * 0.02 }}
                 >
                     <Text className="text-white text-lg text-center font-semibold">
-                        {showAnswer ? 'Show Letter' : 'Show Example'}
+                        {showAnswer
+                            ? categoryStr === 'numbers'
+                                ? 'Show Number'
+                                : 'Show Letter'
+                            : 'Show Example'}
                     </Text>
                 </TouchableOpacity>
 
-                {/* Navigation Buttons */}
-                <View className="flex-row self-center w-3/4" style={{ marginBottom: height * 0.02 }}>
+                <View
+                    className="flex-row self-center w-3/4"
+                    style={{ marginBottom: height * 0.02 }}
+                >
                     <TouchableOpacity
                         onPress={previousCard}
                         className="flex-1 bg-purple-700 py-3 rounded-xl mr-3"
@@ -233,6 +257,4 @@ export default function FlashcardsScreen() {
             </View>
         </SafeAreaView>
     );
-
-
 }

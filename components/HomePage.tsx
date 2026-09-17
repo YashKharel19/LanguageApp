@@ -49,12 +49,13 @@ const supportedCountries = [
     'gw',
     'mz',
     'tl',
+    'bd'
 ];
 const supportedLanguages = [
     'Nepali',
     'Tamang',
     'Limbu',
-    'Gujrati',
+    'Gujarati',
     'Punjabi',
     'Hindi',
     'Kannada',
@@ -65,7 +66,11 @@ const supportedLanguages = [
     'French',
     'Persian',
     'Korean',
-    'English'
+    'English',
+    'Bengali',
+    'Telugu',
+    'Malayalam'
+
 ];
 const supportedLanguagesSet = new Set(supportedLanguages);
 

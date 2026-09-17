@@ -40,16 +40,12 @@ export default function ComingSoon() {
             );
             soundRef.current = sound;
 
-            // Set looping
             await sound.setIsLoopingAsync(true);
-
-            // Play
             await sound.playAsync();
         };
 
         loadAndPlaySound();
 
-        // Cleanup on unmount
         return () => {
             if (soundRef.current) {
                 soundRef.current.stopAsync();
@@ -63,8 +59,7 @@ export default function ComingSoon() {
         <ImageBackground
             source={require('../assets/images/sadbackground.jpg')}
             resizeMode="cover"
-            imageStyle={{ width: '100%', height: '100%' }}
-            className="flex-1 justify-start items-center"
+            className="flex-1 justify-between items-center py-20"
         >
             {/* Top Navigation Buttons */}
             <View className="absolute top-12 left-5 right-5 flex-row justify-between">
@@ -89,8 +84,10 @@ export default function ComingSoon() {
             <Animated.View
                 style={{
                     transform: [{ translateY: bounceValue }],
-                    marginTop: 282,
-                    marginBottom: 300,
+                    flex: 1,
+                    justifyContent: "flex-end", // push toward bottom
+                    alignItems: "center",
+                    marginBottom: "65%", // responsive spacing
                 }}
             >
                 <Image
@@ -100,8 +97,9 @@ export default function ComingSoon() {
                 />
             </Animated.View>
 
+
             {/* Coming Soon Text */}
-            <Text className="text-3xl font-bold text-white mt-6">
+            <Text className="text-3xl font-bold text-white mb-12">
                 Coming Soon
             </Text>
         </ImageBackground>

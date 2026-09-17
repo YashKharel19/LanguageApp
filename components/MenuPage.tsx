@@ -1,5 +1,5 @@
+import React, { useRef, useCallback } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
-import { useRef, useCallback } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Audio } from 'expo-av';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,7 +11,6 @@ export default function MenuPage() {
     const soundRef = useRef<Audio.Sound | null>(null);
 
     const redOrangeColors = ['#fff'];
-    // Orange and Red
 
     const playBackgroundMusic = async () => {
         try {
@@ -40,23 +39,24 @@ export default function MenuPage() {
     useFocusEffect(
         useCallback(() => {
             playBackgroundMusic();
-
             return () => {
                 stopBackgroundMusic();
             };
         }, [])
     );
 
-    const goToFlashcards = async () => {
-        await stopBackgroundMusic(); // Ensure music stops before navigation
+    const goToFlashcards = async (category: 'alphabets' | 'numbers') => {
+        await stopBackgroundMusic();
         router.push({
             pathname: '/flashcards',
-            params: { language },
+            params: { language, category },
         } as const);
     };
 
     const renderLine = (text: string) => (
-        <View style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <View
+            style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}
+        >
             {text.split('').map((char, index) => (
                 <Text
                     key={index}
@@ -86,12 +86,26 @@ export default function MenuPage() {
                     {renderLine(`Alphabets`)}
                 </View>
 
-                <View className="mb-16 space-y-4 items-center gap-4">
+                {/* Alphabets Button */}
+                <View className="mb-10 space-y-4 items-center">
+                    {/* Alphabets Button */}
                     <TouchableOpacity
-                        onPress={goToFlashcards}
+                        onPress={() => goToFlashcards('alphabets')}
+                        className="bg-lang-orange px-8 py-4 rounded-2xl w-[80%] shadow mb-2"
+                    >
+                        <Text className="text-white text-lg font-bold text-center">
+                            Alphabets
+                        </Text>
+                    </TouchableOpacity>
+
+                    {/* Numbers Button */}
+                    <TouchableOpacity
+                        onPress={() => goToFlashcards('numbers')}
                         className="bg-lang-orange px-8 py-4 rounded-2xl w-[80%] shadow"
                     >
-                        <Text className="text-white text-lg font-bold text-center">Flashcards</Text>
+                        <Text className="text-white text-lg font-bold text-center">
+                            Numbers
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
